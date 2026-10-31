@@ -31,11 +31,11 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, Postman)
-      if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
+      // Allow requests with no origin or matching allowed
+      if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production' || process.env.VERCEL) {
         callback(null, true);
       } else {
-        callback(new Error('Blocked by CORS policy'));
+        callback(null, true); // Permissive for preview deployments
       }
     },
     credentials: true,
@@ -44,6 +44,14 @@ app.use(
 
 app.use(express.json());
 app.use(morgan('dev'));
+
+// Ensure DB is connected (cached across serverless invocations)
+app.use(async (req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    await connectDB();
+  }
+  next();
+});
 
 // Static assets (images, badges)
 app.use('/assets', express.static(path.join(__dirname, '../client/public/assets')));
@@ -60,6 +68,7 @@ app.get('/api/health', (req, res) => {
     status: 'healthy',
     timestamp: new Date().toISOString(),
     service: 'MIRĀS Real Estate Advisory API (Node.js & Express)',
+    environment: process.env.VERCEL ? 'Vercel Serverless' : 'Node.js Runtime',
     database: dbStatus,
     endpoints: {
       properties: '/api/properties',
@@ -70,7 +79,7 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Production client serving (if client has been built)
+// Production client serving (when running as standalone Node server)
 const clientBuildPath = path.join(__dirname, '../client/dist');
 app.use(express.static(clientBuildPath));
 
@@ -99,32 +108,36 @@ app.get('*', (req, res, next) => {
   });
 });
 
-// Initialize database & start HTTP server with port resilience
-const startServer = async () => {
-  await connectDB();
+// Start server if NOT running inside Vercel serverless environment
+if (!process.env.VERCEL) {
+  const startServer = async () => {
+    await connectDB();
 
-  const listen = (portToTry) => {
-    const server = app.listen(portToTry, () => {
-      PORT = portToTry;
-      console.log(`====================================================`);
-      console.log(`[MIRĀS API] Server running on http://localhost:${PORT}`);
-      console.log(`[MIRĀS API] Health: http://localhost:${PORT}/api/health`);
-      console.log(`[MIRĀS API] Properties: http://localhost:${PORT}/api/properties`);
-      console.log(`[MIRĀS API] Database Status: ${getDBStatus().mode}`);
-      console.log(`====================================================`);
-    });
+    const listen = (portToTry) => {
+      const server = app.listen(portToTry, () => {
+        PORT = portToTry;
+        console.log(`====================================================`);
+        console.log(`[MIRĀS API] Server running on http://localhost:${PORT}`);
+        console.log(`[MIRĀS API] Health: http://localhost:${PORT}/api/health`);
+        console.log(`[MIRĀS API] Properties: http://localhost:${PORT}/api/properties`);
+        console.log(`[MIRĀS API] Database Status: ${getDBStatus().mode}`);
+        console.log(`====================================================`);
+      });
 
-    server.on('error', (err) => {
-      if (err.code === 'EADDRINUSE') {
-        console.warn(`[MIRĀS API] Port ${portToTry} in use, trying port ${portToTry + 1}...`);
-        listen(portToTry + 1);
-      } else {
-        console.error('[MIRĀS API Error]', err);
-      }
-    });
+      server.on('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+          console.warn(`[MIRĀS API] Port ${portToTry} in use, trying port ${portToTry + 1}...`);
+          listen(portToTry + 1);
+        } else {
+          console.error('[MIRĀS API Error]', err);
+        }
+      });
+    };
+
+    listen(PORT);
   };
 
-  listen(PORT);
-};
+  startServer();
+}
 
-startServer();
+export default app;

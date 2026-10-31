@@ -23,7 +23,7 @@ Unlike generic retail broker websites, **MIRĀS** (meaning *Heritage & Enduring 
 - **Backend API:** Node.js, Express.js REST API, Morgan HTTP logging, CORS security, Port auto-resilience.
 - **Database & Persistence:** MongoDB & Mongoose ORM.
   - **Graceful Zero-Config Fallback:** If a MongoDB connection is not configured or unavailable, the backend automatically operates with an in-memory repository. All filters, queries, and inquiry submissions remain 100% operational out of the box!
-- **Orchestration:** Root `concurrently` scripts to run client and server simultaneously.
+- **Orchestration:** Root `concurrently` scripts to run client and server simultaneously, and `vercel.json` for one-click Vercel serverless deployment.
 
 ---
 
@@ -31,13 +31,16 @@ Unlike generic retail broker websites, **MIRĀS** (meaning *Heritage & Enduring 
 
 ```text
 abcd/
-├── package.json               # Root scripts (concurrently dev, seed, install)
+├── vercel.json                # Vercel Monorepo Serverless & SPA routing config
+├── api/
+│   └── index.js               # Vercel Serverless Function entrypoint wrapping Express
+├── package.json               # Root dependencies & scripts (concurrently dev, seed, install)
 ├── .env.example               # Root environment configuration reference
 ├── README.md                  # Comprehensive documentation & setup guide
 │
 ├── server/                    # Node.js & Express REST Backend
 │   ├── config/
-│   │   └── db.js              # MongoDB connection with automatic fallback
+│   │   └── db.js              # MongoDB connection with serverless pooling & fallback
 │   ├── models/
 │   │   ├── Property.js        # Mongoose Schema for Curated Listings
 │   │   └── Inquiry.js         # Mongoose Schema for Client Inquiries
@@ -51,19 +54,21 @@ abcd/
 │   │   └── seed.js            # Database seeding script for MongoDB
 │   ├── .env.example           # Server environment template
 │   ├── package.json           # Server dependencies & scripts
-│   └── server.js              # Express application entrypoint
+│   └── server.js              # Express application & serverless export
 │
 └── client/                    # React + Vite Frontend
     ├── public/
     │   └── assets/            # High-resolution architectural photography
     ├── src/
     │   ├── components/
-    │   │   ├── Navbar.jsx               # Editorial navigation & mobile drawer
+    │   │   ├── Navbar.jsx               # Editorial header, reading scroll bar, mobile drawer
     │   │   ├── Footer.jsx               # Corridor hubs, REGA notes, contact
     │   │   ├── PropertyCard.jsx         # Architectural cards with specs & actions
     │   │   ├── PropertyFilter.jsx       # Multi-criteria filter bar (City, Type, Price, Beds)
     │   │   ├── InquiryModal.jsx         # Contextual brief submission & WhatsApp link
     │   │   ├── MortgageCalculator.jsx   # Islamic financing & yield pro-forma model
+    │   │   ├── ScrollReveal.jsx         # Subtle scroll-triggered animation utility
+    │   │   ├── BackToTop.jsx            # Floating smooth scroll-to-top button
     │   │   └── DatabaseStatusIndicator.jsx # Live MERN stack & database status pill
     │   ├── pages/
     │   │   ├── HomePage.jsx             # Hero, 3 corridors, featured units, model
@@ -87,7 +92,26 @@ abcd/
 
 ---
 
-## 🚀 Quickstart & Setup Guide
+## ⚡ Deploying to Vercel (1-Click Monorepo Setup)
+
+You can deploy this entire full-stack project **directly on Vercel**:
+- The **React frontend** is built and served from Vercel's global Edge CDN with SPA routing.
+- The **Express.js backend** runs serverlessly via `api/index.js` handling all `/api/*` endpoints.
+- If you don't connect a database immediately, the site runs seamlessly on Vercel in **Demo Mode**. To make data persistent across invocations, simply add your free **MongoDB Atlas** connection string!
+
+### Steps to Deploy on Vercel:
+1. Go to [vercel.com](https://vercel.com) and click **"Add New Project"** &rarr; **"Import Git Repository"**.
+2. Select your repository: `harshitt0418/real-state-demo`.
+3. Vercel automatically detects the `vercel.json` configuration (Build command: `cd client && npm install && npm run build`, Output Directory: `client/dist`).
+4. **Environment Variables (Optional):**
+   - `MONGODB_URI`: Your MongoDB Atlas URI (e.g., `mongodb+srv://user:pass@cluster.mongodb.net/miras_real_estate`).
+   - `NODE_ENV`: `production`
+5. Click **"Deploy"**.
+6. Once deployed, your site and all API endpoints (`/api/properties`, `/api/inquiries`, `/api/health`, `/api/stats`) are live immediately!
+
+---
+
+## 🚀 Local Quickstart Guide
 
 ### 1. Prerequisites
 - **Node.js** v18+ (tested on Node v24.13)
@@ -106,6 +130,7 @@ npm run install:all
 
 Or install individually:
 ```bash
+npm install
 cd server && npm install
 cd ../client && npm install
 ```
@@ -141,7 +166,7 @@ VITE_WHATSAPP="+966501234567"
 
 ---
 
-### 4. Running the Application
+### 4. Running the Application Locally
 
 #### Option A: Run Both Concurrently (Recommended for Development)
 ```bash
