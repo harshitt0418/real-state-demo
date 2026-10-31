@@ -45,7 +45,7 @@ app.use(
 app.use(express.json());
 app.use(morgan('dev'));
 
-// Ensure DB is connected (cached across serverless invocations)
+// Ensure DB is connected
 app.use(async (req, res, next) => {
   if (req.path.startsWith('/api')) {
     await connectDB();
@@ -68,7 +68,7 @@ app.get('/api/health', (req, res) => {
     status: 'healthy',
     timestamp: new Date().toISOString(),
     service: 'MIRĀS Real Estate Advisory API (Node.js & Express)',
-    environment: process.env.VERCEL ? 'Vercel Serverless' : 'Node.js Runtime',
+    environment: process.env.VERCEL ? 'Vercel Multi-Service' : 'Node.js Runtime',
     database: dbStatus,
     endpoints: {
       properties: '/api/properties',
@@ -79,7 +79,7 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Production client serving (when running as standalone Node server)
+// Production client serving (fallback when running as standalone Node server)
 const clientBuildPath = path.join(__dirname, '../client/dist');
 app.use(express.static(clientBuildPath));
 
@@ -108,35 +108,35 @@ app.get('*', (req, res, next) => {
   });
 });
 
-// Start server if NOT running inside Vercel serverless environment
-if (!process.env.VERCEL) {
-  const startServer = async () => {
-    await connectDB();
+// Start HTTP server with port resilience
+const startServer = async () => {
+  await connectDB();
 
-    const listen = (portToTry) => {
-      const server = app.listen(portToTry, () => {
-        PORT = portToTry;
-        console.log(`====================================================`);
-        console.log(`[MIRĀS API] Server running on http://localhost:${PORT}`);
-        console.log(`[MIRĀS API] Health: http://localhost:${PORT}/api/health`);
-        console.log(`[MIRĀS API] Properties: http://localhost:${PORT}/api/properties`);
-        console.log(`[MIRĀS API] Database Status: ${getDBStatus().mode}`);
-        console.log(`====================================================`);
-      });
+  const listen = (portToTry) => {
+    const server = app.listen(portToTry, () => {
+      PORT = portToTry;
+      console.log(`====================================================`);
+      console.log(`[MIRĀS API] Server running on http://localhost:${PORT}`);
+      console.log(`[MIRĀS API] Health: http://localhost:${PORT}/api/health`);
+      console.log(`[MIRĀS API] Properties: http://localhost:${PORT}/api/properties`);
+      console.log(`[MIRĀS API] Database Status: ${getDBStatus().mode}`);
+      console.log(`====================================================`);
+    });
 
-      server.on('error', (err) => {
-        if (err.code === 'EADDRINUSE') {
-          console.warn(`[MIRĀS API] Port ${portToTry} in use, trying port ${portToTry + 1}...`);
-          listen(portToTry + 1);
-        } else {
-          console.error('[MIRĀS API Error]', err);
-        }
-      });
-    };
-
-    listen(PORT);
+    server.on('error', (err) => {
+      if (err.code === 'EADDRINUSE') {
+        console.warn(`[MIRĀS API] Port ${portToTry} in use, trying port ${portToTry + 1}...`);
+        listen(portToTry + 1);
+      } else {
+        console.error('[MIRĀS API Error]', err);
+      }
+    });
   };
 
+  listen(PORT);
+};
+
+if (process.env.NODE_ENV !== 'test') {
   startServer();
 }
 
