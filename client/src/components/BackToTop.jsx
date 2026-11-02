@@ -2,30 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
 
 export default function BackToTop() {
-  const [show, setShow] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShow(window.scrollY > 400);
-    };
+    const handleScroll = () => setIsVisible(window.scrollY > 600);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  if (!show) return null;
+  if (!isVisible) return null;
 
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-4 right-4 z-40 p-2.5 rounded-full bg-[#151A21]/90 backdrop-blur-md border border-neutral-700/80 text-stone-300 hover:text-[#C5A265] hover:border-[#C5A265]/60 shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer animate-in fade-in duration-200"
-      aria-label="Scroll back to top"
-      title="Scroll back to top"
+      className="fixed bottom-32 right-6 z-40 h-9 w-9 rounded-full bg-[#FAF7F2] border border-[rgba(15,15,14,0.14)] text-[#6B6B5A] hover:text-[#B8913A] hover:border-[#B8913A] shadow-md hover:shadow-lg flex items-center justify-center transition-all duration-300 cursor-pointer"
+      aria-label="Back to top"
     >
-      <ArrowUp size={16} />
+      <ArrowUp size={15} />
     </button>
   );
 }

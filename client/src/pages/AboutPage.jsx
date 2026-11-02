@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Compass, Building2, Scale, ArrowUpRight } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
+import MovingTextBand from '../components/MovingTextBand';
 
 export default function AboutPage({ onOpenInquiry }) {
   const pillars = [
@@ -33,14 +34,14 @@ export default function AboutPage({ onOpenInquiry }) {
       {/* Header Banner */}
       <ScrollReveal animation="fade-down">
         <div className="space-y-4 max-w-3xl">
-          <div className="flex items-center gap-2 text-xs font-mono text-[#C5A265] uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-xs font-mono text-[#B8913A] uppercase tracking-widest">
             <Compass size={14} />
             <span>About MIRĀS Advisory</span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#F3EFEA] tracking-tight leading-tight">
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-[#0F0F0E] tracking-tight leading-tight">
             A real estate consultancy built around capital protection.
           </h1>
-          <p className="text-stone-300 text-sm sm:text-base leading-relaxed">
+          <p className="text-[#5A5A52] text-sm sm:text-base leading-relaxed">
             MIRĀS Real Estate Advisory was founded on a simple principle: serious property investors need an analytical, fiduciary counterweight in Saudi Arabia’s accelerating property market.
           </p>
         </div>
@@ -49,9 +50,9 @@ export default function AboutPage({ onOpenInquiry }) {
       {/* Split Section: The Story & Editorial Imagery */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        <div className="lg:col-span-6 space-y-5 text-stone-300 text-sm sm:text-base leading-relaxed">
+        <div className="lg:col-span-6 space-y-5 text-[#5A5A52] text-sm sm:text-base leading-relaxed">
           <ScrollReveal animation="fade-right">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#F3EFEA] mb-3">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0F0F0E] mb-3">
               The Evolution of Saudi Real Estate
             </h2>
             <p className="mb-3">
@@ -68,16 +69,16 @@ export default function AboutPage({ onOpenInquiry }) {
 
         <div className="lg:col-span-6">
           <ScrollReveal animation="fade-left" delay={150}>
-            <div className="editorial-img-container aspect-[4/3] rounded-2xl border border-neutral-800 shadow-2xl overflow-hidden relative">
+            <div className="editorial-img-container aspect-[4/3] rounded-2xl border border-[rgba(15,15,14,0.10)] shadow-lg overflow-hidden relative">
               <img
                 src="/assets/advisory.jpg"
                 alt="MIRĀS strategic real estate advisory consultation"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F1216]/80 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 bg-[#0F1216]/90 backdrop-blur-md p-3.5 rounded-lg border border-neutral-800 text-xs text-stone-300">
-                <p className="font-serif font-bold text-sm text-[#F3EFEA]">Fiduciary Counsel</p>
-                <p className="text-stone-400 text-[11px]">Direct representation from initial acquisition brief to title deed handover.</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0E]/80 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 bg-[#FAF7F2]/95 backdrop-blur-md p-4 rounded-xl border border-[rgba(15,15,14,0.10)] text-xs text-[#0F0F0E]">
+                <p className="font-serif font-bold text-sm text-[#0F0F0E]">Fiduciary Counsel</p>
+                <p className="text-[#6B6B5A] text-[11px] mt-0.5">Direct representation from initial acquisition brief to title deed handover.</p>
               </div>
             </div>
           </ScrollReveal>
@@ -89,8 +90,8 @@ export default function AboutPage({ onOpenInquiry }) {
       <div className="space-y-8">
         <ScrollReveal animation="fade-up">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#C5A265]">Our Operating Ethos</p>
-            <h2 className="font-serif text-3xl font-bold text-[#F3EFEA]">The Four Foundations of MIRĀS</h2>
+            <p className="text-xs font-mono uppercase tracking-widest text-[#B8913A]">Our Operating Ethos</p>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0F0F0E]">The Four Foundations of MIRĀS</h2>
           </div>
         </ScrollReveal>
 
@@ -103,12 +104,12 @@ export default function AboutPage({ onOpenInquiry }) {
                 animation="fade-up"
                 delay={idx * 110}
               >
-                <div className="bg-[#151A21] border border-neutral-800 rounded-xl p-6 space-y-4 hover:border-[#C5A265]/50 transition-colors h-full">
-                  <div className="h-10 w-10 rounded-lg bg-[#C5A265]/10 border border-[#C5A265]/30 flex items-center justify-center text-[#C5A265]">
+                <div className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.10)] rounded-xl p-6 space-y-4 hover:border-[#B8913A]/40 transition-colors h-full shadow-sm hover:shadow-md">
+                  <div className="h-10 w-10 rounded-lg bg-[#F0EBE1] border border-[rgba(184,145,58,0.3)] flex items-center justify-center text-[#B8913A]">
                     <Icon size={20} />
                   </div>
-                  <h3 className="font-serif text-lg font-semibold text-[#F3EFEA]">{pillar.title}</h3>
-                  <p className="text-xs text-stone-400 leading-relaxed">{pillar.desc}</p>
+                  <h3 className="font-serif text-lg font-semibold text-[#0F0F0E]">{pillar.title}</h3>
+                  <p className="text-xs text-[#6B6B5A] leading-relaxed">{pillar.desc}</p>
                 </div>
               </ScrollReveal>
             );
@@ -118,28 +119,28 @@ export default function AboutPage({ onOpenInquiry }) {
 
       {/* Split Section 2: Channel Partner Model Explained */}
       <ScrollReveal animation="fade-up" duration={700}>
-        <div className="bg-[#12161D] border border-neutral-800 rounded-2xl p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div className="bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-2xl p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           <div className="lg:col-span-5">
-            <div className="editorial-img-container aspect-square rounded-xl overflow-hidden border border-neutral-800 relative">
+            <div className="editorial-img-container aspect-square rounded-xl overflow-hidden border border-[rgba(15,15,14,0.10)] relative shadow-sm">
               <img
                 src="/assets/district.jpg"
                 alt="Contemporary master-planned district boulevard in Riyadh"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              <div className="absolute bottom-4 left-4 text-xs font-mono text-[#C5A265]">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute bottom-4 left-4 text-xs font-mono text-[#D4A853]">
                 Master District Planning · Riyadh
               </div>
             </div>
           </div>
 
           <div className="lg:col-span-7 space-y-5">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#C5A265]">The Mechanism</p>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#F3EFEA]">
+            <p className="text-xs font-mono uppercase tracking-widest text-[#B8913A]">The Mechanism</p>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0F0F0E]">
               Why the Channel Partner Model Works Better
             </h2>
-            <div className="space-y-3 text-xs sm:text-sm text-stone-300 leading-relaxed">
+            <div className="space-y-3 text-xs sm:text-sm text-[#5A5A52] leading-relaxed">
               <p>
                 Developers excel at construction, architecture, and municipal delivery. Investors excel at capital allocation. Yet direct interactions often break down over misaligned timeline expectations, lack of comparative market context, or bureaucratic friction.
               </p>
@@ -154,7 +155,7 @@ export default function AboutPage({ onOpenInquiry }) {
             <div className="pt-2 flex items-center gap-4">
               <button
                 onClick={() => onOpenInquiry ? onOpenInquiry() : window.location.href = '/contact'}
-                className="inline-flex items-center gap-2 bg-[#C5A265] text-[#0F1216] font-semibold px-5 py-2.5 rounded text-xs tracking-wider uppercase cursor-pointer"
+                className="inline-flex items-center gap-2 bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] font-semibold px-5 py-3 rounded text-xs tracking-wider uppercase cursor-pointer transition-colors"
               >
                 <span>Schedule Strategic Consultation</span>
                 <ArrowUpRight size={14} />

@@ -76,14 +76,14 @@ export default function ServicesPage({ onOpenInquiry }) {
       {/* Page Header */}
       <ScrollReveal animation="fade-down">
         <div className="space-y-4 max-w-3xl">
-          <div className="flex items-center gap-2 text-xs font-mono text-[#C5A265] uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-xs font-mono text-[#B8913A] uppercase tracking-widest">
             <Compass size={14} />
             <span>Investor Services & Advisory</span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#F3EFEA] tracking-tight leading-tight">
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-[#0F0F0E] tracking-tight leading-tight">
             From acquisition brief to verified title deed.
           </h1>
-          <p className="text-stone-300 text-sm sm:text-base leading-relaxed">
+          <p className="text-[#5A5A52] text-sm sm:text-base leading-relaxed">
             We guide clients through every critical juncture of the property acquisition lifecycle with rigorous due diligence, developer channel access, and complete fiduciary discipline.
           </p>
         </div>
@@ -99,25 +99,25 @@ export default function ServicesPage({ onOpenInquiry }) {
               animation="fade-up" 
               delay={idx * 130}
             >
-              <div className="editorial-card rounded-xl p-8 flex flex-col justify-between space-y-6 bg-[#151A21] h-full">
+              <div className="editorial-card rounded-xl p-8 flex flex-col justify-between space-y-6 bg-[#FAF7F2] h-full shadow-sm hover:shadow-md">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <div className="h-10 w-10 rounded-lg bg-[#C5A265]/10 border border-[#C5A265]/30 flex items-center justify-center text-[#C5A265]">
+                    <div className="h-10 w-10 rounded-lg bg-[#F0EBE1] border border-[rgba(184,145,58,0.3)] flex items-center justify-center text-[#B8913A]">
                       <Icon size={20} />
                     </div>
-                    <span className="font-mono text-[10.5px] uppercase tracking-wider text-[#C5A265] px-2.5 py-0.5 rounded bg-[#0F1216] border border-neutral-800">
+                    <span className="font-mono text-[10.5px] uppercase tracking-wider text-[#B8913A] px-2.5 py-0.5 rounded bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] font-semibold">
                       {srv.badge}
                     </span>
                   </div>
 
-                  <h3 className="font-serif text-2xl font-bold text-[#F3EFEA]">{srv.title}</h3>
-                  <p className="text-stone-300 text-xs sm:text-sm leading-relaxed">{srv.desc}</p>
+                  <h3 className="font-serif text-2xl font-bold text-[#0F0F0E]">{srv.title}</h3>
+                  <p className="text-[#5A5A52] text-xs sm:text-sm leading-relaxed">{srv.desc}</p>
 
-                  <div className="pt-3 border-t border-neutral-800 space-y-2">
-                    <p className="text-[10px] font-mono uppercase text-stone-400 tracking-wider">Key Advisory Deliverables</p>
+                  <div className="pt-3 border-t border-[rgba(15,15,14,0.08)] space-y-2">
+                    <p className="text-[10px] font-mono uppercase text-[#6B6B5A] tracking-wider">Key Advisory Deliverables</p>
                     {srv.deliverables.map((item, dIdx) => (
-                      <div key={dIdx} className="flex items-start gap-2.5 text-xs text-stone-300">
-                        <div className="p-0.5 rounded bg-[#C5A265]/15 text-[#C5A265] mt-0.5 shrink-0">
+                      <div key={dIdx} className="flex items-start gap-2.5 text-xs text-[#5A5A52]">
+                        <div className="p-0.5 rounded bg-[#B8913A]/15 text-[#B8913A] mt-0.5 shrink-0">
                           <Check size={11} />
                         </div>
                         <span>{item}</span>
@@ -126,10 +126,10 @@ export default function ServicesPage({ onOpenInquiry }) {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-neutral-800">
+                <div className="pt-4 border-t border-[rgba(15,15,14,0.08)]">
                   <button
                     onClick={() => onOpenInquiry ? onOpenInquiry({ type: srv.title }) : null}
-                    className="w-full py-2.5 px-4 rounded bg-neutral-800 hover:bg-[#C5A265] text-stone-200 hover:text-[#0F1216] text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full py-3 px-4 rounded bg-[#F0EBE1] hover:bg-[#B8913A] text-[#0F0F0E] hover:text-[#FAF7F2] text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer border border-[rgba(15,15,14,0.08)]"
                   >
                     <span>Initiate {srv.title.split(' ')[0]} Mandate</span>
                     <ArrowUpRight size={13} />
@@ -143,26 +143,26 @@ export default function ServicesPage({ onOpenInquiry }) {
 
       {/* Structured Engagement Roadmap */}
       <ScrollReveal animation="fade-up" duration={700}>
-        <div className="bg-[#12161D] border border-neutral-800 rounded-2xl p-8 sm:p-12 space-y-10">
+        <div className="bg-[#0C0C0A] text-[#E8E3DC] border border-[rgba(255,255,255,0.08)] rounded-2xl p-8 sm:p-12 space-y-10">
           <div className="max-w-2xl space-y-2">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#C5A265]">The Advisory Arc</p>
-            <h2 className="font-serif text-3xl font-bold text-[#F3EFEA]">
+            <p className="text-xs font-mono uppercase tracking-widest text-[#B8913A]">The Advisory Arc</p>
+            <h2 className="font-serif text-3xl font-bold text-[#E8E3DC]">
               How An Engagement Progresses
             </h2>
-            <p className="text-stone-400 text-xs sm:text-sm leading-relaxed">
+            <p className="text-[#8A8578] text-xs sm:text-sm leading-relaxed">
               Our disciplined five-stage process guarantees that no capital is committed until physical, legal, and financial parameters have been verified.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             {timeline.map((item, idx) => (
-              <div key={idx} className="relative space-y-3 p-4 rounded-xl bg-[#0F1216] border border-neutral-800">
+              <div key={idx} className="relative space-y-3 p-5 rounded-xl bg-[#161614] border border-[rgba(255,255,255,0.06)]">
                 <div className="flex items-center justify-between text-[11px] font-mono">
-                  <span className="text-[#C5A265] font-bold">{item.step}</span>
-                  <span className="text-stone-400">{item.time}</span>
+                  <span className="text-[#D4A853] font-bold">{item.step}</span>
+                  <span className="text-[#8A8578]">{item.time}</span>
                 </div>
-                <h4 className="font-serif text-base font-semibold text-[#F3EFEA]">{item.title}</h4>
-                <p className="text-[11.5px] text-stone-400 leading-relaxed">{item.desc}</p>
+                <h4 className="font-serif text-base font-semibold text-[#E8E3DC]">{item.title}</h4>
+                <p className="text-[11.5px] text-[#8A8578] leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>

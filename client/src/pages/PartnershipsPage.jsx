@@ -78,14 +78,14 @@ export default function PartnershipsPage() {
       {/* Page Header */}
       <ScrollReveal animation="fade-down">
         <div className="space-y-4 max-w-3xl">
-          <div className="flex items-center gap-2 text-xs font-mono text-[#C5A265] uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-xs font-mono text-[#B8913A] uppercase tracking-widest">
             <Handshake size={14} />
             <span>Developer Channel Partnerships</span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#F3EFEA] tracking-tight leading-tight">
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-[#0F0F0E] tracking-tight leading-tight">
             Connecting premier developers with vetted capital.
           </h1>
-          <p className="text-stone-300 text-sm sm:text-base leading-relaxed">
+          <p className="text-[#5A5A52] text-sm sm:text-base leading-relaxed">
             MIRĀS serves as an exclusive channel partner for select developers across Saudi Arabia. We originate qualified purchasers and manage the acquisition relationship from introduction through to handover.
           </p>
         </div>
@@ -99,10 +99,10 @@ export default function PartnershipsPage() {
             animation="fade-up"
             delay={idx * 110}
           >
-            <div className="bg-[#151A21] border border-neutral-800 rounded-xl p-6 space-y-3 h-full">
-              <span className="font-serif text-2xl font-bold text-[#C5A265]">0{idx + 1}</span>
-              <h3 className="font-serif text-lg font-semibold text-[#F3EFEA]">{adv.title}</h3>
-              <p className="text-xs text-stone-400 leading-relaxed">{adv.desc}</p>
+            <div className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.10)] rounded-xl p-6 space-y-3 h-full shadow-sm hover:shadow-md transition-shadow">
+              <span className="font-serif text-2xl font-bold text-[#B8913A]">0{idx + 1}</span>
+              <h3 className="font-serif text-lg font-semibold text-[#0F0F0E]">{adv.title}</h3>
+              <p className="text-xs text-[#6B6B5A] leading-relaxed">{adv.desc}</p>
             </div>
           </ScrollReveal>
         ))}
@@ -114,42 +114,42 @@ export default function PartnershipsPage() {
         {/* Left: Vetting Criteria */}
         <div className="lg:col-span-5 space-y-6">
           <ScrollReveal animation="fade-right">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#F3EFEA]">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0F0F0E]">
               Our Developer Selection Criteria
             </h2>
-            <p className="text-stone-300 text-sm leading-relaxed mb-4">
+            <p className="text-[#5A5A52] text-sm leading-relaxed mb-4">
               We partner with a limited circle of master developers to ensure each project receives dedicated origination focus. We evaluate prospective developments against four core standards:
             </p>
 
-            <div className="space-y-4 text-xs text-stone-300">
-              <div className="flex items-start gap-3 p-3.5 rounded-lg bg-[#141920] border border-neutral-800">
-                <CheckCircle2 size={16} className="text-[#C5A265] shrink-0 mt-0.5" />
+            <div className="space-y-4 text-xs text-[#5A5A52]">
+              <div className="flex items-start gap-3 p-4 rounded-xl bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)]">
+                <CheckCircle2 size={16} className="text-[#B8913A] shrink-0 mt-0.5" />
                 <div>
-                  <strong className="text-[#F3EFEA] block font-semibold mb-0.5">Wafi Off-Plan Certification:</strong>
+                  <strong className="text-[#0F0F0E] block font-semibold mb-0.5">Wafi Off-Plan Certification:</strong>
                   Complete licensing under the Wafi program with verified Ministry of Housing escrow accounts for all off-plan phases.
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3.5 rounded-lg bg-[#141920] border border-neutral-800">
-                <CheckCircle2 size={16} className="text-[#C5A265] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 p-4 rounded-xl bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)]">
+                <CheckCircle2 size={16} className="text-[#B8913A] shrink-0 mt-0.5" />
                 <div>
-                  <strong className="text-[#F3EFEA] block font-semibold mb-0.5">Demonstrated Delivery Record:</strong>
+                  <strong className="text-[#0F0F0E] block font-semibold mb-0.5">Demonstrated Delivery Record:</strong>
                   Minimum 3 successfully delivered projects with verified municipal completion certificates in the Kingdom.
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3.5 rounded-lg bg-[#141920] border border-neutral-800">
-                <CheckCircle2 size={16} className="text-[#C5A265] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 p-4 rounded-xl bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)]">
+                <CheckCircle2 size={16} className="text-[#B8913A] shrink-0 mt-0.5" />
                 <div>
-                  <strong className="text-[#F3EFEA] block font-semibold mb-0.5">Architectural & Engineering Integrity:</strong>
+                  <strong className="text-[#0F0F0E] block font-semibold mb-0.5">Architectural & Engineering Integrity:</strong>
                   Higher specification materials, sustainable thermal performance, and verifiable MEP warranties.
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3.5 rounded-lg bg-[#141920] border border-neutral-800">
-                <CheckCircle2 size={16} className="text-[#C5A265] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 p-4 rounded-xl bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)]">
+                <CheckCircle2 size={16} className="text-[#B8913A] shrink-0 mt-0.5" />
                 <div>
-                  <strong className="text-[#F3EFEA] block font-semibold mb-0.5">Transparent Escrow Protocol:</strong>
+                  <strong className="text-[#0F0F0E] block font-semibold mb-0.5">Transparent Escrow Protocol:</strong>
                   Clean contract mechanisms protecting buyer capital and tying drawdowns to independent engineer sign-offs.
                 </div>
               </div>
@@ -160,24 +160,24 @@ export default function PartnershipsPage() {
         {/* Right: Partner Intake Form */}
         <div className="lg:col-span-7">
           <ScrollReveal animation="fade-left" delay={150}>
-            <div className="bg-[#151A21] border border-neutral-800 rounded-2xl p-8 shadow-xl">
-              <div className="border-b border-neutral-800 pb-4 mb-6">
-                <h3 className="font-serif text-xl font-bold text-[#F3EFEA]">Developer Channel Registration</h3>
-                <p className="text-stone-400 text-xs mt-1">Submit your upcoming project or development pipeline for channel evaluation.</p>
+            <div className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.12)] rounded-2xl p-8 shadow-sm">
+              <div className="border-b border-[rgba(15,15,14,0.08)] pb-4 mb-6">
+                <h3 className="font-serif text-xl font-bold text-[#0F0F0E]">Developer Channel Registration</h3>
+                <p className="text-[#6B6B5A] text-xs mt-1">Submit your upcoming project or development pipeline for channel evaluation.</p>
               </div>
 
               {submitted ? (
                 <div className="py-12 text-center space-y-4">
-                  <div className="h-14 w-14 rounded-full bg-[#C5A265]/15 border border-[#C5A265] text-[#C5A265] flex items-center justify-center mx-auto">
+                  <div className="h-14 w-14 rounded-full bg-[#B8913A]/15 border border-[#B8913A] text-[#B8913A] flex items-center justify-center mx-auto">
                     <CheckCircle2 size={28} />
                   </div>
-                  <h4 className="font-serif text-xl font-bold text-[#F3EFEA]">Application Registered</h4>
-                  <p className="text-xs text-stone-400 max-w-md mx-auto leading-relaxed">
+                  <h4 className="font-serif text-xl font-bold text-[#0F0F0E]">Application Registered</h4>
+                  <p className="text-xs text-[#6B6B5A] max-w-md mx-auto leading-relaxed">
                     Thank you. Your developer dossier has been logged. Our partnership director will contact you within two business days to arrange an introductory briefing.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="px-4 py-2 rounded bg-neutral-800 text-stone-300 text-xs hover:text-white"
+                    className="px-4 py-2 rounded bg-[#F0EBE1] text-[#0F0F0E] text-xs hover:bg-[#E8E1D5] cursor-pointer"
                   >
                     Submit Another Project
                   </button>
@@ -185,7 +185,7 @@ export default function PartnershipsPage() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {errorMessage && (
-                    <div className="p-3 bg-rose-950/60 border border-rose-800 text-rose-200 text-xs rounded flex items-center gap-2">
+                    <div className="p-3 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded flex items-center gap-2">
                       <AlertCircle size={14} />
                       <span>{errorMessage}</span>
                     </div>
@@ -193,59 +193,59 @@ export default function PartnershipsPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">Developer / Entity Name *</label>
+                      <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Developer / Entity Name *</label>
                       <input
                         type="text"
                         required
                         value={formData.developerName}
                         onChange={(e) => setFormData({ ...formData, developerName: e.target.value })}
                         placeholder="e.g. Al-Rawabi Developments"
-                        className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg p-2.5 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none"
+                        className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">Representative Name</label>
+                      <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Representative Name</label>
                       <input
                         type="text"
                         value={formData.contactPerson}
                         onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
                         placeholder="e.g. Eng. Khalid Al-Mansoor"
-                        className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg p-2.5 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none"
+                        className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">Corporate Email *</label>
+                      <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Corporate Email *</label>
                       <input
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="partnerships@developer.sa"
-                        className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg p-2.5 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none"
+                        className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">Contact Phone / Mobile</label>
+                      <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Contact Phone / Mobile</label>
                       <input
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="+966 11 000 0000"
-                        className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg p-2.5 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none"
+                        className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                      <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">Project Location</label>
+                      <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Project Location</label>
                       <select
                         value={formData.projectLocation}
                         onChange={(e) => setFormData({ ...formData, projectLocation: e.target.value })}
-                        className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg p-2.5 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none"
+                        className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
                       >
                         <option value="Riyadh">Riyadh Metropolitan</option>
                         <option value="Jeddah">Jeddah Waterfront</option>
@@ -254,11 +254,11 @@ export default function PartnershipsPage() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">Asset Class</label>
+                      <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Asset Class</label>
                       <select
                         value={formData.projectType}
                         onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                        className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg p-2.5 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none"
+                        className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
                       >
                         <option value="Residential Master Community">Residential Villas/Community</option>
                         <option value="Luxury Apartments / High-Rise">Apartments / High-Rise</option>
@@ -267,11 +267,11 @@ export default function PartnershipsPage() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">Project Scale</label>
+                      <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Project Scale</label>
                       <select
                         value={formData.estimatedUnits}
                         onChange={(e) => setFormData({ ...formData, estimatedUnits: e.target.value })}
-                        className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg p-2.5 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none"
+                        className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
                       >
                         <option value="Under 50 Units">Under 50 Units</option>
                         <option value="50-200 Units">50 – 200 Units</option>
@@ -281,26 +281,26 @@ export default function PartnershipsPage() {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">Project Summary & Licensing Status *</label>
+                    <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Project Summary & Licensing Status *</label>
                     <textarea
                       required
                       rows={4}
                       value={formData.notes}
                       onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                       placeholder="Outline project location, construction timeline, Wafi approval status, and target channel release date..."
-                      className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg p-3 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none resize-none"
+                      className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-3 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none resize-none"
                     />
                   </div>
 
                   <div className="pt-2 flex items-center justify-between">
-                    <p className="text-[10px] text-stone-400 font-mono flex items-center gap-1">
-                      <Clock size={11} className="text-[#C5A265]" /> Response within 48h
+                    <p className="text-[10px] text-[#8A8A75] font-mono flex items-center gap-1">
+                      <Clock size={11} className="text-[#B8913A]" /> Response within 48h
                     </p>
 
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="bg-[#C5A265] hover:bg-[#B28F52] text-[#0F1216] font-semibold px-6 py-2.5 rounded text-xs tracking-wider uppercase flex items-center gap-2 cursor-pointer transition-colors"
+                      className="bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] font-semibold px-6 py-3 rounded text-xs tracking-wider uppercase flex items-center gap-2 cursor-pointer transition-colors shadow-sm"
                     >
                       {isSubmitting ? (
                         <span>Submitting...</span>

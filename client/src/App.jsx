@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import DatabaseStatusIndicator from './components/DatabaseStatusIndicator';
 import InquiryModal from './components/InquiryModal';
 import BackToTop from './components/BackToTop';
+import FloatingBriefButton from './components/FloatingBriefButton';
 
 import HomePage from './pages/HomePage';
 import PropertiesPage from './pages/PropertiesPage';
@@ -42,7 +43,7 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="flex flex-col min-h-screen bg-[#0F1216] text-[#EAE5DE] font-sans antialiased selection:bg-[#C5A265] selection:text-[#0F1216]">
+      <div className="flex flex-col min-h-screen bg-[#FAF7F2] text-[#0F0F0E] font-sans antialiased selection:bg-[#B8913A] selection:text-[#FAF7F2]">
         
         {/* Navigation Bar with Scroll Progress */}
         <Navbar onOpenInquiry={() => handleOpenInquiry(null)} />
@@ -52,6 +53,9 @@ export default function App() {
 
         {/* Floating Smooth Back-To-Top Button */}
         <BackToTop />
+
+        {/* Floating Quick Action Brief Button */}
+        <FloatingBriefButton onOpenInquiry={() => handleOpenInquiry(null)} />
 
         {/* Global Inquiry Modal */}
         <InquiryModal

@@ -1,147 +1,208 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Bed, Bath, Maximize2, MapPin, ArrowUpRight, TrendingUp } from 'lucide-react';
+import { MapPin, ArrowUpRight, TrendingUp, Bed, Bath, Maximize2 } from 'lucide-react';
 
-export default function PropertyCard({ property, onInquire }) {
+/**
+ * FeaturedPropertyCard — Large editorial card for featured listings.
+ * Used in HomePage hero grid and PropertiesPage.
+ */
+export function FeaturedPropertyCard({ property, onInquire }) {
   if (!property) return null;
-
-  const {
-    id,
-    title,
-    city,
-    district,
-    type,
-    price,
-    priceLabel,
-    pricePerSqm,
-    beds,
-    baths,
-    area,
-    image,
-    blurb,
-    featured,
-    financialMetrics
-  } = property;
+  const { id, title, city, district, type, priceLabel, price, beds, baths, area, image, blurb, financialMetrics } = property;
 
   return (
-    <article className="editorial-card rounded-lg overflow-hidden flex flex-col group h-full">
-      
-      {/* Media Container */}
-      <div className="editorial-img-container aspect-[16/10] w-full relative">
-        <img
-          src={image}
-          alt={title}
-          loading="lazy"
-          className="w-full h-full object-cover"
-        />
+    <article className="featured-card rounded-xl overflow-hidden flex flex-col group h-full">
+      {/* Image */}
+      <div className="card-image editorial-img-container aspect-[16/10] relative">
+        <img src={image} alt={title} loading="lazy" className="w-full h-full object-cover" />
 
-        {/* Gradient Scrim */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F1216]/80 via-transparent to-black/30 pointer-events-none" />
+        {/* Scrim */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0E]/70 via-transparent to-black/20 pointer-events-none" />
 
-        {/* Top Badges */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-          <div className="flex items-center gap-2">
-            <span className="bg-[#0F1216]/85 backdrop-blur-md border border-neutral-700/60 text-[#C5A265] text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded">
-              {type} · {city}
-            </span>
-            {featured && (
-              <span className="bg-[#C5A265] text-[#0F1216] text-[10px] font-bold font-mono uppercase tracking-wider px-1.5 py-0.5 rounded">
-                Featured
-              </span>
-            )}
-          </div>
-          <span className="bg-neutral-900/80 backdrop-blur-md text-stone-400 text-[9px] font-mono px-2 py-0.5 rounded border border-neutral-700/50">
-            Sample Asset
+        {/* Top badge */}
+        <div className="absolute top-3 left-3">
+          <span className="brass-badge rounded">
+            {type} · {city}
           </span>
         </div>
 
-        {/* Bottom overlay: Location pill */}
-        <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-stone-200 text-xs font-medium bg-[#0F1216]/75 backdrop-blur-sm px-2.5 py-1 rounded">
-          <MapPin size={12} className="text-[#C5A265]" />
+        {/* Yield badge */}
+        {financialMetrics?.estimatedYield && (
+          <div className="absolute top-3 right-3 bg-[#0F0F0E]/85 backdrop-blur-sm px-2.5 py-1.5 rounded border border-[rgba(255,255,255,0.10)]">
+            <p className="text-[9px] font-mono uppercase text-[#8A8578] leading-none mb-0.5">Net Yield</p>
+            <p className="text-xs font-mono font-bold text-[#D4A853] leading-none">{financialMetrics.estimatedYield}</p>
+          </div>
+        )}
+
+        {/* Location chip */}
+        <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-white text-xs font-medium bg-[#0F0F0E]/70 backdrop-blur-sm px-2.5 py-1 rounded">
+          <MapPin size={11} className="text-[#D4A853]" />
           <span>{district}, {city}</span>
         </div>
       </div>
 
-      {/* Body Content */}
-      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-        
+      {/* Body */}
+      <div className="card-body p-5 flex-1 flex flex-col justify-between bg-[#FAF7F2] space-y-4">
         <div>
-          {/* Price Header */}
-          <div className="flex items-baseline justify-between gap-2 border-b border-neutral-800/80 pb-3">
+          {/* Price row */}
+          <div className="flex items-baseline justify-between border-b border-[rgba(15,15,14,0.08)] pb-3 mb-3">
             <div>
-              <p className="text-[10px] uppercase font-mono tracking-wider text-stone-400">Acquisition Guide</p>
-              <p className="text-xl font-serif font-bold text-[#F3EFEA] tracking-tight text-[#C5A265]">
+              <p className="text-[10px] uppercase font-mono tracking-wider text-[#8A8A75] mb-0.5">Acquisition Guide</p>
+              <p className="text-xl font-serif font-bold text-[#B8913A] tracking-tight">
                 {priceLabel || `SAR ${price?.toLocaleString()}`}
               </p>
             </div>
-            {pricePerSqm && (
+            {area && (
               <div className="text-right">
-                <p className="text-[9px] uppercase font-mono text-stone-400">Unit Rate</p>
-                <p className="text-xs font-mono text-stone-300">
-                  SAR {pricePerSqm?.toLocaleString()} / m²
-                </p>
+                <p className="text-[9px] uppercase font-mono text-[#8A8A75]">Area</p>
+                <p className="text-xs font-mono text-[#3A3A35]">{area} m²</p>
               </div>
             )}
           </div>
 
-          {/* Title & Short Blurb */}
-          <div className="pt-3">
-            <h3 className="font-serif text-base font-semibold text-[#F3EFEA] group-hover:text-[#C5A265] transition-colors leading-snug">
-              <Link to={`/properties/${id}`} className="focus:outline-none">
-                {title}
-              </Link>
-            </h3>
-            <p className="text-stone-400 text-xs leading-relaxed mt-2 line-clamp-2">
-              {blurb}
-            </p>
-          </div>
+          {/* Title */}
+          <h3 className="font-serif text-base font-semibold text-[#0F0F0E] group-hover:text-[#B8913A] transition-colors leading-snug">
+            <Link to={`/properties/${id}`} className="focus:outline-none">{title}</Link>
+          </h3>
+          <p className="text-[#6B6B5A] text-xs leading-relaxed mt-2 line-clamp-2">{blurb}</p>
         </div>
 
-        {/* Specifications Bar */}
-        <div className="space-y-3 pt-2">
-          <div className="grid grid-cols-3 gap-2 py-2 px-3 bg-[#0F1216]/60 rounded border border-neutral-800/60 text-[11px] text-stone-300">
+        {/* Stats + actions */}
+        <div className="space-y-3">
+          <div className="grid grid-cols-3 gap-2 py-2 px-3 bg-[#F0EBE1] rounded border border-[rgba(15,15,14,0.06)] text-[11px] text-[#3A3A35]">
             <div className="flex items-center gap-1.5">
-              <Maximize2 size={13} className="text-stone-400" />
+              <Maximize2 size={12} className="text-[#8A8A75]" />
               <span>{area} m²</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Bed size={13} className="text-stone-400" />
-              <span>{beds !== null && beds !== undefined ? `${beds} Beds` : 'Commercial'}</span>
+              <Bed size={12} className="text-[#8A8A75]" />
+              <span>{beds != null ? `${beds} Beds` : 'Comm.'}</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Bath size={13} className="text-stone-400" />
+              <Bath size={12} className="text-[#8A8A75]" />
               <span>{baths} Baths</span>
             </div>
           </div>
 
-          {/* Financial Indicator */}
-          {financialMetrics?.estimatedYield && (
-            <div className="flex items-center gap-1.5 text-[10.5px] text-[#C5A265] font-mono">
-              <TrendingUp size={12} />
-              <span>{financialMetrics.estimatedYield}</span>
-            </div>
-          )}
-
-          {/* Action CTAs */}
           <div className="flex items-center gap-2 pt-1">
             <Link
               to={`/properties/${id}`}
-              className="flex-1 text-center py-2 px-3 rounded bg-neutral-800/80 hover:bg-neutral-700/80 text-stone-200 text-xs font-medium tracking-wide border border-neutral-700/70 transition-colors"
+              className="flex-1 text-center py-2 px-3 rounded bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#3A3A35] text-xs font-medium tracking-wide border border-[rgba(15,15,14,0.10)] transition-colors"
             >
               View Details
             </Link>
             <button
               onClick={() => onInquire ? onInquire(property) : null}
-              className="py-2 px-3 rounded bg-[#C5A265] hover:bg-[#B28F52] text-[#0F1216] text-xs font-semibold tracking-wider uppercase transition-colors flex items-center justify-center gap-1 cursor-pointer"
-              title="Submit Inquiry for this property"
+              className="py-2 px-3 rounded bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] text-xs font-semibold tracking-wider uppercase transition-colors flex items-center gap-1 cursor-pointer"
             >
               <span>Inquire</span>
               <ArrowUpRight size={13} />
             </button>
           </div>
         </div>
-
       </div>
     </article>
   );
+}
+
+/**
+ * OffsetPropertyCard — slightly offset magazine-layout card.
+ * Used in grids to create editorial rhythm.
+ */
+export function OffsetPropertyCard({ property, onInquire, offset = false }) {
+  if (!property) return null;
+  const { id, title, city, type, priceLabel, price, area, image, financialMetrics } = property;
+
+  return (
+    <article
+      className={`editorial-card rounded-xl overflow-hidden group ${offset ? 'mt-8' : '-mt-8'} h-full`}
+      style={{ transition: 'transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease' }}
+    >
+      <div className="editorial-img-container aspect-[4/3] relative">
+        <img src={image} alt={title} loading="lazy" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0E]/60 via-transparent to-transparent" />
+        <div className="absolute top-3 left-3">
+          <span className="brass-badge rounded text-[8px]">{type}</span>
+        </div>
+        {financialMetrics?.estimatedYield && (
+          <div className="absolute bottom-3 right-3 text-right bg-[#0F0F0E]/75 backdrop-blur-sm px-2.5 py-1.5 rounded">
+            <p className="text-[9px] font-mono text-[#D4A853] font-bold">{financialMetrics.estimatedYield}</p>
+          </div>
+        )}
+      </div>
+      <div className="p-4 bg-[#FAF7F2]">
+        <p className="text-[10px] uppercase font-mono tracking-wider text-[#8A8A75] mb-1">{city}</p>
+        <h3 className="font-serif text-sm font-semibold text-[#0F0F0E] group-hover:text-[#B8913A] transition-colors leading-snug">
+          <Link to={`/properties/${id}`}>{title}</Link>
+        </h3>
+        <p className="text-sm font-serif font-bold text-[#B8913A] mt-1.5">
+          {priceLabel || `SAR ${price?.toLocaleString()}`}
+        </p>
+        {area && <p className="text-[11px] text-[#8A8A75] font-mono mt-1">{area} m²</p>}
+      </div>
+    </article>
+  );
+}
+
+/**
+ * CityCard — Image-led card for a city market.
+ */
+export function CityCard({ city, tagline, image, stat, statLabel, href }) {
+  return (
+    <Link
+      to={href || `/properties?city=${city}`}
+      className="group block editorial-card rounded-xl overflow-hidden"
+    >
+      <div className="editorial-img-container aspect-[4/3] relative">
+        <img src={image} alt={city} loading="lazy" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0E]/80 via-[#0F0F0E]/30 to-transparent" />
+
+        {/* City name */}
+        <div className="absolute bottom-0 left-0 right-0 p-5">
+          <h3 className="font-serif text-2xl font-bold text-white mb-0.5">{city}</h3>
+          <p className="text-[11px] font-mono text-white/70 uppercase tracking-wider mb-3">{tagline}</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-[9px] font-mono uppercase text-white/50 mb-0.5">{statLabel}</p>
+              <p className="text-sm font-mono font-bold text-[#D4A853]">{stat}</p>
+            </div>
+            <div className="h-8 w-8 rounded-full border border-white/30 flex items-center justify-center text-white group-hover:bg-[#B8913A] group-hover:border-[#B8913A] transition-all">
+              <ArrowUpRight size={15} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/**
+ * MarketInsightCard — Premium data card with large numbers.
+ */
+export function MarketInsightCard({ label, value, unit, sub, dark = false }) {
+  return (
+    <div className={`p-5 rounded-xl border ${
+      dark
+        ? 'bg-[#1C1C1A] border-[rgba(255,255,255,0.06)]'
+        : 'bg-[#FAF7F2] border-[rgba(15,15,14,0.08)]'
+    }`}>
+      <p className={`metric-label mb-3 ${dark ? 'text-[#5A5A52]' : ''}`}>{label}</p>
+      <div className="flex items-baseline gap-1.5 mb-1">
+        <span className={`metric-num text-3xl ${dark ? 'text-[#E8E3DC]' : ''}`}>{value}</span>
+        {unit && (
+          <span className={`text-sm font-sans font-medium ${dark ? 'text-[#8A8578]' : 'text-[#6B6B5A]'}`}>{unit}</span>
+        )}
+      </div>
+      {sub && (
+        <p className={`text-[11px] font-sans ${dark ? 'text-[#5A5A52]' : 'text-[#8A8A75]'}`}>{sub}</p>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Default export: backward-compatible PropertyCard (uses bright theme)
+ */
+export default function PropertyCard({ property, onInquire }) {
+  return <FeaturedPropertyCard property={property} onInquire={onInquire} />;
 }

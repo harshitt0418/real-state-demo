@@ -88,226 +88,230 @@ export default function InquiryModal({
   );
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
       <div 
-        className="bg-[#141920] border border-neutral-700/80 rounded-2xl max-w-xl w-full shadow-2xl overflow-hidden relative animate-in fade-in zoom-in-95 duration-200"
+        className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.14)] rounded-2xl max-w-xl w-full shadow-2xl overflow-hidden relative animate-in fade-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-800 bg-[#10141A]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(15,15,14,0.08)] bg-[#F0EBE1]">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#C5A265]">Private Advisory Brief</span>
-              <span className="text-neutral-500 text-xs">|</span>
-              <span className="text-[10px] text-stone-400 font-mono">Fiduciary Channel</span>
+              <span className="font-serif font-bold text-lg text-[#0F0F0E]">MIRĀS</span>
+              <span className="text-[10px] tracking-widest uppercase font-mono text-[#B8913A] border-l border-[rgba(15,15,14,0.12)] pl-2">
+                Private Advisory Brief
+              </span>
             </div>
-            <h2 className="font-serif text-lg font-semibold text-[#F3EFEA] mt-0.5">
-              {initialProperty ? 'Inquire on Specified Unit' : 'Schedule a Confidential Consultation'}
-            </h2>
+            {initialProperty && (
+              <p className="text-xs text-[#6B6B5A] truncate mt-0.5">
+                Target Asset: <span className="text-[#0F0F0E] font-medium">{initialProperty.title}</span> ({initialProperty.city})
+              </p>
+            )}
           </div>
+
           <button
             onClick={resetAndClose}
-            className="p-1.5 rounded-lg text-stone-400 hover:text-white hover:bg-neutral-800 transition-colors"
-            aria-label="Close dialog"
+            className="p-1 rounded-md text-[#6B6B5A] hover:text-[#0F0F0E] hover:bg-[#E8E1D5] transition-colors cursor-pointer"
+            aria-label="Close Modal"
           >
             <X size={18} />
           </button>
         </div>
 
-        {/* Modal Body */}
+        {/* Content Area */}
         <div className="p-6">
           
           {submittedData ? (
-            /* Success State */
-            <div className="text-center py-6 space-y-5 animate-in fade-in duration-300">
-              <div className="h-14 w-14 rounded-full bg-[#C5A265]/15 border border-[#C5A265] text-[#C5A265] flex items-center justify-center mx-auto shadow-inner">
-                <CheckCircle size={28} />
-              </div>
-              <div className="space-y-1.5">
-                <h3 className="font-serif text-xl font-bold text-[#F3EFEA]">Inquiry Registered Successfully</h3>
-                <p className="text-xs text-stone-400 max-w-md mx-auto leading-relaxed">
-                  Your acquisition brief has been logged in the MIRĀS database. A senior property advisor will review your parameters and follow up within 24 business hours.
-                </p>
+            /* Success confirmation */
+            <div className="py-8 text-center space-y-4">
+              <div className="h-12 w-12 rounded-full bg-[#B8913A]/15 border border-[#B8913A] text-[#B8913A] flex items-center justify-center mx-auto">
+                <CheckCircle size={24} />
               </div>
 
-              <div className="bg-[#0F1216] border border-neutral-800 rounded-lg p-3 text-xs text-stone-300 font-mono max-w-sm mx-auto text-left space-y-1">
-                <p><span className="text-stone-400">Reference:</span> {submittedData.id || `INQ-${Date.now().toString().slice(-6)}`}</p>
-                <p><span className="text-stone-400">Contact:</span> {submittedData.name} ({submittedData.email})</p>
-                <p><span className="text-stone-400">Target Region:</span> {submittedData.cityOfInterest}</p>
+              <div>
+                <h3 className="font-serif text-xl font-bold text-[#0F0F0E]">Inquiry Successfully Logged</h3>
+                <p className="text-xs text-[#6B6B5A] mt-1">Ref ID: {submittedData.id || 'INQ-SAVED-LOCAL'}</p>
               </div>
 
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <div className="bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-3 text-left text-xs space-y-1.5 text-[#5A5A52]">
+                <p><strong className="text-[#0F0F0E]">Name:</strong> {submittedData.name}</p>
+                <p><strong className="text-[#0F0F0E]">Contact:</strong> {submittedData.email} {submittedData.phone ? `· ${submittedData.phone}` : ''}</p>
+                <p><strong className="text-[#0F0F0E]">Region:</strong> {submittedData.cityOfInterest}</p>
+                {submittedData.propertyTitle && (
+                  <p><strong className="text-[#0F0F0E]">Asset:</strong> {submittedData.propertyTitle}</p>
+                )}
+              </div>
+
+              <p className="text-xs text-[#5A5A52] leading-relaxed max-w-sm mx-auto">
+                Your mandate has been recorded in our database ledger. An authorized advisor will review your criteria and respond within 24 business hours.
+              </p>
+
+              <div className="pt-2 flex items-center justify-center gap-3">
                 <a
                   href={`https://wa.me/966501234567?text=${whatsappMessage}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-4 py-2 rounded text-xs transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded text-xs font-semibold uppercase tracking-wider transition-colors"
                 >
                   <Phone size={13} />
-                  <span>Direct WhatsApp Followup</span>
+                  <span>Connect on WhatsApp</span>
                 </a>
+
                 <button
                   onClick={resetAndClose}
-                  className="w-full sm:w-auto px-4 py-2 rounded bg-neutral-800 hover:bg-neutral-700 text-stone-200 text-xs font-medium transition-colors"
+                  className="px-4 py-2 rounded bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#0F0F0E] text-xs font-medium transition-colors cursor-pointer"
                 >
                   Close Window
                 </button>
               </div>
             </div>
           ) : (
-            /* Inquiry Form */
+            /* Submission Form */
             <form onSubmit={handleSubmit} className="space-y-4">
               
-              {/* Optional Property Pill */}
-              {initialProperty && (
-                <div className="flex items-center gap-3 p-2.5 rounded-lg bg-[#0F1216] border border-neutral-800 text-xs">
-                  <img
-                    src={initialProperty.image}
-                    alt={initialProperty.title}
-                    className="h-10 w-14 object-cover rounded"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <p className="font-serif font-semibold text-stone-200 truncate">{initialProperty.title}</p>
-                    <p className="text-[11px] text-[#C5A265] font-mono">{initialProperty.district}, {initialProperty.city} · {initialProperty.priceLabel}</p>
-                  </div>
-                </div>
-              )}
-
               {errorMessage && (
-                <div className="flex items-center gap-2 p-3 rounded bg-rose-950/60 border border-rose-800/80 text-rose-200 text-xs">
-                  <AlertCircle size={15} />
+                <div className="p-3 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded flex items-center gap-2">
+                  <AlertCircle size={14} />
                   <span>{errorMessage}</span>
                 </div>
               )}
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              {/* Row 1: Name and Email */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">
-                    Full Name <span className="text-[#C5A265]">*</span>
+                  <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
+                    Your Name *
                   </label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="e.g. Faisal Al-Otaibi"
-                    className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg px-3 py-2 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none"
+                    placeholder="e.g. Tariq Al-Ghamdi"
+                    className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md px-3 py-2 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
                   />
                 </div>
-
                 <div>
-                  <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">
-                    Email Address <span className="text-[#C5A265]">*</span>
+                  <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
+                    Email Address *
                   </label>
                   <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="name@domain.com"
-                    className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg px-3 py-2 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none"
+                    placeholder="name@company.sa"
+                    className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md px-3 py-2 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              {/* Row 2: Phone and City */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">
-                    Phone / WhatsApp (with country code)
+                  <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
+                    Phone / Mobile (Optional)
                   </label>
                   <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="+966 50 123 4567"
-                    className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg px-3 py-2 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none"
+                    placeholder="+966 50 000 0000"
+                    className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md px-3 py-2 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
                   />
                 </div>
-
                 <div>
-                  <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">
-                    Region of Interest
+                  <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
+                    Target Region
                   </label>
                   <select
                     value={formData.cityOfInterest}
                     onChange={(e) => setFormData({ ...formData, cityOfInterest: e.target.value })}
-                    className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg px-3 py-2 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none"
+                    className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md px-3 py-2 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
                   >
                     <option value="Riyadh">Riyadh Metropolitan</option>
-                    <option value="Jeddah">Jeddah & Red Sea Coast</option>
-                    <option value="Al Khobar">Al Khobar & Eastern Province</option>
-                    <option value="Multiple">Multiple Corridors</option>
+                    <option value="Jeddah">Jeddah Waterfront</option>
+                    <option value="Al Khobar">Al Khobar & Eastern Prov.</option>
+                    <option value="Multi-city">Multiple Markets</option>
                   </select>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              {/* Row 3: Inquiry Type and Capital Bracket */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">
-                    Inquiry Category
+                  <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
+                    Acquisition Focus
                   </label>
                   <select
                     value={formData.inquiryType}
                     onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
-                    className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg px-3 py-2 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none"
+                    className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md px-3 py-2 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
                   >
                     <option value="Private Acquisition">Private Residential Acquisition</option>
                     <option value="Commercial Investment">Commercial / Office Floorplate</option>
-                    <option value="Family Office Allocation">Family Office Portfolio Allocation</option>
-                    <option value="Developer Channel">Developer Channel Partnership</option>
-                    <option value="General Consultation">General Advisory Consultation</option>
+                    <option value="Developer Channel">Developer Channel Partner</option>
+                    <option value="General Consultation">Fiduciary Portfolio Review</option>
                   </select>
                 </div>
-
                 <div>
-                  <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">
-                    Target Capital Allocation
+                  <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
+                    Capital Allocation Target
                   </label>
                   <select
                     value={formData.budgetRange}
                     onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                    className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg px-3 py-2 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none"
+                    className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md px-3 py-2 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
                   >
-                    <option value="SAR 1M - 2M">SAR 1,000,000 – 2,000,000</option>
+                    <option value="Under SAR 2M">Under SAR 2,000,000</option>
                     <option value="SAR 2M - 4M">SAR 2,000,000 – 4,000,000</option>
-                    <option value="SAR 4M - 7M">SAR 4,000,000 – 7,000,000</option>
-                    <option value="SAR 7M+">Above SAR 7,000,000</option>
+                    <option value="SAR 4M - 8M">SAR 4,000,000 – 8,000,000</option>
+                    <option value="SAR 8M+">Above SAR 8,000,000</option>
                   </select>
                 </div>
               </div>
 
+              {/* Row 4: Message */}
               <div>
-                <label className="block text-[11px] uppercase font-mono text-stone-400 mb-1">
-                  Brief Details / Specific Requirements <span className="text-[#C5A265]">*</span>
+                <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
+                  Brief Details / Specific Requirements *
                 </label>
                 <textarea
                   required
                   rows={3}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Outline your acquisition criteria, desired completion timeline, or target yield objectives..."
-                  className="w-full bg-[#0F1216] border border-neutral-800 rounded-lg p-3 text-xs text-stone-200 focus:border-[#C5A265] focus:outline-none resize-none"
+                  placeholder="Outline your acquisition criteria, preferred district, or questions regarding this unit..."
+                  className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none resize-none"
                 />
               </div>
 
-              <div className="pt-2 flex items-center justify-between">
-                <p className="text-[10px] text-stone-400 flex items-center gap-1 font-mono">
-                  <Clock size={11} className="text-[#C5A265]" /> Response within 24h
-                </p>
+              {/* Actions & WhatsApp Direct */}
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[rgba(15,15,14,0.08)]">
+                <a
+                  href={`https://wa.me/966501234567?text=${whatsappMessage}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5 font-medium"
+                >
+                  <Phone size={13} />
+                  <span>Direct WhatsApp Concierge</span>
+                </a>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-full sm:w-auto">
                   <button
                     type="button"
                     onClick={resetAndClose}
-                    className="px-3 py-2 rounded text-stone-400 hover:text-white text-xs"
+                    className="flex-1 sm:flex-none px-3 py-2 rounded bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#6B6B5A] text-xs font-medium transition-colors cursor-pointer"
                   >
                     Cancel
                   </button>
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-[#C5A265] hover:bg-[#B28F52] disabled:opacity-50 text-[#0F1216] font-semibold px-4 py-2 rounded text-xs tracking-wider uppercase flex items-center gap-1.5 transition-colors cursor-pointer"
+                    className="flex-1 sm:flex-none px-4 py-2 rounded bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
                   >
                     {isSubmitting ? (
                       <span>Submitting...</span>

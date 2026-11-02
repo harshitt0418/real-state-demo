@@ -74,17 +74,17 @@ export default function InquiriesDashboardPage() {
   const getStatusBadge = (status) => {
     switch (status) {
       case 'New':
-        return 'bg-blue-950 text-blue-300 border-blue-800';
+        return 'bg-blue-100 text-blue-800 border-blue-200';
       case 'Under Review':
-        return 'bg-amber-950 text-amber-300 border-amber-800';
+        return 'bg-amber-100 text-amber-800 border-amber-200';
       case 'Advisory Scheduled':
-        return 'bg-purple-950 text-purple-300 border-purple-800';
+        return 'bg-purple-100 text-purple-800 border-purple-200';
       case 'In Progress':
-        return 'bg-cyan-950 text-cyan-300 border-cyan-800';
+        return 'bg-cyan-100 text-cyan-800 border-cyan-200';
       case 'Completed':
-        return 'bg-emerald-950 text-emerald-300 border-emerald-800';
+        return 'bg-emerald-100 text-emerald-800 border-emerald-200';
       default:
-        return 'bg-neutral-800 text-stone-300 border-neutral-700';
+        return 'bg-stone-100 text-stone-800 border-stone-200';
     }
   };
 
@@ -94,84 +94,59 @@ export default function InquiriesDashboardPage() {
     <div className="pt-28 pb-24 space-y-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       {/* Header & Stack Status */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-800 pb-6">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[rgba(15,15,14,0.08)] pb-6">
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-xs font-mono text-[#C5A265] uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-xs font-mono text-[#B8913A] uppercase tracking-widest">
             <Database size={14} />
-            <span>MERN Backend Administration</span>
+            <span>MERN Stack Persistence</span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#F3EFEA]">
-            Inquiries & Advisory Pipeline
+          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#0F0F0E]">
+            Client Inquiries & CRM Ledger
           </h1>
-          <p className="text-stone-400 text-xs sm:text-sm max-w-2xl">
-            Live record of client consultations, residential briefs, and developer applications stored in the backend database.
+          <p className="text-xs sm:text-sm text-[#5A5A52] max-w-2xl leading-relaxed">
+            Live database records logged through website briefs, inquiry modals, and developer channel registrations. Data is preserved in MongoDB Atlas with resilient in-memory fallback.
           </p>
         </div>
 
-        {/* Database Status Chip */}
-        <div className="bg-[#151A21] border border-neutral-800 rounded-xl p-3.5 flex items-center gap-3">
+        {/* System telemetry chip */}
+        <div className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.12)] p-4 rounded-xl flex items-center gap-4 text-xs shadow-sm">
           <div className="flex items-center gap-2">
-            <span className="relative flex h-2.5 w-2.5">
-              {isMongoLive ? (
-                <>
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                </>
-              ) : (
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400"></span>
-              )}
-            </span>
-            <span className="text-xs font-mono font-medium text-stone-200">
-              {isMongoLive ? 'MongoDB Connected' : 'In-Memory Store (Demo Mode)'}
-            </span>
+            <div className={`h-2.5 w-2.5 rounded-full ${isMongoLive ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
+            <div>
+              <p className="font-mono font-semibold text-[#0F0F0E]">
+                {isMongoLive ? 'MongoDB Atlas Live' : 'In-Memory Mock Store'}
+              </p>
+              <p className="text-[10px] text-[#6B6B5A] font-mono">
+                {stats?.totalInquiries || inquiries.length} Active Records
+              </p>
+            </div>
           </div>
 
           <button
             onClick={loadData}
-            className="p-1 rounded bg-neutral-800 hover:bg-neutral-700 text-stone-300 transition-colors"
-            title="Refresh from database"
+            className="p-2 rounded bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#0F0F0E] transition-colors cursor-pointer"
+            title="Refresh database records"
           >
-            <RotateCcw size={13} />
+            <RotateCcw size={14} />
           </button>
         </div>
       </div>
 
-      {/* KPI Stats Strip */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="p-4 rounded-xl bg-[#141920] border border-neutral-800">
-          <span className="text-[10px] font-mono text-stone-400 uppercase block mb-1">Total Inquiries</span>
-          <p className="font-serif text-2xl font-bold text-[#F3EFEA]">{inquiries.length}</p>
-        </div>
-        <div className="p-4 rounded-xl bg-[#141920] border border-neutral-800">
-          <span className="text-[10px] font-mono text-stone-400 uppercase block mb-1">Active Pipeline</span>
-          <p className="font-serif text-2xl font-bold text-[#C5A265]">
-            {inquiries.filter(i => i.status !== 'Completed').length}
-          </p>
-        </div>
-        <div className="p-4 rounded-xl bg-[#141920] border border-neutral-800">
-          <span className="text-[10px] font-mono text-stone-400 uppercase block mb-1">Portfolio Units</span>
-          <p className="font-serif text-2xl font-bold text-[#F3EFEA]">7 Active</p>
-        </div>
-        <div className="p-4 rounded-xl bg-[#141920] border border-neutral-800">
-          <span className="text-[10px] font-mono text-stone-400 uppercase block mb-1">Backend Server</span>
-          <p className="font-mono text-xs font-semibold text-stone-300 pt-1">Express.js :5001</p>
-        </div>
-      </div>
-
-      {/* Filter Row */}
-      <div className="bg-[#151A21] border border-neutral-800 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4 text-xs">
+      {/* Filters Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-[#FAF7F2] p-4 rounded-xl border border-[rgba(15,15,14,0.10)] text-xs shadow-sm">
         <div className="flex flex-wrap items-center gap-3">
-          <span className="font-mono text-stone-400 uppercase text-[10.5px] flex items-center gap-1">
-            <Filter size={12} className="text-[#C5A265]" /> Filter by Status:
-          </span>
-          {['all', 'New', 'Under Review', 'Advisory Scheduled', 'In Progress', 'Completed'].map(st => (
+          <div className="flex items-center gap-1.5 text-[#6B6B5A] font-mono text-[11px] uppercase">
+            <Filter size={12} className="text-[#B8913A]" />
+            Status:
+          </div>
+          {['all', 'New', 'Under Review', 'Advisory Scheduled', 'Completed'].map(st => (
             <button
               key={st}
               onClick={() => setStatusFilter(st)}
-              className={`px-2.5 py-1 rounded text-xs transition-colors ${
-                statusFilter === st 
-                  ? 'bg-[#C5A265] text-[#0F1216] font-semibold' 
-                  : 'text-stone-300 hover:bg-neutral-800'
+              className={`px-3 py-1 rounded-md transition-colors cursor-pointer ${
+                statusFilter === st
+                  ? 'bg-[#B8913A] text-[#FAF7F2] font-semibold'
+                  : 'text-[#5A5A52] hover:bg-[#F0EBE1]'
               }`}
             >
               {st === 'all' ? 'All Statuses' : st}
@@ -180,11 +155,11 @@ export default function InquiriesDashboardPage() {
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="font-mono text-stone-400 uppercase text-[10.5px]">Region:</span>
+          <span className="text-[11px] font-mono text-[#6B6B5A]">Region:</span>
           <select
             value={cityFilter}
             onChange={(e) => setCityFilter(e.target.value)}
-            className="bg-[#0F1216] border border-neutral-800 rounded px-2.5 py-1 text-xs text-stone-200 focus:outline-none"
+            className="bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded px-2.5 py-1 text-xs text-[#0F0F0E] focus:outline-none"
           >
             <option value="all">All Regions</option>
             <option value="Riyadh">Riyadh</option>
@@ -194,41 +169,36 @@ export default function InquiriesDashboardPage() {
         </div>
       </div>
 
-      {/* Inquiries Table / Cards */}
+      {/* Records Table / Cards */}
       {loading ? (
-        <div className="space-y-3">
+        <div className="space-y-4">
           {[1, 2, 3].map(i => (
-            <div key={i} className="h-28 bg-neutral-800/40 rounded-xl animate-pulse" />
+            <div key={i} className="h-32 rounded-xl bg-[#F0EBE1] animate-pulse border border-[rgba(15,15,14,0.06)]" />
           ))}
         </div>
       ) : inquiries.length === 0 ? (
-        <div className="text-center py-16 bg-[#141920] border border-neutral-800 rounded-xl space-y-3">
-          <Database size={24} className="text-stone-400 mx-auto" />
-          <h3 className="font-serif text-lg font-semibold text-[#F3EFEA]">No inquiries recorded</h3>
-          <p className="text-xs text-stone-400">
-            Submit a test inquiry through the website or contact page to see it appear here in real time.
-          </p>
+        <div className="text-center py-20 bg-[#FAF7F2] border border-[rgba(15,15,14,0.10)] rounded-xl space-y-3">
+          <p className="font-serif text-lg text-[#0F0F0E]">No inquiries matching current filter</p>
+          <p className="text-xs text-[#6B6B5A]">Try selecting 'All Statuses' or submitting a brief through any property page.</p>
         </div>
       ) : (
         <div className="space-y-4">
           {inquiries.map((inq) => {
-            const inqId = inq.id || inq._id;
+            const id = inq.id || inq._id;
             return (
-              <div
-                key={inqId}
-                className="bg-[#151A21] border border-neutral-800 rounded-xl p-5 hover:border-neutral-700 transition-colors space-y-4"
+              <div 
+                key={id}
+                className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.10)] rounded-xl p-5 hover:border-[#B8913A]/40 transition-all space-y-4 shadow-sm"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-800/80 pb-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[rgba(15,15,14,0.08)] pb-3">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-[11px] text-[#C5A265] bg-[#0F1216] px-2 py-0.5 rounded border border-neutral-800">
-                      {inqId}
-                    </span>
-                    <h3 className="font-serif font-bold text-base text-[#F3EFEA]">
-                      {inq.name}
-                    </h3>
-                    <span className="text-[10px] text-stone-400 font-mono">
-                      {inq.inquiryType || 'General Advisory'}
-                    </span>
+                    <div className="h-8 w-8 rounded-full bg-[#F0EBE1] border border-[rgba(184,145,58,0.3)] flex items-center justify-center text-[#B8913A] font-semibold text-xs">
+                      <User size={14} />
+                    </div>
+                    <div>
+                      <h3 className="font-serif font-bold text-sm text-[#0F0F0E]">{inq.name}</h3>
+                      <p className="text-[10px] font-mono text-[#6B6B5A]">{inq.inquiryType || 'General Brief'} · Ref: {id}</p>
+                    </div>
                   </div>
 
                   <div className="flex items-center gap-2">
@@ -236,14 +206,14 @@ export default function InquiriesDashboardPage() {
                       {inq.status || 'New'}
                     </span>
 
-                    {/* Change Status Dropdown */}
+                    {/* Status updater */}
                     <select
                       value={inq.status || 'New'}
-                      disabled={updatingId === inqId}
-                      onChange={(e) => handleStatusChange(inqId, e.target.value)}
-                      className="bg-[#0F1216] border border-neutral-800 rounded px-2 py-0.5 text-[11px] text-stone-300 focus:outline-none"
+                      onChange={(e) => handleStatusChange(id, e.target.value)}
+                      disabled={updatingId === id}
+                      className="bg-[#F0EBE1] border border-[rgba(15,15,14,0.10)] text-[11px] rounded px-2 py-0.5 text-[#0F0F0E] focus:outline-none cursor-pointer"
                     >
-                      <option value="New">New</option>
+                      <option value="New">Mark New</option>
                       <option value="Under Review">Under Review</option>
                       <option value="Advisory Scheduled">Advisory Scheduled</option>
                       <option value="In Progress">In Progress</option>
@@ -252,49 +222,39 @@ export default function InquiriesDashboardPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-stone-300">
-                  <div className="space-y-1">
-                    <p className="flex items-center gap-1.5 text-stone-400">
-                      <Mail size={12} className="text-[#C5A265]" />
-                      <a href={`mailto:${inq.email}`} className="text-stone-300 hover:underline">{inq.email}</a>
-                    </p>
-                    {inq.phone && (
-                      <p className="flex items-center gap-1.5 text-stone-400">
-                        <Phone size={12} className="text-[#C5A265]" />
-                        <span>{inq.phone}</span>
-                      </p>
-                    )}
+                {/* Details Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs text-[#5A5A52]">
+                  <div className="flex items-center gap-2">
+                    <Mail size={13} className="text-[#B8913A] shrink-0" />
+                    <span className="truncate">{inq.email}</span>
                   </div>
-
-                  <div className="space-y-1">
-                    <p className="flex items-center gap-1.5 text-stone-400">
-                      <MapPin size={12} className="text-[#C5A265]" />
-                      <span>Target: <strong className="text-stone-200">{inq.cityOfInterest}</strong></span>
-                    </p>
-                    {inq.budgetRange && (
-                      <p className="text-stone-400 text-[11px] font-mono">
-                        Budget: {inq.budgetRange}
-                      </p>
-                    )}
+                  <div className="flex items-center gap-2">
+                    <Phone size={13} className="text-[#B8913A] shrink-0" />
+                    <span>{inq.phone || 'Not provided'}</span>
                   </div>
-
-                  <div className="space-y-1">
-                    {inq.propertyTitle && (
-                      <p className="flex items-center gap-1.5 text-stone-400 truncate">
-                        <Building size={12} className="text-[#C5A265]" />
-                        <span className="truncate">Unit: <strong className="text-stone-200">{inq.propertyTitle}</strong></span>
-                      </p>
-                    )}
-                    <p className="text-[11px] text-stone-400 font-mono flex items-center gap-1">
-                      <Clock size={11} />
-                      {new Date(inq.createdAt).toLocaleString()}
-                    </p>
+                  <div className="flex items-center gap-2">
+                    <MapPin size={13} className="text-[#B8913A] shrink-0" />
+                    <span>{inq.cityOfInterest || 'Riyadh'}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock size={13} className="text-[#B8913A] shrink-0" />
+                    <span className="font-mono text-[11px]">
+                      {inq.createdAt ? new Date(inq.createdAt).toLocaleDateString() : 'Recent'}
+                    </span>
                   </div>
                 </div>
 
-                <div className="bg-[#0F1216] p-3 rounded-lg border border-neutral-800 text-xs text-stone-300 leading-relaxed font-sans">
-                  <span className="text-[10px] font-mono uppercase text-stone-400 block mb-1">Brief Content:</span>
-                  <p className="whitespace-pre-line">{inq.message}</p>
+                {/* Property context if any */}
+                {inq.propertyTitle && (
+                  <div className="p-2.5 rounded bg-[#F0EBE1] border border-[rgba(15,15,14,0.06)] text-xs flex items-center gap-2 text-[#0F0F0E]">
+                    <Building size={13} className="text-[#B8913A]" />
+                    <span>Target Property: <strong>{inq.propertyTitle}</strong></span>
+                  </div>
+                )}
+
+                {/* Message Body */}
+                <div className="p-3 bg-[#F0EBE1] rounded-lg border border-[rgba(15,15,14,0.06)] text-xs text-[#5A5A52] leading-relaxed whitespace-pre-wrap">
+                  {inq.message}
                 </div>
               </div>
             );

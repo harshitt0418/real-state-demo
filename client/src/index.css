@@ -4,75 +4,441 @@
   :root {
     --font-serif: 'Playfair Display', Georgia, serif;
     --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* === BRIGHT LUXURY IVORY SYSTEM === */
+    --color-ivory: #FAF7F2;
+    --color-sandstone: #F0EBE1;
+    --color-parchment: #E8E1D5;
+    --color-ink: #0F0F0E;
+    --color-charcoal: #1A1A18;
+    --color-graphite: #3A3A35;
+    --color-graphite-light: #5A5A52;
+    --color-brass: #B8913A;
+    --color-brass-light: #D4A853;
+    --color-brass-muted: #8A6C2A;
+    --color-brass-pale: #EDD89A;
+    --color-olive: #6B6B5A;
+    --color-olive-light: #8A8A75;
+
+    /* Dark Sections (selective) */
+    --color-dark-bg: #0C0C0A;
+    --color-dark-mid: #141412;
+    --color-dark-card: #1C1C1A;
+    --color-dark-border: rgba(255,255,255,0.08);
+    --color-dark-text: #E8E3DC;
+    --color-dark-muted: #8A8578;
+
+    /* Border */
+    --color-border-light: rgba(15,15,14,0.10);
+    --color-border-mid: rgba(15,15,14,0.16);
+    --color-border-strong: rgba(15,15,14,0.24);
   }
 
   body {
     font-family: var(--font-sans);
-    background-color: #0F1216;
-    color: #EAE5DE;
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, .font-serif {
+  h1, h2, h3, h4, .font-serif {
     font-family: var(--font-serif);
   }
 
-  /* Custom scrollbar for refined aesthetic */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #0F1216;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #2D3542;
-    border-radius: 3px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #C5A265;
-  }
+  /* Refined scrollbar */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--color-sandstone); }
+  ::-webkit-scrollbar-thumb { background: var(--color-brass-muted); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-brass); }
 }
 
-/* Custom editorial utilities */
-.editorial-border {
-  border-color: rgba(255, 255, 255, 0.08);
-}
+/* =============================================
+   EDITORIAL CARD SYSTEM (Ivory / Bright)
+   ============================================= */
 
 .editorial-card {
-  background-color: #151A21;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: var(--color-ivory);
+  border: 1px solid var(--color-border-light);
+  transition: border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .editorial-card:hover {
-  border-color: rgba(197, 162, 101, 0.4);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  border-color: rgba(184, 145, 58, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -12px rgba(15, 15, 14, 0.12);
 }
 
-/* Subtle image frame */
+/* Dark variant card */
+.dark-card {
+  background-color: var(--color-dark-card);
+  border: 1px solid var(--color-dark-border);
+  transition: border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark-card:hover {
+  border-color: rgba(184, 145, 58, 0.40);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.6);
+}
+
+/* =============================================
+   IMAGE CONTAINERS
+   ============================================= */
+
 .editorial-img-container {
   overflow: hidden;
   position: relative;
-  background-color: #1A202A;
+  background-color: var(--color-parchment);
 }
 
 .editorial-img-container img {
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .editorial-img-container:hover img {
-  transform: scale(1.035);
+  transform: scale(1.04);
 }
 
-/* Focus styles for keyboard accessibility */
-a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-  outline: 2px solid #C5A265;
+/* =============================================
+   SECTION BACKGROUNDS
+   ============================================= */
+
+.bg-ivory   { background-color: var(--color-ivory); }
+.bg-sandstone { background-color: var(--color-sandstone); }
+.bg-parchment { background-color: var(--color-parchment); }
+.bg-dark    { background-color: var(--color-dark-bg); }
+.bg-dark-mid { background-color: var(--color-dark-mid); }
+
+/* =============================================
+   TYPOGRAPHY UTILITIES
+   ============================================= */
+
+.text-ink     { color: var(--color-ink); }
+.text-graphite { color: var(--color-graphite); }
+.text-brass   { color: var(--color-brass); }
+.text-brass-light { color: var(--color-brass-light); }
+.text-dark-muted { color: var(--color-dark-muted); }
+.text-dark-text  { color: var(--color-dark-text); }
+.border-brass { border-color: var(--color-brass); }
+
+/* =============================================
+   MOVING TEXT BAND
+   ============================================= */
+
+.text-band-track {
+  display: flex;
+  white-space: nowrap;
+  animation: textBandScroll 28s linear infinite;
+}
+
+.text-band-track-reverse {
+  animation: textBandScrollReverse 32s linear infinite;
+}
+
+@keyframes textBandScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes textBandScrollReverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+/* =============================================
+   TICKER ANIMATION (Hero bottom)
+   ============================================= */
+
+.hero-ticker-track {
+  display: flex;
+  white-space: nowrap;
+  animation: tickerScroll 18s linear infinite;
+}
+
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* =============================================
+   BRASS BUTTON / CTA STYLES
+   ============================================= */
+
+.btn-brass {
+  background-color: var(--color-brass);
+  color: var(--color-ivory);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-brass:hover {
+  background-color: var(--color-brass-light);
+  box-shadow: 0 8px 24px -6px rgba(184, 145, 58, 0.38);
+}
+
+.btn-outline-dark {
+  background-color: transparent;
+  border: 1px solid var(--color-border-mid);
+  color: var(--color-graphite);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-outline-dark:hover {
+  border-color: var(--color-brass);
+  background-color: rgba(184, 145, 58, 0.06);
+  color: var(--color-brass);
+}
+
+.btn-outline-light {
+  background-color: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-outline-light:hover {
+  border-color: var(--color-brass);
+  color: var(--color-brass);
+}
+
+/* =============================================
+   REVEAL ANIMATIONS (Intersection Observer)
+   ============================================= */
+
+.reveal-init {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-init.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.reveal-fade.is-visible { opacity: 1; }
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-left.is-visible { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-right.is-visible { opacity: 1; transform: translateX(0); }
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-scale.is-visible { opacity: 1; transform: scale(1); }
+
+/* Image mask reveal */
+.img-reveal-mask {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.9s cubic-bezier(0.77, 0, 0.18, 1);
+}
+.img-reveal-mask.is-visible {
+  clip-path: inset(0 0% 0 0);
+}
+
+/* =============================================
+   PARALLAX LAYERS
+   ============================================= */
+
+.parallax-layer-slow { will-change: transform; }
+.parallax-layer-mid  { will-change: transform; }
+
+/* =============================================
+   PROPERTY CARD — FEATURED (Editorial)
+   ============================================= */
+
+.featured-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-ivory);
+  border: 1px solid var(--color-border-light);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease;
+}
+
+.featured-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--color-brass);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.featured-card:hover::after { opacity: 1; }
+.featured-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 32px 64px -16px rgba(15, 15, 14, 0.14);
+}
+
+.featured-card .card-image img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.featured-card:hover .card-image img {
+  transform: scale(1.06);
+}
+
+.featured-card .card-body {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.featured-card:hover .card-body {
+  transform: translateY(-4px);
+}
+
+/* =============================================
+   FLOATING BADGE
+   ============================================= */
+
+.brass-badge {
+  background-color: var(--color-brass);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+}
+
+/* =============================================
+   METRIC / DATA DISPLAY
+   ============================================= */
+
+.metric-num {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--color-ink);
+  line-height: 1;
+}
+
+.metric-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-olive);
+}
+
+/* On dark backgrounds */
+.dark-section .metric-num { color: var(--color-dark-text); }
+.dark-section .metric-label { color: var(--color-dark-muted); }
+
+/* =============================================
+   SCROLLING PROGRESS RAIL
+   ============================================= */
+
+.scroll-progress-rail {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.scroll-progress-rail.is-visible {
+  opacity: 1;
+}
+
+/* =============================================
+   SECTION DIVIDERS
+   ============================================= */
+
+.brass-rule {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-brass), transparent);
+  opacity: 0.35;
+}
+
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-brass);
+}
+
+/* =============================================
+   NAVIGATION
+   ============================================= */
+
+.nav-bright {
+  background-color: rgba(250, 247, 242, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.nav-transparent {
+  background-color: transparent;
+}
+
+/* =============================================
+   FOCUS / ACCESSIBILITY
+   ============================================= */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-brass);
   outline-offset: 2px;
 }
 
-/* Respect user's motion preferences */
+/* =============================================
+   REDUCED MOTION RESPECT
+   ============================================= */
+
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
@@ -80,4 +446,111 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  .text-band-track,
+  .text-band-track-reverse,
+  .hero-ticker-track {
+    animation: none;
+    transform: none;
+  }
+
+  .reveal-init,
+  .reveal-fade,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale,
+  .img-reveal-mask {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    transition: none;
+  }
+}
+
+/* =============================================
+   SMOOTH SCROLLING
+   ============================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* =============================================
+   CITY STORY PINNED SECTION
+   ============================================= */
+
+.city-story-panel {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
+}
+
+.city-story-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* =============================================
+   HORIZONTAL GALLERY SCROLL
+   ============================================= */
+
+.h-gallery-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 16px;
+}
+
+.h-gallery-track::-webkit-scrollbar { display: none; }
+
+.h-gallery-item {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* =============================================
+   FLOATING BRIEF BUTTON
+   ============================================= */
+
+.floating-brief-btn {
+  position: fixed;
+  bottom: 32px;
+  right: 24px;
+  z-index: 50;
+  transform: translateY(80px);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.5s ease;
+}
+
+.floating-brief-btn.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* =============================================
+   BRASS LINE ANIMATION (Hero SVG)
+   ============================================= */
+
+.brass-line {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.brass-line.animate-in {
+  stroke-dashoffset: 0;
+}
+
+/* Count-up number display */
+.count-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
 }
