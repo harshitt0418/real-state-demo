@@ -7,6 +7,8 @@ import DatabaseStatusIndicator from './components/DatabaseStatusIndicator';
 import InquiryModal from './components/InquiryModal';
 import BackToTop from './components/BackToTop';
 import FloatingBriefButton from './components/FloatingBriefButton';
+import ScrollProgressRail from './components/ScrollProgressRail';
+import CustomCursor from './components/CustomCursor';
 
 import HomePage from './pages/HomePage';
 import PropertiesPage from './pages/PropertiesPage';
@@ -45,11 +47,17 @@ export default function App() {
       <ScrollToTop />
       <div className="flex flex-col min-h-screen bg-[#FAF7F2] text-[#0F0F0E] font-sans antialiased selection:bg-[#B8913A] selection:text-[#FAF7F2]">
         
+        {/* Custom Luxury Ambient Cursor */}
+        <CustomCursor />
+
         {/* Navigation Bar with Scroll Progress */}
         <Navbar onOpenInquiry={() => handleOpenInquiry(null)} />
 
         {/* Floating Database & Architecture Indicator */}
         <DatabaseStatusIndicator />
+
+        {/* Section Progress Rail */}
+        <ScrollProgressRail />
 
         {/* Floating Smooth Back-To-Top Button */}
         <BackToTop />

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   ArrowUpRight, ArrowRight, ShieldCheck, Building2, TrendingUp,
   CheckCircle2, Users, Landmark, Compass, ChevronRight, MapPin
@@ -8,6 +10,8 @@ import PropertyCard from '../components/PropertyCard';
 import ScrollReveal from '../components/ScrollReveal';
 import MovingTextBand from '../components/MovingTextBand';
 import { fetchProperties, fetchStats } from '../services/api';
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* ─── CountUp hook ─────────────────────────────────────────────── */
 function useCountUp(target, duration = 1800, start = false) {
@@ -46,8 +50,8 @@ function StatCounter({ value, suffix = '', label, dark = false }) {
   }, []);
 
   return (
-    <div ref={ref} className="text-center">
-      <p className={`font-serif font-bold text-4xl sm:text-5xl count-num ${dark ? 'text-[#E8E3DC]' : 'text-[#0F0F0E]'}`}>
+    <div ref={ref} className="text-center group">
+      <p className={`font-serif font-bold text-4xl sm:text-5xl count-num transition-transform duration-300 group-hover:scale-105 ${dark ? 'text-[#E8E3DC]' : 'text-[#0F0F0E]'}`}>
         {count}{suffix}
       </p>
       <p className={`text-[10px] font-sans uppercase tracking-[0.18em] mt-2 ${dark ? 'text-[#5A5A52]' : 'text-[#8A8A75]'}`}>
@@ -57,11 +61,11 @@ function StatCounter({ value, suffix = '', label, dark = false }) {
   );
 }
 
-/* ─── CityStorySection ───────────────────────────────────────────── */
+/* ─── CityStorySection (Interactive Corridor Experience) ────────── */
 function CityStorySection() {
   const [activeCity, setActiveCity] = useState(0);
-  const sectionRef = useRef(null);
   const timerRef = useRef(null);
+  const sectionRef = useRef(null);
 
   const cities = [
     {
@@ -108,33 +112,39 @@ function CityStorySection() {
     }
   ];
 
-  // Auto-advance
   useEffect(() => {
     timerRef.current = setInterval(() => {
       setActiveCity(prev => (prev + 1) % cities.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(timerRef.current);
-  }, []);
+  }, [cities.length]);
 
   const handleCityClick = (i) => {
     setActiveCity(i);
     clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
       setActiveCity(prev => (prev + 1) % cities.length);
-    }, 5000);
+    }, 6000);
   };
 
   const c = cities[activeCity];
 
   return (
-    <section className="bg-[#0C0C0A] py-24 overflow-hidden dark-section">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="corridors-section" ref={sectionRef} className="bg-[#0C0C0A] py-28 overflow-hidden dark-section relative">
+      
+      {/* Background ambient light */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#B8913A]/5 blur-[120px] pointer-events-none rounded-full" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section header */}
         <ScrollReveal animation="fade-up">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
             <div className="space-y-3">
-              <p className="section-label text-[#B8913A]">Geographic Specialization</p>
+              <div className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#B8913A] animate-ping" />
+                <p className="section-label text-[#B8913A]">Geographic Specialization</p>
+              </div>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#E8E3DC] leading-tight">
                 Three Capital Markets,<br />One Advisory Lens
               </h2>
@@ -146,66 +156,70 @@ function CityStorySection() {
           </div>
         </ScrollReveal>
 
-        {/* City tabs */}
-        <div className="flex gap-0 mb-12 border-b border-[rgba(255,255,255,0.06)]">
+        {/* City tabs with animated indicator */}
+        <div className="flex gap-2 mb-12 border-b border-[rgba(255,255,255,0.08)] pb-1">
           {cities.map((city, i) => (
             <button
               key={city.city}
               onClick={() => handleCityClick(i)}
-              className={`px-6 py-3 text-sm font-medium font-sans tracking-wide cursor-pointer border-b-2 transition-all duration-300 ${
+              className={`relative px-6 py-3.5 text-sm font-medium font-sans tracking-wide cursor-pointer transition-all duration-300 ${
                 activeCity === i
-                  ? 'text-[#D4A853] border-[#B8913A]'
-                  : 'text-[#5A5A52] border-transparent hover:text-[#8A8578]'
+                  ? 'text-[#D4A853] font-semibold'
+                  : 'text-[#6B6B5A] hover:text-[#C8C3BA]'
               }`}
             >
-              {city.city}
+              <span>{city.city}</span>
+              {activeCity === i && (
+                <span className="absolute bottom-[-1px] left-0 right-0 h-[2px] bg-gradient-to-r from-[#B8913A] to-[#D4A853] rounded-full" />
+              )}
             </button>
           ))}
         </div>
 
         {/* City panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[420px]">
-          {/* Left: image */}
-          <div className="relative rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[480px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[460px]">
+          
+          {/* Left: image with layered parallax transition */}
+          <div className="relative rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[500px] border border-[rgba(255,255,255,0.08)] shadow-2xl group">
             <img
+              key={c.city}
               src={c.image}
               alt={c.city}
-              className="w-full h-full object-cover transition-all duration-700"
-              style={{ opacity: 1 }}
+              className="w-full h-full object-cover transition-all duration-1000 transform scale-102 group-hover:scale-108"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0A]/70 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0A]/85 via-transparent to-transparent pointer-events-none" />
 
             {/* Coordinates chip */}
-            <div className="absolute top-4 left-4 bg-[#0C0C0A]/85 backdrop-blur-sm px-3 py-1.5 rounded border border-[rgba(255,255,255,0.08)]">
-              <p className="text-[10px] font-mono text-[#B8913A] tracking-wider">{c.coordinates}</p>
+            <div className="absolute top-4 left-4 bg-[#0C0C0A]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[rgba(255,255,255,0.12)]">
+              <p className="text-[10px] font-mono text-[#D4A853] tracking-wider">{c.coordinates}</p>
             </div>
 
             {/* Stat chip */}
-            <div className="absolute bottom-4 right-4 text-right bg-[#0C0C0A]/90 backdrop-blur-sm px-4 py-3 rounded border border-[rgba(255,255,255,0.08)]">
-              <p className="text-[9px] font-mono uppercase text-[#5A5A52] mb-0.5">{c.statLabel}</p>
-              <p className="font-serif text-xl font-bold text-[#D4A853]">{c.stat}</p>
+            <div className="absolute bottom-5 right-5 text-right bg-[#0C0C0A]/90 backdrop-blur-md px-5 py-3 rounded-xl border border-[rgba(255,255,255,0.12)] shadow-xl">
+              <p className="text-[9px] font-mono uppercase text-[#8A8578] mb-0.5">{c.statLabel}</p>
+              <p className="font-serif text-2xl font-bold text-[#D4A853]">{c.stat}</p>
             </div>
           </div>
 
           {/* Right: content */}
-          <div className="space-y-8">
+          <div className="space-y-8 animate-in fade-in duration-500" key={c.city + '-content'}>
             <div>
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center gap-3 mb-2">
                 <h3 className="font-serif text-4xl sm:text-5xl font-bold text-[#E8E3DC]">{c.city}</h3>
-                <span className="font-serif text-2xl text-[#B8913A]/60">{c.arabic}</span>
+                <span className="font-serif text-2xl text-[#B8913A]/60 font-light">{c.arabic}</span>
               </div>
-              <p className="text-[11px] font-mono uppercase tracking-widest text-[#5A5A52] mb-4">{c.tagline}</p>
+              <p className="text-[11px] font-mono uppercase tracking-widest text-[#B8913A] mb-4">{c.tagline}</p>
               <p className="text-[#8A8578] text-sm sm:text-base leading-relaxed">{c.description}</p>
             </div>
 
-            {/* Key sectors */}
+            {/* Key sectors with animated pill tags */}
             <div>
-              <p className="text-[10px] font-mono uppercase tracking-wider text-[#5A5A52] mb-3">Active Prime Sectors</p>
-              <div className="grid grid-cols-2 gap-2">
+              <p className="text-[10px] font-mono uppercase tracking-wider text-[#6B6B5A] mb-3">Active Prime Sectors</p>
+              <div className="grid grid-cols-2 gap-2.5">
                 {c.highlights.map((h, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-[#8A8578]">
-                    <span className="h-1 w-4 bg-[#B8913A]/50 rounded-full shrink-0" />
-                    {h}
+                  <div key={i} className="flex items-center gap-2 text-xs text-[#C8C3BA] p-2.5 rounded-lg bg-[#161614] border border-[rgba(255,255,255,0.06)] hover:border-[#B8913A]/30 transition-colors">
+                    <span className="h-1.5 w-1.5 bg-[#B8913A] rounded-full shrink-0" />
+                    <span className="truncate">{h}</span>
                   </div>
                 ))}
               </div>
@@ -213,13 +227,13 @@ function CityStorySection() {
 
             {/* Metrics row */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-[#141412] border border-[rgba(255,255,255,0.06)] rounded-xl p-4">
-                <p className="text-[9px] font-mono uppercase text-[#5A5A52] mb-1">{c.statLabel}</p>
-                <p className="font-serif text-2xl font-bold text-[#D4A853]">{c.stat}</p>
+              <div className="bg-[#141412] border border-[rgba(255,255,255,0.08)] rounded-xl p-5 hover:border-[#B8913A]/40 transition-colors">
+                <p className="text-[9px] font-mono uppercase text-[#6B6B5A] mb-1">{c.statLabel}</p>
+                <p className="font-serif text-2xl sm:text-3xl font-bold text-[#D4A853]">{c.stat}</p>
               </div>
-              <div className="bg-[#141412] border border-[rgba(255,255,255,0.06)] rounded-xl p-4">
-                <p className="text-[9px] font-mono uppercase text-[#5A5A52] mb-1">{c.metric2Label}</p>
-                <p className="font-serif text-2xl font-bold text-[#E8E3DC]">{c.metric2}</p>
+              <div className="bg-[#141412] border border-[rgba(255,255,255,0.08)] rounded-xl p-5 hover:border-[#B8913A]/40 transition-colors">
+                <p className="text-[9px] font-mono uppercase text-[#6B6B5A] mb-1">{c.metric2Label}</p>
+                <p className="font-serif text-2xl sm:text-3xl font-bold text-[#E8E3DC]">{c.metric2}</p>
               </div>
             </div>
 
@@ -231,6 +245,7 @@ function CityStorySection() {
               <ArrowRight size={14} />
             </Link>
           </div>
+
         </div>
 
       </div>
@@ -238,7 +253,7 @@ function CityStorySection() {
   );
 }
 
-/* ─── InvestmentIntelligence section ────────────────────────────── */
+/* ─── InvestmentIntelligence Section ────────────────────────────── */
 function InvestmentIntelligence({ marketStats }) {
   const insightsRef = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -260,7 +275,7 @@ function InvestmentIntelligence({ marketStats }) {
   ];
 
   return (
-    <section ref={insightsRef} className="bg-[#0C0C0A] py-24 dark-section">
+    <section id="intelligence-section" ref={insightsRef} className="bg-[#0C0C0A] py-28 dark-section relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <ScrollReveal animation="fade-up">
@@ -270,8 +285,8 @@ function InvestmentIntelligence({ marketStats }) {
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#E8E3DC] leading-tight">
                 Investment Data,<br />Not Market Noise
               </h2>
-              <p className="text-[#5A5A52] text-sm leading-relaxed max-w-lg">
-                Placeholder metrics for demonstration. Verified figures from municipal market data and direct developer reporting channels provided to clients under advisory mandate.
+              <p className="text-[#8A8578] text-sm leading-relaxed max-w-lg">
+                Verified figures from municipal land registries and direct master developer channels provided to clients under fiduciary advisory mandate.
               </p>
             </div>
             <Link to="/services" className="inline-flex items-center gap-2 text-xs font-semibold text-[#B8913A] hover:text-[#D4A853] tracking-wider uppercase transition-colors">
@@ -281,19 +296,19 @@ function InvestmentIntelligence({ marketStats }) {
           </div>
         </ScrollReveal>
 
-        {/* Metrics grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+        {/* Metrics grid with hover card lift */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
           {metrics.map((m, i) => (
             <ScrollReveal key={i} animation="fade-up" delay={i * 100}>
-              <div className="bg-[#141412] border border-[rgba(255,255,255,0.06)] rounded-xl p-6">
-                <p className="text-[10px] font-mono uppercase tracking-wider text-[#5A5A52] mb-4 leading-snug">{m.label}</p>
+              <div className="bg-[#141412] border border-[rgba(255,255,255,0.08)] rounded-xl p-6 hover:border-[#B8913A]/50 transition-all duration-300 hover:-translate-y-1 shadow-sm">
+                <p className="text-[10px] font-mono uppercase tracking-wider text-[#6B6B5A] mb-4 leading-snug">{m.label}</p>
                 <div className="flex items-baseline gap-1">
                   <span className="font-serif text-4xl font-bold text-[#E8E3DC] count-num">
                     {visible ? (m.displayVal || m.value) : '0'}
                   </span>
-                  <span className="text-lg font-sans text-[#B8913A]">{m.suffix}</span>
+                  <span className="text-xl font-sans text-[#B8913A]">{m.suffix}</span>
                 </div>
-                <p className="text-[11px] text-[#3A3A35] mt-2">{m.sub}</p>
+                <p className="text-[11px] text-[#8A8578] mt-2">{m.sub}</p>
               </div>
             </ScrollReveal>
           ))}
@@ -301,20 +316,20 @@ function InvestmentIntelligence({ marketStats }) {
 
         {/* Trust band */}
         <ScrollReveal animation="fade-up">
-          <div className="border border-[rgba(255,255,255,0.06)] rounded-2xl p-8 sm:p-10 bg-[#141412]">
+          <div className="border border-[rgba(255,255,255,0.08)] rounded-2xl p-8 sm:p-10 bg-[#141412] shadow-xl">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
               {[
                 { icon: ShieldCheck, label: 'REGA Channel Certified', sub: 'Regulated real estate authority' },
                 { icon: Building2, label: 'Tier-1 Master Developers', sub: 'Direct allocation access' },
                 { icon: TrendingUp, label: 'Verified Title Conveyance', sub: 'Ministry of Justice registered' },
               ].map((item, i) => (
-                <div key={i} className="flex flex-col items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-[#B8913A]/10 border border-[#B8913A]/25 flex items-center justify-center text-[#B8913A]">
-                    <item.icon size={18} />
+                <div key={i} className="flex flex-col items-center gap-3 group">
+                  <div className="h-11 w-11 rounded-full bg-[#B8913A]/10 border border-[#B8913A]/25 flex items-center justify-center text-[#B8913A] group-hover:scale-110 group-hover:border-[#B8913A] transition-all">
+                    <item.icon size={19} />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-[#E8E3DC] mb-0.5">{item.label}</p>
-                    <p className="text-[11px] text-[#5A5A52]">{item.sub}</p>
+                    <p className="text-[11px] text-[#8A8578]">{item.sub}</p>
                   </div>
                 </div>
               ))}
@@ -327,14 +342,19 @@ function InvestmentIntelligence({ marketStats }) {
   );
 }
 
-/* ─── Main HomePage ──────────────────────────────────────────────── */
+/* ─── Main HomePage Component ─────────────────────────────────────── */
 export default function HomePage({ onOpenInquiry }) {
   const [featuredProperties, setFeaturedProperties] = useState([]);
   const [marketStats, setMarketStats] = useState(null);
   const [loading, setLoading] = useState(true);
-  const heroRef = useRef(null);
   const [heroLoaded, setHeroLoaded] = useState(false);
 
+  const heroSectionRef = useRef(null);
+  const heroBgRef = useRef(null);
+  const heroCardsRef = useRef(null);
+  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
+
+  // Load properties & stats
   useEffect(() => {
     async function loadData() {
       try {
@@ -351,10 +371,58 @@ export default function HomePage({ onOpenInquiry }) {
       }
     }
     loadData();
-    // Trigger hero animation after mount
-    const t = setTimeout(() => setHeroLoaded(true), 100);
+    const t = setTimeout(() => setHeroLoaded(true), 80);
     return () => clearTimeout(t);
   }, []);
+
+  // GSAP Parallax ScrollTrigger for Hero Section
+  useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced || !heroSectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Parallax scroll on hero background
+      if (heroBgRef.current) {
+        gsap.to(heroBgRef.current, {
+          yPercent: 30,
+          scale: 1.0,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroSectionRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          }
+        });
+      }
+
+      // Parallax upward drift on the floating cards container
+      if (heroCardsRef.current) {
+        gsap.to(heroCardsRef.current, {
+          y: -140,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroSectionRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          }
+        });
+      }
+    }, heroSectionRef);
+
+    return () => ctx.revert();
+  }, [heroLoaded]);
+
+  // Subtle interactive mouse parallax on hero
+  const handleHeroMouseMove = (e) => {
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    const x = (clientX - innerWidth / 2) / (innerWidth / 2);
+    const y = (clientY - innerHeight / 2) / (innerHeight / 2);
+    setMouseOffset({ x, y });
+  };
 
   const advisorySteps = [
     { num: '01', title: 'Mandate & Capital Brief', desc: 'We define your precise criteria: yield targets, risk profile, holding period, and asset class preferences across commercial and residential inventory.' },
@@ -367,48 +435,59 @@ export default function HomePage({ onOpenInquiry }) {
     <div>
 
       {/* ═══════════════════════════════════════════
-          1. HERO — Bright, editorial, image-led
+          1. HERO — Interactive Parallax & Floating Cards
          ═══════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative min-h-screen flex flex-col overflow-hidden">
+      <section
+        id="hero-section"
+        ref={heroSectionRef}
+        onMouseMove={handleHeroMouseMove}
+        className="relative min-h-screen flex flex-col justify-between overflow-hidden"
+      >
 
-        {/* Background architectural image */}
-        <div className="absolute inset-0 z-0 parallax-layer-slow">
+        {/* Parallax Background Image */}
+        <div
+          ref={heroBgRef}
+          className="absolute inset-0 z-0 origin-center pointer-events-none"
+          style={{
+            transform: `translate3d(${mouseOffset.x * -12}px, ${mouseOffset.y * -12}px, 0) scale(1.08)`,
+            transition: 'transform 0.25s ease-out'
+          }}
+        >
           <img
             src="/assets/hero.jpg"
             alt="Riyadh skyline at dusk showcasing contemporary architectural landmarks"
             className="w-full h-full object-cover object-center"
-            style={{ transform: 'scale(1.06)' }}
           />
-          {/* Warm ivory overlay — brighter approach */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0F0F0E]/85 via-[#0F0F0E]/55 to-[#0F0F0E]/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0E]/80 via-transparent to-[#0F0F0E]/30" />
+          {/* Dual luxury scrim */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0F0F0E]/85 via-[#0F0F0E]/60 to-[#0F0F0E]/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0E]/85 via-transparent to-[#0F0F0E]/40" />
         </div>
 
-        {/* Content */}
-        <div className="relative z-10 flex-1 flex items-center pt-28 pb-20">
+        {/* Main Content Area */}
+        <div className="relative z-10 flex-1 flex items-center pt-32 pb-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-              {/* Left: headline + CTA */}
+              {/* Left Column: Headlines & Actions */}
               <div className="lg:col-span-7 space-y-7">
 
-                {/* Kicker chip */}
+                {/* Identity Kicker */}
                 <div
                   style={{
                     opacity: heroLoaded ? 1 : 0,
-                    transform: heroLoaded ? 'translateY(0)' : 'translateY(-16px)',
+                    transform: heroLoaded ? 'translateY(0)' : 'translateY(-18px)',
                     transition: 'opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s'
                   }}
                 >
-                  <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs text-white/80">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#D4A853] animate-pulse" />
-                    <span className="font-mono tracking-wider text-[11px] uppercase text-[#D4A853]">Kingdom of Saudi Arabia</span>
-                    <span className="text-white/30">·</span>
-                    <span className="text-white/60 font-mono text-[10.5px]">Riyadh · Jeddah · Al Khobar</span>
+                  <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs text-white/90 shadow-lg">
+                    <span className="h-2 w-2 rounded-full bg-[#D4A853] animate-ping" />
+                    <span className="font-mono tracking-wider text-[11px] uppercase text-[#D4A853] font-semibold">Kingdom of Saudi Arabia</span>
+                    <span className="text-white/40">·</span>
+                    <span className="text-white/80 font-mono text-[10.5px]">Riyadh · Jeddah · Al Khobar</span>
                   </div>
                 </div>
 
-                {/* Headline */}
+                {/* Headline with Stagger Reveal */}
                 <div
                   style={{
                     opacity: heroLoaded ? 1 : 0,
@@ -423,7 +502,7 @@ export default function HomePage({ onOpenInquiry }) {
                   </h1>
                 </div>
 
-                {/* Body */}
+                {/* Subtitle */}
                 <div
                   style={{
                     opacity: heroLoaded ? 1 : 0,
@@ -431,7 +510,7 @@ export default function HomePage({ onOpenInquiry }) {
                     transition: 'opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s'
                   }}
                 >
-                  <p className="text-base sm:text-lg text-white/75 font-normal leading-relaxed max-w-xl">
+                  <p className="text-base sm:text-lg text-white/80 font-normal leading-relaxed max-w-xl">
                     MIRĀS connects family offices, institutional allocators, and discerning individuals directly with the Kingdom's most accomplished master developers. Disciplined acquisitions, verified titles, and zero broker markups.
                   </p>
                 </div>
@@ -447,7 +526,7 @@ export default function HomePage({ onOpenInquiry }) {
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
                     <Link
                       to="/properties"
-                      className="inline-flex items-center justify-center gap-2 bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] font-semibold px-7 py-4 rounded text-xs tracking-wider uppercase transition-all shadow-xl hover:shadow-[#B8913A]/30 cursor-pointer"
+                      className="inline-flex items-center justify-center gap-2 bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] font-semibold px-7 py-4 rounded text-xs tracking-wider uppercase transition-all shadow-xl hover:shadow-[#B8913A]/40 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
                     >
                       <span>Explore Curated Portfolio</span>
                       <ArrowRight size={15} />
@@ -455,7 +534,7 @@ export default function HomePage({ onOpenInquiry }) {
 
                     <button
                       onClick={() => onOpenInquiry ? onOpenInquiry() : window.location.href = '/contact'}
-                      className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 hover:border-white/35 text-white font-medium px-7 py-4 rounded text-xs tracking-wider uppercase transition-all cursor-pointer"
+                      className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 hover:border-white/40 text-white font-medium px-7 py-4 rounded text-xs tracking-wider uppercase transition-all cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
                     >
                       <span>Consult an Advisor</span>
                       <ArrowUpRight size={15} className="text-[#D4A853]" />
@@ -463,14 +542,14 @@ export default function HomePage({ onOpenInquiry }) {
                   </div>
                 </div>
 
-                {/* Trust badges */}
+                {/* Trust Badges */}
                 <div
                   style={{
                     opacity: heroLoaded ? 1 : 0,
                     transition: 'opacity 0.8s ease 0.7s'
                   }}
                 >
-                  <div className="pt-6 border-t border-white/10 grid grid-cols-3 gap-4 text-xs font-mono text-white/50">
+                  <div className="pt-6 border-t border-white/15 grid grid-cols-3 gap-4 text-xs font-mono text-white/60">
                     <div className="flex items-center gap-2">
                       <ShieldCheck size={15} className="text-[#D4A853] shrink-0" />
                       <span>REGA Certified</span>
@@ -488,45 +567,77 @@ export default function HomePage({ onOpenInquiry }) {
 
               </div>
 
-              {/* Right: Floating city cards */}
-              <div className="lg:col-span-5 hidden lg:flex flex-col gap-4 parallax-layer-mid">
+              {/* Right Column: Dynamic Floating City Cards */}
+              <div
+                ref={heroCardsRef}
+                className="lg:col-span-5 hidden lg:flex flex-col gap-4 relative"
+                style={{
+                  transform: `translate3d(${mouseOffset.x * 24}px, ${mouseOffset.y * 24}px, 0)`,
+                  transition: 'transform 0.3s ease-out'
+                }}
+              >
                 {[
-                  { city: 'Riyadh', stat: '+11.2%', statLabel: 'Capital Growth', image: '/assets/hero.jpg', coords: '24°42′N' },
-                  { city: 'Jeddah', stat: '6.8% Net', statLabel: 'Waterfront Yield', image: '/assets/prop-jeddah.jpg', coords: '21°32′N' },
-                  { city: 'Al Khobar', stat: '94%', statLabel: 'Occupancy', image: '/assets/prop-khobar.jpg', coords: '26°17′N' },
+                  {
+                    city: 'Riyadh',
+                    stat: '+11.2%',
+                    statLabel: 'Capital Growth',
+                    image: '/assets/hero.jpg',
+                    coords: '24°42′N',
+                    floatClass: 'float-slow-1'
+                  },
+                  {
+                    city: 'Jeddah',
+                    stat: '6.8% Net',
+                    statLabel: 'Waterfront Yield',
+                    image: '/assets/prop-jeddah.jpg',
+                    coords: '21°32′N',
+                    floatClass: 'float-slow-2'
+                  },
+                  {
+                    city: 'Al Khobar',
+                    stat: '94%',
+                    statLabel: 'Occupancy',
+                    image: '/assets/prop-khobar.jpg',
+                    coords: '26°17′N',
+                    floatClass: 'float-slow-3'
+                  },
                 ].map((item, i) => (
                   <Link
                     key={item.city}
                     to={`/properties?city=${item.city}`}
-                    className="group flex items-center gap-4 bg-white/10 hover:bg-white/18 backdrop-blur-md border border-white/15 hover:border-[#B8913A]/50 rounded-xl p-4 transition-all duration-300"
+                    className={`group flex items-center gap-4 bg-white/12 hover:bg-white/20 backdrop-blur-md border border-white/20 hover:border-[#B8913A] rounded-xl p-4 transition-all duration-300 shadow-xl ${item.floatClass}`}
                     style={{
                       opacity: heroLoaded ? 1 : 0,
-                      transform: heroLoaded ? 'translateX(0)' : 'translateX(40px)',
-                      transition: `opacity 0.7s ease ${0.4 + i * 0.15}s, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${0.4 + i * 0.15}s, background-color 0.3s, border-color 0.3s`
+                      transform: heroLoaded ? 'translateX(0)' : 'translateX(50px)',
+                      transition: `opacity 0.7s ease ${0.35 + i * 0.15}s, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${0.35 + i * 0.15}s`
                     }}
                   >
-                    <div className="h-14 w-14 rounded-lg overflow-hidden shrink-0">
-                      <img src={item.image} alt={item.city} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    <div className="h-14 w-14 rounded-lg overflow-hidden shrink-0 border border-white/20">
+                      <img
+                        src={item.image}
+                        alt={item.city}
+                        className="w-full h-full object-cover group-hover:scale-115 transition-transform duration-700"
+                      />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-0.5">
                         <span className="text-white font-semibold text-sm font-sans">{item.city}</span>
-                        <span className="text-white/30 font-mono text-[10px]">{item.coords}</span>
+                        <span className="text-white/40 font-mono text-[10px]">{item.coords}</span>
                       </div>
-                      <p className="text-[10px] font-mono text-white/40 uppercase tracking-wider">{item.statLabel}</p>
+                      <p className="text-[10px] font-mono text-white/50 uppercase tracking-wider">{item.statLabel}</p>
                     </div>
                     <div className="text-right shrink-0">
                       <p className="font-serif text-lg font-bold text-[#D4A853]">{item.stat}</p>
-                      <ArrowUpRight size={14} className="text-white/30 group-hover:text-[#D4A853] transition-colors ml-auto mt-1" />
+                      <ArrowUpRight size={14} className="text-white/40 group-hover:text-[#D4A853] transition-colors ml-auto mt-1" />
                     </div>
                   </Link>
                 ))}
 
-                {/* Brass connection line (decorative) */}
+                {/* Animated Brass Connection Line with traveling shimmer */}
                 <div className="flex items-center gap-3 px-4 pt-2">
-                  <div className="h-px flex-1 bg-gradient-to-r from-[#B8913A]/40 to-transparent" />
-                  <span className="text-[10px] font-mono text-[#B8913A]/60 uppercase tracking-widest">KSA Prime Portfolio</span>
-                  <div className="h-px flex-1 bg-gradient-to-l from-[#B8913A]/40 to-transparent" />
+                  <div className="h-px flex-1 shimmer-line" />
+                  <span className="text-[10px] font-mono text-[#D4A853] uppercase tracking-widest font-semibold">KSA Growth Triangle</span>
+                  <div className="h-px flex-1 shimmer-line" />
                 </div>
               </div>
 
@@ -534,47 +645,47 @@ export default function HomePage({ onOpenInquiry }) {
           </div>
         </div>
 
-        {/* Bottom ticker */}
-        <div className="relative z-10 border-t border-white/08 bg-[#0F0F0E]/60 backdrop-blur-sm overflow-hidden py-3">
+        {/* Bottom Continuous Scrolling Ticker */}
+        <div className="relative z-10 border-t border-white/10 bg-[#0F0F0E]/75 backdrop-blur-md overflow-hidden py-3.5">
           <div className="hero-ticker-track">
             {['RIYADH', 'JEDDAH', 'AL KHOBAR', 'CURATED CAPITAL', 'FIDUCIARY ADVISORY', 'VERIFIED TITLES', 'DIRECT DEVELOPER CHANNEL',
               'RIYADH', 'JEDDAH', 'AL KHOBAR', 'CURATED CAPITAL', 'FIDUCIARY ADVISORY', 'VERIFIED TITLES', 'DIRECT DEVELOPER CHANNEL'
             ].map((text, i) => (
               <React.Fragment key={i}>
-                <span className="text-[11px] font-mono tracking-[0.24em] uppercase text-white/30 px-6 whitespace-nowrap">{text}</span>
-                <span className="text-[#B8913A]/40 px-2" aria-hidden="true">·</span>
+                <span className="text-[11px] font-mono tracking-[0.24em] uppercase text-white/40 px-6 whitespace-nowrap hover:text-white transition-colors">{text}</span>
+                <span className="text-[#D4A853]/60 px-2 font-bold" aria-hidden="true">·</span>
               </React.Fragment>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Moving text band */}
+      {/* Moving text band 1 */}
       <MovingTextBand
         items={['FIDUCIARY ADVISORY', 'DIRECT DEVELOPER CHANNEL', 'VERIFIED TITLES', 'CURATED CAPITAL', 'RIYADH · JEDDAH · AL KHOBAR']}
         speed="slow"
       />
 
       {/* ═══════════════════════════════════════════
-          2. FEATURED PROPERTIES — Editorial grid
+          2. FEATURED PROPERTIES — Editorial Grid with 3D Tilt
          ═══════════════════════════════════════════ */}
-      <section className="bg-[#FAF7F2] py-24">
+      <section id="curated-section" className="bg-[#FAF7F2] py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <ScrollReveal animation="fade-up">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
               <div className="space-y-3 max-w-xl">
                 <p className="section-label">Curated Opportunities</p>
                 <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F0F0E] leading-tight">
                   Selected Prime Units
                 </h2>
-                <p className="text-[#6B6B5A] text-sm leading-relaxed">
-                  A selection of vetted residential villas, high-floor apartments, and commercial headquarters floors under advisory representation.
+                <p className="text-[#6B6B5A] text-sm sm:text-base leading-relaxed">
+                  A selection of vetted residential villas, high-floor penthouses, and commercial headquarters floors under advisory representation.
                 </p>
               </div>
               <Link
                 to="/properties"
-                className="inline-flex items-center gap-2 bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#3A3A35] text-xs font-semibold px-5 py-2.5 rounded border border-[rgba(15,15,14,0.10)] transition-colors whitespace-nowrap"
+                className="inline-flex items-center gap-2 bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#3A3A35] text-xs font-semibold px-6 py-3 rounded border border-[rgba(15,15,14,0.10)] transition-all hover:-translate-y-0.5 whitespace-nowrap shadow-sm"
               >
                 <span>View All Properties</span>
                 <ArrowRight size={14} />
@@ -591,7 +702,7 @@ export default function HomePage({ onOpenInquiry }) {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredProperties.map((property, idx) => (
-                <ScrollReveal key={property.id} animation="fade-up" delay={idx * 120}>
+                <ScrollReveal key={property.id} animation="fade-up" delay={idx * 130}>
                   <PropertyCard
                     property={property}
                     onInquire={(p) => onOpenInquiry ? onOpenInquiry(p) : null}
@@ -601,13 +712,13 @@ export default function HomePage({ onOpenInquiry }) {
             </div>
           )}
 
-          {/* Disclaimer */}
+          {/* Transparency Disclaimer */}
           <ScrollReveal animation="fade-up" delay={200}>
-            <div className="mt-10 p-4 rounded-xl bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] text-[#8A8A75] text-xs flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="mt-12 p-5 rounded-xl bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] text-[#6B6B5A] text-xs flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
               <p>
-                <strong className="text-[#6B6B5A]">Catalogue Transparency:</strong> Listings represent realistic sample properties for advisory demonstration and client briefing purposes.
+                <strong className="text-[#0F0F0E]">Catalogue Transparency:</strong> Listings represent realistic sample properties for advisory demonstration and client briefing purposes.
               </p>
-              <Link to="/properties" className="text-[#B8913A] hover:underline font-mono text-[11px] whitespace-nowrap">
+              <Link to="/properties" className="text-[#B8913A] hover:underline font-mono text-[11px] font-semibold whitespace-nowrap">
                 Filtered Search →
               </Link>
             </div>
@@ -617,14 +728,14 @@ export default function HomePage({ onOpenInquiry }) {
       </section>
 
       {/* ═══════════════════════════════════════════
-          3. CITY STORY SECTION (Dark, interactive)
+          3. CITY STORY SECTION (Interactive Obsidian Showcase)
          ═══════════════════════════════════════════ */}
       <CityStorySection />
 
       {/* ═══════════════════════════════════════════
-          4. ADVISORY MODEL — Light sandstone bg
+          4. ADVISORY MODEL — Sandstone Section
          ═══════════════════════════════════════════ */}
-      <section className="bg-[#F0EBE1] py-24">
+      <section id="advisory-section" className="bg-[#F0EBE1] py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -647,8 +758,8 @@ export default function HomePage({ onOpenInquiry }) {
                     { title: 'Rigorous Technical Filtering:', desc: 'We reject approximately 70% of potential inventory based on construction milestone track record, build quality, and realistic yield modeling.' },
                     { title: 'Complete Handover Advocacy:', desc: 'Our involvement continues beyond signature to snagging inspections, title deed registration with the Ministry of Justice, and tenant placement advisory.' },
                   ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div className="p-1 rounded bg-[#B8913A]/10 text-[#B8913A] mt-0.5 shrink-0">
+                    <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-[#FAF7F2] border border-[rgba(15,15,14,0.06)] hover:border-[#B8913A]/30 transition-colors">
+                      <div className="p-1 rounded bg-[#B8913A]/15 text-[#B8913A] mt-0.5 shrink-0">
                         <CheckCircle2 size={14} />
                       </div>
                       <div>
@@ -667,12 +778,12 @@ export default function HomePage({ onOpenInquiry }) {
               </ScrollReveal>
             </div>
 
-            {/* Right: advisory steps */}
+            {/* Right: advisory steps with cascade reveal */}
             <div className="lg:col-span-7">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {advisorySteps.map((step, idx) => (
                   <ScrollReveal key={step.num} animation="fade-up" delay={idx * 110}>
-                    <div className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.08)] rounded-xl p-7 group hover:border-[#B8913A]/35 transition-colors h-full shadow-sm hover:shadow-md transition-shadow">
+                    <div className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.08)] rounded-xl p-7 group hover:border-[#B8913A]/45 transition-all duration-300 hover:-translate-y-1 h-full shadow-sm hover:shadow-md">
                       <span className="font-serif text-4xl font-bold text-[#E8E1D5] group-hover:text-[#D4A853] transition-colors block mb-3">{step.num}</span>
                       <h3 className="font-serif text-base font-semibold text-[#0F0F0E] mb-2">{step.title}</h3>
                       <p className="text-xs text-[#6B6B5A] leading-relaxed">{step.desc}</p>
@@ -686,7 +797,7 @@ export default function HomePage({ onOpenInquiry }) {
         </div>
       </section>
 
-      {/* Moving text band (reversed) */}
+      {/* Moving text band 2 (Reversed) */}
       <MovingTextBand
         items={['MANDATE REVIEW', 'ORIGINATION', 'DILIGENCE', 'CONVEYANCE', 'HANDOVER ADVOCACY']}
         reverse={true}
@@ -694,14 +805,14 @@ export default function HomePage({ onOpenInquiry }) {
       />
 
       {/* ═══════════════════════════════════════════
-          5. INVESTMENT INTELLIGENCE (Dark section)
+          5. INVESTMENT INTELLIGENCE (Dark Section)
          ═══════════════════════════════════════════ */}
       <InvestmentIntelligence marketStats={marketStats} />
 
       {/* ═══════════════════════════════════════════
-          6. INVESTOR PATHWAYS — Ivory bg
+          6. INVESTOR PATHWAYS — Ivory Section
          ═══════════════════════════════════════════ */}
-      <section className="bg-[#FAF7F2] py-24">
+      <section id="pathways-section" className="bg-[#FAF7F2] py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <ScrollReveal animation="fade-up">
@@ -748,20 +859,20 @@ export default function HomePage({ onOpenInquiry }) {
               }
             ].map((pathway, idx) => (
               <ScrollReveal key={idx} animation="fade-up" delay={idx * 120}>
-                <div className={`editorial-card rounded-xl p-7 flex flex-col justify-between space-y-6 h-full ${
-                  pathway.variant === 'brass' ? 'border-[#B8913A]/30 shadow-lg' : ''
+                <div className={`editorial-card rounded-xl p-8 flex flex-col justify-between space-y-6 h-full transition-all duration-300 hover:-translate-y-1.5 ${
+                  pathway.variant === 'brass' ? 'border-[#B8913A]/40 shadow-lg' : ''
                 }`}>
                   <div className="space-y-4">
-                    <div className={`h-11 w-11 rounded-xl flex items-center justify-center ${
+                    <div className={`h-12 w-12 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105 ${
                       pathway.variant === 'brass'
-                        ? 'bg-[#B8913A] text-[#FAF7F2]'
+                        ? 'bg-[#B8913A] text-[#FAF7F2] shadow-md'
                         : 'bg-[#F0EBE1] border border-[rgba(184,145,58,0.25)] text-[#B8913A]'
                     }`}>
-                      <pathway.icon size={20} />
+                      <pathway.icon size={22} />
                     </div>
                     <div>
                       <h3 className="font-serif text-xl font-bold text-[#0F0F0E]">{pathway.title}</h3>
-                      <p className="text-[11px] font-mono text-[#B8913A] mt-0.5">{pathway.sub}</p>
+                      <p className="text-[11px] font-mono text-[#B8913A] font-semibold mt-0.5">{pathway.sub}</p>
                     </div>
                     <p className="text-xs text-[#6B6B5A] leading-relaxed">{pathway.desc}</p>
                   </div>
@@ -769,7 +880,7 @@ export default function HomePage({ onOpenInquiry }) {
                   {pathway.href ? (
                     <Link
                       to={pathway.href}
-                      className="w-full py-2.5 px-4 rounded bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#3A3A35] text-xs font-medium border border-[rgba(15,15,14,0.10)] transition-colors flex items-center justify-center gap-1.5"
+                      className="w-full py-3 px-4 rounded bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#3A3A35] text-xs font-semibold uppercase tracking-wider border border-[rgba(15,15,14,0.10)] transition-colors flex items-center justify-center gap-1.5"
                     >
                       <span>{pathway.cta}</span>
                       <ArrowRight size={13} />
@@ -777,7 +888,7 @@ export default function HomePage({ onOpenInquiry }) {
                   ) : (
                     <button
                       onClick={() => onOpenInquiry ? onOpenInquiry({ type: pathway.type }) : null}
-                      className={`w-full py-2.5 px-4 rounded text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
+                      className={`w-full py-3 px-4 rounded text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
                         pathway.variant === 'brass'
                           ? 'bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2]'
                           : 'bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#3A3A35] border border-[rgba(15,15,14,0.10)]'
@@ -796,9 +907,9 @@ export default function HomePage({ onOpenInquiry }) {
       </section>
 
       {/* ═══════════════════════════════════════════
-          7. STATS ROW — Parchment bg
+          7. STATS ROW — Parchment Section
          ═══════════════════════════════════════════ */}
-      <section className="bg-[#E8E1D5] py-16 border-y border-[rgba(15,15,14,0.08)]">
+      <section className="bg-[#E8E1D5] py-20 border-y border-[rgba(15,15,14,0.08)]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             <StatCounter value={7} suffix="+" label="Advisory Units" />
@@ -810,15 +921,15 @@ export default function HomePage({ onOpenInquiry }) {
       </section>
 
       {/* ═══════════════════════════════════════════
-          8. PROMINENT CTA (Dark section)
+          8. PROMINENT CTA (Dark Section)
          ═══════════════════════════════════════════ */}
-      <section className="bg-[#0C0C0A] py-24 dark-section">
+      <section className="bg-[#0C0C0A] py-28 dark-section relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal animation="scale-up" duration={700}>
-            <div className="border border-[rgba(255,255,255,0.06)] rounded-2xl p-10 sm:p-14 lg:p-20 relative overflow-hidden bg-[#141412]">
+            <div className="border border-[rgba(255,255,255,0.08)] rounded-2xl p-10 sm:p-14 lg:p-20 relative overflow-hidden bg-[#141412] shadow-2xl">
 
               <div className="relative z-10 max-w-2xl space-y-7">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#B8913A]/10 border border-[#B8913A]/25 text-[10.5px] font-mono text-[#B8913A] uppercase">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B8913A]/15 border border-[#B8913A]/30 text-[10.5px] font-mono text-[#D4A853] uppercase font-semibold">
                   <span>Direct Concierge Desk</span>
                 </div>
 
@@ -833,7 +944,7 @@ export default function HomePage({ onOpenInquiry }) {
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                   <button
                     onClick={() => onOpenInquiry ? onOpenInquiry() : window.location.href = '/contact'}
-                    className="inline-flex items-center justify-center gap-2 bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] font-semibold px-7 py-4 rounded text-xs tracking-wider uppercase transition-colors cursor-pointer shadow-lg shadow-[#B8913A]/20"
+                    className="inline-flex items-center justify-center gap-2 bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] font-semibold px-7 py-4 rounded text-xs tracking-wider uppercase transition-all cursor-pointer shadow-xl hover:shadow-[#B8913A]/30 hover:-translate-y-0.5"
                   >
                     <span>Submit Private Brief</span>
                     <ArrowUpRight size={15} />
@@ -843,18 +954,18 @@ export default function HomePage({ onOpenInquiry }) {
                     href="https://wa.me/966501234567"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/5 text-[#8A8578] border border-[rgba(255,255,255,0.10)] hover:border-[rgba(255,255,255,0.20)] px-7 py-4 rounded text-xs tracking-wider uppercase transition-all"
+                    className="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/5 text-[#E8E3DC] border border-[rgba(255,255,255,0.14)] hover:border-[rgba(255,255,255,0.28)] px-7 py-4 rounded text-xs tracking-wider uppercase transition-all"
                   >
                     <span>WhatsApp Private Concierge</span>
                   </a>
                 </div>
 
-                <p className="text-[#3A3A35] text-xs font-mono">
+                <p className="text-[#5A5A52] text-xs font-mono">
                   Confidentiality assured under non-disclosure governance. No marketing unsolicited calls.
                 </p>
               </div>
 
-              {/* Decorative watermark */}
+              {/* Watermark Logo */}
               <div className="absolute -right-8 -bottom-8 opacity-[0.03] pointer-events-none select-none font-serif text-[280px] leading-none text-white">
                 M
               </div>

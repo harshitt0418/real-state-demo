@@ -1,41 +1,86 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, ArrowUpRight, TrendingUp, Bed, Bath, Maximize2 } from 'lucide-react';
+import { MapPin, ArrowUpRight, Maximize2, Bed, Bath } from 'lucide-react';
 
 /**
- * FeaturedPropertyCard — Large editorial card for featured listings.
- * Used in HomePage hero grid and PropertiesPage.
+ * Hook for 3D card perspective tilt on mousemove
+ */
+function useCardTilt(maxTilt = 6) {
+  const cardRef = useRef(null);
+  const [style, setStyle] = useState({});
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -maxTilt;
+    const rotateY = ((x - centerX) / centerX) * maxTilt;
+
+    setStyle({
+      transform: `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-6px)`,
+      transition: 'transform 0.1s ease-out'
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setStyle({
+      transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)',
+      transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
+    });
+  };
+
+  return { cardRef, style, handleMouseMove, handleMouseLeave };
+}
+
+/**
+ * FeaturedPropertyCard — Large editorial card with 3D tilt, image zoom & yield badge
  */
 export function FeaturedPropertyCard({ property, onInquire }) {
   if (!property) return null;
   const { id, title, city, district, type, priceLabel, price, beds, baths, area, image, blurb, financialMetrics } = property;
+  const { cardRef, style, handleMouseMove, handleMouseLeave } = useCardTilt(5);
 
   return (
-    <article className="featured-card rounded-xl overflow-hidden flex flex-col group h-full">
-      {/* Image */}
+    <article
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={style}
+      className="featured-card rounded-xl overflow-hidden flex flex-col group h-full cursor-pointer"
+    >
+      {/* Image container */}
       <div className="card-image editorial-img-container aspect-[16/10] relative">
-        <img src={image} alt={title} loading="lazy" className="w-full h-full object-cover" />
+        <img
+          src={image}
+          alt={title}
+          loading="lazy"
+          className="w-full h-full object-cover"
+        />
 
-        {/* Scrim */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0E]/70 via-transparent to-black/20 pointer-events-none" />
+        {/* Gradient Scrim */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0E]/75 via-transparent to-black/20 pointer-events-none" />
 
         {/* Top badge */}
         <div className="absolute top-3 left-3">
-          <span className="brass-badge rounded">
+          <span className="brass-badge rounded shadow-sm">
             {type} · {city}
           </span>
         </div>
 
-        {/* Yield badge */}
+        {/* Yield badge with subtle glow */}
         {financialMetrics?.estimatedYield && (
-          <div className="absolute top-3 right-3 bg-[#0F0F0E]/85 backdrop-blur-sm px-2.5 py-1.5 rounded border border-[rgba(255,255,255,0.10)]">
+          <div className="absolute top-3 right-3 bg-[#0F0F0E]/85 backdrop-blur-md px-2.5 py-1.5 rounded border border-[rgba(255,255,255,0.12)] shadow-md">
             <p className="text-[9px] font-mono uppercase text-[#8A8578] leading-none mb-0.5">Net Yield</p>
             <p className="text-xs font-mono font-bold text-[#D4A853] leading-none">{financialMetrics.estimatedYield}</p>
           </div>
         )}
 
         {/* Location chip */}
-        <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-white text-xs font-medium bg-[#0F0F0E]/70 backdrop-blur-sm px-2.5 py-1 rounded">
+        <div className="absolute bottom-3 left-3 flex items-center gap-1.5 text-white text-xs font-medium bg-[#0F0F0E]/75 backdrop-blur-sm px-2.5 py-1 rounded">
           <MapPin size={11} className="text-[#D4A853]" />
           <span>{district}, {city}</span>
         </div>
@@ -55,7 +100,7 @@ export function FeaturedPropertyCard({ property, onInquire }) {
             {area && (
               <div className="text-right">
                 <p className="text-[9px] uppercase font-mono text-[#8A8A75]">Area</p>
-                <p className="text-xs font-mono text-[#3A3A35]">{area} m²</p>
+                <p className="text-xs font-mono text-[#3A3A35] font-semibold">{area} m²</p>
               </div>
             )}
           </div>
@@ -67,7 +112,7 @@ export function FeaturedPropertyCard({ property, onInquire }) {
           <p className="text-[#6B6B5A] text-xs leading-relaxed mt-2 line-clamp-2">{blurb}</p>
         </div>
 
-        {/* Stats + actions */}
+        {/* Specs & actions */}
         <div className="space-y-3">
           <div className="grid grid-cols-3 gap-2 py-2 px-3 bg-[#F0EBE1] rounded border border-[rgba(15,15,14,0.06)] text-[11px] text-[#3A3A35]">
             <div className="flex items-center gap-1.5">
@@ -106,17 +151,20 @@ export function FeaturedPropertyCard({ property, onInquire }) {
 }
 
 /**
- * OffsetPropertyCard — slightly offset magazine-layout card.
- * Used in grids to create editorial rhythm.
+ * OffsetPropertyCard — Magazine-layout card
  */
 export function OffsetPropertyCard({ property, onInquire, offset = false }) {
   if (!property) return null;
   const { id, title, city, type, priceLabel, price, area, image, financialMetrics } = property;
+  const { cardRef, style, handleMouseMove, handleMouseLeave } = useCardTilt(4);
 
   return (
     <article
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={style}
       className={`editorial-card rounded-xl overflow-hidden group ${offset ? 'mt-8' : '-mt-8'} h-full`}
-      style={{ transition: 'transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease' }}
     >
       <div className="editorial-img-container aspect-[4/3] relative">
         <img src={image} alt={title} loading="lazy" className="w-full h-full object-cover" />
@@ -145,17 +193,23 @@ export function OffsetPropertyCard({ property, onInquire, offset = false }) {
 }
 
 /**
- * CityCard — Image-led card for a city market.
+ * CityCard — Image-led card for a city market
  */
 export function CityCard({ city, tagline, image, stat, statLabel, href }) {
+  const { cardRef, style, handleMouseMove, handleMouseLeave } = useCardTilt(5);
+
   return (
     <Link
       to={href || `/properties?city=${city}`}
-      className="group block editorial-card rounded-xl overflow-hidden"
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={style}
+      className="group block editorial-card rounded-xl overflow-hidden shadow-sm"
     >
       <div className="editorial-img-container aspect-[4/3] relative">
         <img src={image} alt={city} loading="lazy" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0E]/80 via-[#0F0F0E]/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0E]/85 via-[#0F0F0E]/35 to-transparent" />
 
         {/* City name */}
         <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -177,14 +231,14 @@ export function CityCard({ city, tagline, image, stat, statLabel, href }) {
 }
 
 /**
- * MarketInsightCard — Premium data card with large numbers.
+ * MarketInsightCard — Premium data card with large numbers
  */
 export function MarketInsightCard({ label, value, unit, sub, dark = false }) {
   return (
-    <div className={`p-5 rounded-xl border ${
+    <div className={`p-5 rounded-xl border transition-all duration-300 hover:scale-[1.02] ${
       dark
-        ? 'bg-[#1C1C1A] border-[rgba(255,255,255,0.06)]'
-        : 'bg-[#FAF7F2] border-[rgba(15,15,14,0.08)]'
+        ? 'bg-[#1C1C1A] border-[rgba(255,255,255,0.06)] hover:border-[#B8913A]/40'
+        : 'bg-[#FAF7F2] border-[rgba(15,15,14,0.08)] hover:border-[#B8913A]/40 shadow-sm'
     }`}>
       <p className={`metric-label mb-3 ${dark ? 'text-[#5A5A52]' : ''}`}>{label}</p>
       <div className="flex items-baseline gap-1.5 mb-1">
@@ -200,9 +254,6 @@ export function MarketInsightCard({ label, value, unit, sub, dark = false }) {
   );
 }
 
-/**
- * Default export: backward-compatible PropertyCard (uses bright theme)
- */
 export default function PropertyCard({ property, onInquire }) {
   return <FeaturedPropertyCard property={property} onInquire={onInquire} />;
 }
