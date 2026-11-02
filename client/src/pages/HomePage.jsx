@@ -4,7 +4,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   ArrowUpRight, ArrowRight, ShieldCheck, Building2, TrendingUp,
-  CheckCircle2, Users, Landmark, Compass, ChevronRight, MapPin
+  CheckCircle2, Users, Landmark, Compass, ChevronRight, MapPin,
+  Sparkles, Activity, FileCheck, Layers
 } from 'lucide-react';
 import PropertyCard from '../components/PropertyCard';
 import ScrollReveal from '../components/ScrollReveal';
@@ -61,7 +62,7 @@ function StatCounter({ value, suffix = '', label, dark = false }) {
   );
 }
 
-/* ─── CityStorySection (Interactive Corridor Experience) ────────── */
+/* ─── CityStorySection (Interactive Kingdom Triangle Matrix) ───── */
 function CityStorySection() {
   const [activeCity, setActiveCity] = useState(0);
   const timerRef = useRef(null);
@@ -80,6 +81,8 @@ function CityStorySection() {
       statLabel: 'YoY Capital Growth',
       metric2: 'SAR 18,400',
       metric2Label: 'Avg. Prime PSM',
+      satellite1: { label: 'Wafi Escrow Registry', val: 'Phase-4 Verified' },
+      satellite2: { label: 'Institutional Tenancy', val: 'Diplomatic & C-Suite' },
       color: '#B8913A'
     },
     {
@@ -94,6 +97,8 @@ function CityStorySection() {
       statLabel: 'Waterfront Net Yield',
       metric2: 'SAR 14,200',
       metric2Label: 'Avg. Coastal PSM',
+      satellite1: { label: 'Coastal Regeneration', val: 'Corniche Marina Belt' },
+      satellite2: { label: 'Yield Capitalization', val: '6.8% Net Unlevered' },
       color: '#8A6C2A'
     },
     {
@@ -108,6 +113,8 @@ function CityStorySection() {
       statLabel: 'Executive Occupancy',
       metric2: 'SAR 11,800',
       metric2Label: 'Avg. Prime PSM',
+      satellite1: { label: 'Energy Tenancy Index', val: '94% Sustained Occ.' },
+      satellite2: { label: 'Transit Connectivity', val: 'Causeway Corridor' },
       color: '#6B6B5A'
     }
   ];
@@ -115,7 +122,7 @@ function CityStorySection() {
   useEffect(() => {
     timerRef.current = setInterval(() => {
       setActiveCity(prev => (prev + 1) % cities.length);
-    }, 6000);
+    }, 6500);
     return () => clearInterval(timerRef.current);
   }, [cities.length]);
 
@@ -124,7 +131,7 @@ function CityStorySection() {
     clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
       setActiveCity(prev => (prev + 1) % cities.length);
-    }, 6000);
+    }, 6500);
   };
 
   const c = cities[activeCity];
@@ -132,17 +139,17 @@ function CityStorySection() {
   return (
     <section id="corridors-section" ref={sectionRef} className="bg-[#0C0C0A] py-28 overflow-hidden dark-section relative">
       
-      {/* Background ambient light */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#B8913A]/5 blur-[120px] pointer-events-none rounded-full" />
+      {/* Background ambient radial glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#B8913A]/6 blur-[140px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section header */}
         <ScrollReveal animation="fade-up">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div className="space-y-3">
               <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#B8913A] animate-ping" />
+                <span className="h-2 w-2 rounded-full bg-[#D4A853] animate-ping" />
                 <p className="section-label text-[#B8913A]">Geographic Specialization</p>
               </div>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#E8E3DC] leading-tight">
@@ -156,53 +163,107 @@ function CityStorySection() {
           </div>
         </ScrollReveal>
 
-        {/* City tabs with animated indicator */}
-        <div className="flex gap-2 mb-12 border-b border-[rgba(255,255,255,0.08)] pb-1">
-          {cities.map((city, i) => (
-            <button
-              key={city.city}
-              onClick={() => handleCityClick(i)}
-              className={`relative px-6 py-3.5 text-sm font-medium font-sans tracking-wide cursor-pointer transition-all duration-300 ${
-                activeCity === i
-                  ? 'text-[#D4A853] font-semibold'
-                  : 'text-[#6B6B5A] hover:text-[#C8C3BA]'
-              }`}
-            >
-              <span>{city.city}</span>
-              {activeCity === i && (
-                <span className="absolute bottom-[-1px] left-0 right-0 h-[2px] bg-gradient-to-r from-[#B8913A] to-[#D4A853] rounded-full" />
-              )}
-            </button>
-          ))}
+        {/* ─── Interactive Kingdom Triangle Constellation Bar ─── */}
+        <div className="mb-14 p-4 rounded-2xl bg-[#141412] border border-[rgba(255,255,255,0.08)] shadow-2xl relative overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 relative z-10">
+            {cities.map((city, i) => {
+              const isSelected = activeCity === i;
+              return (
+                <button
+                  key={city.city}
+                  onClick={() => handleCityClick(i)}
+                  className={`group relative flex items-center justify-between p-4 rounded-xl transition-all duration-300 text-left cursor-pointer ${
+                    isSelected
+                      ? 'bg-white/10 border border-[#B8913A] shadow-lg shadow-[#B8913A]/10 scale-102'
+                      : 'bg-white/4 border border-[rgba(255,255,255,0.05)] hover:bg-white/8 hover:border-white/20'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    {/* Glowing Node Dot */}
+                    <div className="relative">
+                      <div className={`h-3 w-3 rounded-full transition-colors ${isSelected ? 'bg-[#D4A853]' : 'bg-white/30'}`} />
+                      {isSelected && (
+                        <div className="absolute inset-0 rounded-full bg-[#D4A853] animate-ping opacity-75" />
+                      )}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className={`font-serif font-bold text-base transition-colors ${isSelected ? 'text-[#E8E3DC]' : 'text-white/70'}`}>
+                          {city.city}
+                        </span>
+                        <span className="text-[10px] font-mono text-white/30">{city.coordinates.split(' ')[0]}</span>
+                      </div>
+                      <p className="text-[10px] font-mono text-[#8A8578] uppercase">{city.tagline.split(' ')[0]} · {city.statLabel}</p>
+                    </div>
+                  </div>
+
+                  <div className="text-right">
+                    <span className={`font-serif text-lg font-bold block ${isSelected ? 'text-[#D4A853]' : 'text-white/60'}`}>
+                      {city.stat}
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Animated Connecting Shimmer Line */}
+          <div className="flex items-center gap-3 px-4 pt-3 mt-2 border-t border-[rgba(255,255,255,0.06)]">
+            <div className="h-px flex-1 shimmer-line" />
+            <span className="text-[9px] font-mono text-[#D4A853] uppercase tracking-[0.2em] font-semibold flex items-center gap-1.5">
+              <Sparkles size={11} className="text-[#D4A853]" /> Interactive Regional Node Network
+            </span>
+            <div className="h-px flex-1 shimmer-line" />
+          </div>
         </div>
 
-        {/* City panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[460px]">
+        {/* ─── City Detail Grid with Floating Satellites ─── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[480px]">
           
-          {/* Left: image with layered parallax transition */}
-          <div className="relative rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[500px] border border-[rgba(255,255,255,0.08)] shadow-2xl group">
-            <img
-              key={c.city}
-              src={c.image}
-              alt={c.city}
-              className="w-full h-full object-cover transition-all duration-1000 transform scale-102 group-hover:scale-108"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0A]/85 via-transparent to-transparent pointer-events-none" />
+          {/* Left: Main City View with Floating Satellite Cards */}
+          <div className="lg:col-span-6 relative">
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[480px] border border-[rgba(255,255,255,0.10)] shadow-2xl group">
+              <img
+                key={c.city}
+                src={c.image}
+                alt={c.city}
+                className="w-full h-full object-cover transition-all duration-1000 transform scale-102 group-hover:scale-108"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0A]/85 via-transparent to-transparent pointer-events-none" />
 
-            {/* Coordinates chip */}
-            <div className="absolute top-4 left-4 bg-[#0C0C0A]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[rgba(255,255,255,0.12)]">
-              <p className="text-[10px] font-mono text-[#D4A853] tracking-wider">{c.coordinates}</p>
+              {/* Coordinates chip */}
+              <div className="absolute top-4 left-4 bg-[#0C0C0A]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[rgba(255,255,255,0.12)]">
+                <p className="text-[10px] font-mono text-[#D4A853] tracking-wider">{c.coordinates}</p>
+              </div>
+
+              {/* Stat chip */}
+              <div className="absolute bottom-5 right-5 text-right bg-[#0C0C0A]/90 backdrop-blur-md px-5 py-3 rounded-xl border border-[rgba(255,255,255,0.12)] shadow-xl">
+                <p className="text-[9px] font-mono uppercase text-[#8A8578] mb-0.5">{c.statLabel}</p>
+                <p className="font-serif text-2xl font-bold text-[#D4A853]">{c.stat}</p>
+              </div>
             </div>
 
-            {/* Stat chip */}
-            <div className="absolute bottom-5 right-5 text-right bg-[#0C0C0A]/90 backdrop-blur-md px-5 py-3 rounded-xl border border-[rgba(255,255,255,0.12)] shadow-xl">
-              <p className="text-[9px] font-mono uppercase text-[#8A8578] mb-0.5">{c.statLabel}</p>
-              <p className="font-serif text-2xl font-bold text-[#D4A853]">{c.stat}</p>
+            {/* Floating Satellite Card 1 (Top Right) */}
+            <div className="absolute -top-6 -right-6 hidden sm:flex items-center gap-2.5 glass-card-dark p-3.5 rounded-xl float-slow-1 z-20 shadow-xl max-w-xs">
+              <div className="h-2 w-2 rounded-full bg-[#D4A853] animate-ping shrink-0" />
+              <div>
+                <p className="text-[9px] font-mono text-white/50 uppercase tracking-wider">{c.satellite1.label}</p>
+                <p className="text-xs font-semibold text-[#E8E3DC] font-sans">{c.satellite1.val}</p>
+              </div>
+            </div>
+
+            {/* Floating Satellite Card 2 (Bottom Left) */}
+            <div className="absolute -bottom-6 -left-6 hidden sm:flex items-center gap-2.5 glass-card-dark p-3.5 rounded-xl float-slow-2 z-20 shadow-xl max-w-xs">
+              <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+              <div>
+                <p className="text-[9px] font-mono text-white/50 uppercase tracking-wider">{c.satellite2.label}</p>
+                <p className="text-xs font-semibold text-[#E8E3DC] font-sans">{c.satellite2.val}</p>
+              </div>
             </div>
           </div>
 
-          {/* Right: content */}
-          <div className="space-y-8 animate-in fade-in duration-500" key={c.city + '-content'}>
+          {/* Right: Content & Sectors */}
+          <div className="lg:col-span-6 space-y-8 animate-in fade-in duration-500" key={c.city + '-content'}>
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <h3 className="font-serif text-4xl sm:text-5xl font-bold text-[#E8E3DC]">{c.city}</h3>
@@ -217,7 +278,7 @@ function CityStorySection() {
               <p className="text-[10px] font-mono uppercase tracking-wider text-[#6B6B5A] mb-3">Active Prime Sectors</p>
               <div className="grid grid-cols-2 gap-2.5">
                 {c.highlights.map((h, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-[#C8C3BA] p-2.5 rounded-lg bg-[#161614] border border-[rgba(255,255,255,0.06)] hover:border-[#B8913A]/30 transition-colors">
+                  <div key={i} className="flex items-center gap-2 text-xs text-[#C8C3BA] p-3 rounded-lg bg-[#161614] border border-[rgba(255,255,255,0.06)] hover:border-[#B8913A]/40 transition-colors">
                     <span className="h-1.5 w-1.5 bg-[#B8913A] rounded-full shrink-0" />
                     <span className="truncate">{h}</span>
                   </div>
@@ -253,7 +314,7 @@ function CityStorySection() {
   );
 }
 
-/* ─── InvestmentIntelligence Section ────────────────────────────── */
+/* ─── InvestmentIntelligence Section (With Constellation Satellites) ── */
 function InvestmentIntelligence({ marketStats }) {
   const insightsRef = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -281,7 +342,10 @@ function InvestmentIntelligence({ marketStats }) {
         <ScrollReveal animation="fade-up">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
             <div className="space-y-3">
-              <p className="section-label text-[#B8913A]">Market Intelligence</p>
+              <div className="flex items-center gap-2">
+                <Activity size={14} className="text-[#B8913A]" />
+                <p className="section-label text-[#B8913A]">Market Intelligence</p>
+              </div>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#E8E3DC] leading-tight">
                 Investment Data,<br />Not Market Noise
               </h2>
@@ -296,7 +360,37 @@ function InvestmentIntelligence({ marketStats }) {
           </div>
         </ScrollReveal>
 
-        {/* Metrics grid with hover card lift */}
+        {/* ─── Floating Constellation Matrix Above Intelligence ─── */}
+        <div className="mb-12 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            { label: 'Riyadh Alpha Corridor', stat: '+14.8%', sub: 'Corporate HQ Influx', floatClass: 'float-slow-1' },
+            { label: 'Jeddah Waterfront Yield', stat: '6.8% Net', sub: 'Corniche Marina Asset', floatClass: 'float-slow-2' },
+            { label: 'Al Khobar Tenancy', stat: '94% Occ.', sub: 'Executive Energy Lease', floatClass: 'float-slow-3' },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className={`glass-card-dark p-4 rounded-xl flex items-center justify-between shadow-xl ${item.floatClass}`}
+            >
+              <div className="flex items-center gap-3">
+                <div className="h-2.5 w-2.5 rounded-full bg-[#D4A853] animate-ping" />
+                <div>
+                  <p className="text-[10px] font-mono text-white/50 uppercase">{item.label}</p>
+                  <p className="text-xs text-[#8A8578]">{item.sub}</p>
+                </div>
+              </div>
+              <p className="font-serif text-lg font-bold text-[#D4A853]">{item.stat}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Animated Connecting Shimmer Line */}
+        <div className="flex items-center gap-3 px-4 pb-12">
+          <div className="h-px flex-1 shimmer-line" />
+          <span className="text-[9px] font-mono text-[#D4A853] uppercase tracking-[0.2em] font-semibold">Verified Registry Telemetry</span>
+          <div className="h-px flex-1 shimmer-line" />
+        </div>
+
+        {/* Metrics Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
           {metrics.map((m, i) => (
             <ScrollReveal key={i} animation="fade-up" delay={i * 100}>
@@ -425,17 +519,17 @@ export default function HomePage({ onOpenInquiry }) {
   };
 
   const advisorySteps = [
-    { num: '01', title: 'Mandate & Capital Brief', desc: 'We define your precise criteria: yield targets, risk profile, holding period, and asset class preferences across commercial and residential inventory.' },
-    { num: '02', title: 'Direct Channel Origination', desc: 'We access off-market and pre-launch units directly through our formal Tier-1 developer channel partnerships, eliminating intermediaries and markups.' },
-    { num: '03', title: 'Technical & Yield Diligence', desc: 'Independent assessment of building specs, construction quality, title registration, and realistic rental comps based on municipal market data.' },
-    { num: '04', title: 'Conveyance to Handover', desc: 'Full fiduciary oversight through developer contract execution, escrow payment milestones, REGA compliance, and key handover.' },
+    { num: '01', title: 'Mandate & Capital Brief', desc: 'We define your precise criteria: yield targets, risk profile, holding period, and asset class preferences across commercial and residential inventory.', tag: 'Phase 01' },
+    { num: '02', title: 'Direct Channel Origination', desc: 'We access off-market and pre-launch units directly through our formal Tier-1 developer channel partnerships, eliminating intermediaries and markups.', tag: 'Phase 02' },
+    { num: '03', title: 'Technical & Yield Diligence', desc: 'Independent assessment of building specs, construction quality, title registration, and realistic rental comps based on municipal market data.', tag: 'Phase 03' },
+    { num: '04', title: 'Conveyance to Handover', desc: 'Full fiduciary oversight through developer contract execution, escrow payment milestones, REGA compliance, and key handover.', tag: 'Phase 04' },
   ];
 
   return (
     <div>
 
       {/* ═══════════════════════════════════════════
-          1. HERO — Interactive Parallax & Floating Cards
+          1. HERO — Interactive Parallax & Floating Cards (Growth Triangle)
          ═══════════════════════════════════════════ */}
       <section
         id="hero-section"
@@ -567,7 +661,7 @@ export default function HomePage({ onOpenInquiry }) {
 
               </div>
 
-              {/* Right Column: Dynamic Floating City Cards */}
+              {/* Right Column: Dynamic Floating City Cards (Growth Triangle) */}
               <div
                 ref={heroCardsRef}
                 className="lg:col-span-5 hidden lg:flex flex-col gap-4 relative"
@@ -667,15 +761,18 @@ export default function HomePage({ onOpenInquiry }) {
       />
 
       {/* ═══════════════════════════════════════════
-          2. FEATURED PROPERTIES — Editorial Grid with 3D Tilt
+          2. FEATURED PROPERTIES — Editorial Grid with Floating Diligence Constellation
          ═══════════════════════════════════════════ */}
       <section id="curated-section" className="bg-[#FAF7F2] py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <ScrollReveal animation="fade-up">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
               <div className="space-y-3 max-w-xl">
-                <p className="section-label">Curated Opportunities</p>
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-[#B8913A] animate-ping" />
+                  <p className="section-label">Curated Opportunities</p>
+                </div>
                 <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F0F0E] leading-tight">
                   Selected Prime Units
                 </h2>
@@ -692,6 +789,40 @@ export default function HomePage({ onOpenInquiry }) {
               </Link>
             </div>
           </ScrollReveal>
+
+          {/* ─── Floating Growth-Triangle Style Constellation Bar ─── */}
+          <div className="mb-14 p-5 rounded-2xl bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] shadow-sm relative overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
+              {[
+                { title: 'Verified Ministry Titles', stat: '100% Escrow', sub: 'Wafi Regulated Channel', floatClass: 'float-slow-1' },
+                { title: 'Tier-1 Master Builders', stat: '0 Broker Surcharge', sub: 'Direct Allocation Terms', floatClass: 'float-slow-2' },
+                { title: 'Unlevered Yield Spread', stat: '6.8% – 11.2%', sub: 'Stress-Tested Comps', floatClass: 'float-slow-3' },
+              ].map((matrix, idx) => (
+                <div
+                  key={idx}
+                  className={`glass-card-light p-4 rounded-xl flex items-center justify-between shadow-sm ${matrix.floatClass}`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="h-2.5 w-2.5 rounded-full bg-[#B8913A] animate-ping" />
+                    <div>
+                      <p className="text-xs font-bold text-[#0F0F0E]">{matrix.title}</p>
+                      <p className="text-[10px] text-[#6B6B5A] font-mono">{matrix.sub}</p>
+                    </div>
+                  </div>
+                  <span className="font-serif text-sm font-bold text-[#B8913A] px-2 py-1 bg-[#FAF7F2] rounded border border-[rgba(184,145,58,0.2)]">
+                    {matrix.stat}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Traveling Shimmer Connector */}
+            <div className="flex items-center gap-3 px-4 pt-3 mt-3 border-t border-[rgba(15,15,14,0.06)]">
+              <div className="h-px flex-1 shimmer-line" />
+              <span className="text-[9px] font-mono text-[#B8913A] uppercase tracking-[0.2em] font-semibold">Institutional Portfolio Assurance Matrix</span>
+              <div className="h-px flex-1 shimmer-line" />
+            </div>
+          </div>
 
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -728,12 +859,12 @@ export default function HomePage({ onOpenInquiry }) {
       </section>
 
       {/* ═══════════════════════════════════════════
-          3. CITY STORY SECTION (Interactive Obsidian Showcase)
+          3. CITY STORY SECTION (Interactive Kingdom Triangle Matrix)
          ═══════════════════════════════════════════ */}
       <CityStorySection />
 
       {/* ═══════════════════════════════════════════
-          4. ADVISORY MODEL — Sandstone Section
+          4. ADVISORY MODEL — Circuit Flow Pipeline
          ═══════════════════════════════════════════ */}
       <section id="advisory-section" className="bg-[#F0EBE1] py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -744,7 +875,10 @@ export default function HomePage({ onOpenInquiry }) {
             <div className="lg:col-span-5 space-y-6">
               <ScrollReveal animation="fade-right">
                 <div className="space-y-3">
-                  <p className="section-label">Our Structural Advantage</p>
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-[#B8913A] animate-ping" />
+                    <p className="section-label">Our Structural Advantage</p>
+                  </div>
                   <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F0F0E] leading-tight">
                     Why Institutional Capital Chooses the Channel Partner Model
                   </h2>
@@ -752,7 +886,17 @@ export default function HomePage({ onOpenInquiry }) {
                 <p className="text-[#6B6B5A] text-sm leading-relaxed mt-4">
                   Traditional real estate brokers rely on transactional churn and public listings. MIRĀS operates on a fiduciary advisory arc: we act as an originate-and-filter counterweight between master developers and qualified buyers.
                 </p>
-                <div className="space-y-4 text-xs text-[#5A5A52] pt-4">
+
+                {/* Floating Satellite Assurance Pill */}
+                <div className="glass-card-light p-4 rounded-xl flex items-center gap-3 float-slow-1 shadow-sm">
+                  <div className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                  <div>
+                    <p className="text-[10px] font-mono uppercase tracking-wider text-[#B8913A] font-semibold">Strict Advisory Filtering</p>
+                    <p className="text-xs text-[#0F0F0E] font-medium">Over 70% of potential market inventory is rejected prior to mandate presentation.</p>
+                  </div>
+                </div>
+
+                <div className="space-y-4 text-xs text-[#5A5A52] pt-2">
                   {[
                     { title: 'Direct Developer Conveyance:', desc: 'Contracts executed directly with the master developer under regulated escrow accounts with zero intermediate brokerage surcharge.' },
                     { title: 'Rigorous Technical Filtering:', desc: 'We reject approximately 70% of potential inventory based on construction milestone track record, build quality, and realistic yield modeling.' },
@@ -778,18 +922,36 @@ export default function HomePage({ onOpenInquiry }) {
               </ScrollReveal>
             </div>
 
-            {/* Right: advisory steps with cascade reveal */}
+            {/* Right: advisory steps with connected circuit line */}
             <div className="lg:col-span-7">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
                 {advisorySteps.map((step, idx) => (
                   <ScrollReveal key={step.num} animation="fade-up" delay={idx * 110}>
-                    <div className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.08)] rounded-xl p-7 group hover:border-[#B8913A]/45 transition-all duration-300 hover:-translate-y-1 h-full shadow-sm hover:shadow-md">
-                      <span className="font-serif text-4xl font-bold text-[#E8E1D5] group-hover:text-[#D4A853] transition-colors block mb-3">{step.num}</span>
+                    <div className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.08)] rounded-xl p-7 group hover:border-[#B8913A]/45 transition-all duration-300 hover:-translate-y-1.5 h-full shadow-sm hover:shadow-md relative overflow-hidden">
+                      {/* Step Tag */}
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="font-serif text-4xl font-bold text-[#E8E1D5] group-hover:text-[#D4A853] transition-colors">
+                          {step.num}
+                        </span>
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-[#B8913A] px-2 py-0.5 rounded bg-[#F0EBE1] border border-[rgba(184,145,58,0.2)]">
+                          {step.tag}
+                        </span>
+                      </div>
                       <h3 className="font-serif text-base font-semibold text-[#0F0F0E] mb-2">{step.title}</h3>
                       <p className="text-xs text-[#6B6B5A] leading-relaxed">{step.desc}</p>
+
+                      {/* Subtle golden bottom accent */}
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#B8913A]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                   </ScrollReveal>
                 ))}
+              </div>
+
+              {/* Connecting circuit line at bottom */}
+              <div className="flex items-center gap-3 px-4 pt-4 mt-3">
+                <div className="h-px flex-1 shimmer-line" />
+                <span className="text-[9px] font-mono text-[#B8913A] uppercase tracking-widest font-semibold">Regulated Acquisition Sequence</span>
+                <div className="h-px flex-1 shimmer-line" />
               </div>
             </div>
 
@@ -810,14 +972,17 @@ export default function HomePage({ onOpenInquiry }) {
       <InvestmentIntelligence marketStats={marketStats} />
 
       {/* ═══════════════════════════════════════════
-          6. INVESTOR PATHWAYS — Ivory Section
+          6. INVESTOR PATHWAYS — Ivory Section with Corridor Connectors
          ═══════════════════════════════════════════ */}
       <section id="pathways-section" className="bg-[#FAF7F2] py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <ScrollReveal animation="fade-up">
             <div className="text-center max-w-2xl mx-auto space-y-3 mb-16">
-              <p className="section-label">Tailored Engagement Paths</p>
+              <div className="flex items-center justify-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-[#B8913A] animate-ping" />
+                <p className="section-label">Tailored Engagement Paths</p>
+              </div>
               <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0F0F0E] leading-tight">
                 How We Structure Your Acquisition
               </h2>
@@ -837,7 +1002,8 @@ export default function HomePage({ onOpenInquiry }) {
                 desc: "For discerning families and private professionals seeking iconic living in Riyadh's northern quarters (Hittin, Al Malqa) or coastal Jeddah. We handle architectural inspection, title deed verification, and bespoke interior fit-out introductions.",
                 cta: 'Submit Residential Brief',
                 type: 'Private Residential Acquisition',
-                variant: 'outline'
+                variant: 'outline',
+                floatClass: 'float-slow-1'
               },
               {
                 icon: Landmark,
@@ -846,7 +1012,8 @@ export default function HomePage({ onOpenInquiry }) {
                 desc: 'Structured acquisitions of Grade-A office floors along King Fahd Road, high-street retail parades, and multi-unit residential portfolios. Detailed financial pro formas, tenancy covenants, and yield stress testing provided.',
                 cta: 'Request Commercial Portfolio',
                 type: 'Family Office Commercial Allocation',
-                variant: 'brass'
+                variant: 'brass',
+                floatClass: 'float-slow-2'
               },
               {
                 icon: Building2,
@@ -855,20 +1022,24 @@ export default function HomePage({ onOpenInquiry }) {
                 desc: 'For premier real estate developers with licensed off-plan or completed developments. We provide qualified institutional origination, international investor roadshows, and structured sales channel representation.',
                 cta: 'Developer Partnership Terms',
                 href: '/partnerships',
-                variant: 'outline'
+                variant: 'outline',
+                floatClass: 'float-slow-3'
               }
             ].map((pathway, idx) => (
               <ScrollReveal key={idx} animation="fade-up" delay={idx * 120}>
-                <div className={`editorial-card rounded-xl p-8 flex flex-col justify-between space-y-6 h-full transition-all duration-300 hover:-translate-y-1.5 ${
-                  pathway.variant === 'brass' ? 'border-[#B8913A]/40 shadow-lg' : ''
+                <div className={`editorial-card rounded-xl p-8 flex flex-col justify-between space-y-6 h-full transition-all duration-300 hover:-translate-y-2 ${
+                  pathway.variant === 'brass' ? 'border-[#B8913A]/50 shadow-xl' : ''
                 }`}>
                   <div className="space-y-4">
-                    <div className={`h-12 w-12 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105 ${
-                      pathway.variant === 'brass'
-                        ? 'bg-[#B8913A] text-[#FAF7F2] shadow-md'
-                        : 'bg-[#F0EBE1] border border-[rgba(184,145,58,0.25)] text-[#B8913A]'
-                    }`}>
-                      <pathway.icon size={22} />
+                    <div className="flex items-center justify-between">
+                      <div className={`h-12 w-12 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105 ${
+                        pathway.variant === 'brass'
+                          ? 'bg-[#B8913A] text-[#FAF7F2] shadow-md'
+                          : 'bg-[#F0EBE1] border border-[rgba(184,145,58,0.25)] text-[#B8913A]'
+                      }`}>
+                        <pathway.icon size={22} />
+                      </div>
+                      <span className="h-2 w-2 rounded-full bg-[#B8913A] animate-pulse" />
                     </div>
                     <div>
                       <h3 className="font-serif text-xl font-bold text-[#0F0F0E]">{pathway.title}</h3>
@@ -880,7 +1051,7 @@ export default function HomePage({ onOpenInquiry }) {
                   {pathway.href ? (
                     <Link
                       to={pathway.href}
-                      className="w-full py-3 px-4 rounded bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#3A3A35] text-xs font-semibold uppercase tracking-wider border border-[rgba(15,15,14,0.10)] transition-colors flex items-center justify-center gap-1.5"
+                      className="w-full py-3.5 px-4 rounded bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#3A3A35] text-xs font-semibold uppercase tracking-wider border border-[rgba(15,15,14,0.10)] transition-colors flex items-center justify-center gap-1.5"
                     >
                       <span>{pathway.cta}</span>
                       <ArrowRight size={13} />
@@ -888,7 +1059,7 @@ export default function HomePage({ onOpenInquiry }) {
                   ) : (
                     <button
                       onClick={() => onOpenInquiry ? onOpenInquiry({ type: pathway.type }) : null}
-                      className={`w-full py-3 px-4 rounded text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
+                      className={`w-full py-3.5 px-4 rounded text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
                         pathway.variant === 'brass'
                           ? 'bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2]'
                           : 'bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#3A3A35] border border-[rgba(15,15,14,0.10)]'
@@ -901,6 +1072,13 @@ export default function HomePage({ onOpenInquiry }) {
                 </div>
               </ScrollReveal>
             ))}
+          </div>
+
+          {/* Animated Connecting Shimmer Line */}
+          <div className="flex items-center gap-3 px-4 pt-10">
+            <div className="h-px flex-1 shimmer-line" />
+            <span className="text-[9px] font-mono text-[#B8913A] uppercase tracking-widest font-semibold">Structured Capital Gateway</span>
+            <div className="h-px flex-1 shimmer-line" />
           </div>
 
         </div>
@@ -921,48 +1099,87 @@ export default function HomePage({ onOpenInquiry }) {
       </section>
 
       {/* ═══════════════════════════════════════════
-          8. PROMINENT CTA (Dark Section)
+          8. PROMINENT CTA (Dark Section with Floating Concierge Status)
          ═══════════════════════════════════════════ */}
       <section className="bg-[#0C0C0A] py-28 dark-section relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal animation="scale-up" duration={700}>
             <div className="border border-[rgba(255,255,255,0.08)] rounded-2xl p-10 sm:p-14 lg:p-20 relative overflow-hidden bg-[#141412] shadow-2xl">
 
-              <div className="relative z-10 max-w-2xl space-y-7">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B8913A]/15 border border-[#B8913A]/30 text-[10.5px] font-mono text-[#D4A853] uppercase font-semibold">
-                  <span>Direct Concierge Desk</span>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+                
+                {/* Left: Main Copy & CTA Buttons */}
+                <div className="lg:col-span-8 space-y-7">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#B8913A]/15 border border-[#B8913A]/30 text-[10.5px] font-mono text-[#D4A853] uppercase font-semibold">
+                    <span className="h-2 w-2 rounded-full bg-[#D4A853] animate-ping" />
+                    <span>Direct Concierge Desk</span>
+                  </div>
+
+                  <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#E8E3DC] leading-tight">
+                    Begin your acquisition conversation with confidence.
+                  </h2>
+
+                  <p className="text-[#8A8578] text-sm sm:text-base leading-relaxed max-w-xl">
+                    Whether you are evaluating a specific Riyadh commercial floorplate, a Red Sea oceanfront residence, or a broad capital allocation strategy, our advisory team is prepared to review your mandate.
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                    <button
+                      onClick={() => onOpenInquiry ? onOpenInquiry() : window.location.href = '/contact'}
+                      className="inline-flex items-center justify-center gap-2 bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] font-semibold px-7 py-4 rounded text-xs tracking-wider uppercase transition-all cursor-pointer shadow-xl hover:shadow-[#B8913A]/30 hover:-translate-y-0.5"
+                    >
+                      <span>Submit Private Brief</span>
+                      <ArrowUpRight size={15} />
+                    </button>
+
+                    <a
+                      href="https://wa.me/966501234567"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/5 text-[#E8E3DC] border border-[rgba(255,255,255,0.14)] hover:border-[rgba(255,255,255,0.28)] px-7 py-4 rounded text-xs tracking-wider uppercase transition-all"
+                    >
+                      <span>WhatsApp Private Concierge</span>
+                    </a>
+                  </div>
+
+                  <p className="text-[#5A5A52] text-xs font-mono">
+                    Confidentiality assured under non-disclosure governance. No marketing unsolicited calls.
+                  </p>
                 </div>
 
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#E8E3DC] leading-tight">
-                  Begin your acquisition conversation with confidence.
-                </h2>
+                {/* Right: Floating VIP Concierge Telemetry Card (Growth Triangle Style) */}
+                <div className="lg:col-span-4 hidden lg:flex flex-col gap-3">
+                  <div className="glass-card-dark p-5 rounded-2xl float-slow-1 border border-[rgba(255,255,255,0.15)] shadow-2xl space-y-4">
+                    <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                      <div className="flex items-center gap-2">
+                        <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping" />
+                        <span className="font-mono text-xs font-semibold text-white uppercase">Advisory Desk Online</span>
+                      </div>
+                      <span className="text-[10px] font-mono text-[#D4A853] uppercase">Riyadh HQ</span>
+                    </div>
 
-                <p className="text-[#8A8578] text-sm sm:text-base leading-relaxed">
-                  Whether you are evaluating a specific Riyadh commercial floorplate, a Red Sea oceanfront residence, or a broad capital allocation strategy, our advisory team is prepared to review your mandate.
-                </p>
+                    <div className="space-y-2 text-xs">
+                      <div className="flex justify-between text-white/70">
+                        <span>Mandate Partner:</span>
+                        <span className="text-white font-medium font-mono">Senior Principal</span>
+                      </div>
+                      <div className="flex justify-between text-white/70">
+                        <span>Average Response:</span>
+                        <span className="text-[#D4A853] font-mono font-bold">&lt; 15 mins</span>
+                      </div>
+                      <div className="flex justify-between text-white/70">
+                        <span>Conveyance Protocol:</span>
+                        <span className="text-white font-mono">REGA Licensed</span>
+                      </div>
+                    </div>
 
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                  <button
-                    onClick={() => onOpenInquiry ? onOpenInquiry() : window.location.href = '/contact'}
-                    className="inline-flex items-center justify-center gap-2 bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] font-semibold px-7 py-4 rounded text-xs tracking-wider uppercase transition-all cursor-pointer shadow-xl hover:shadow-[#B8913A]/30 hover:-translate-y-0.5"
-                  >
-                    <span>Submit Private Brief</span>
-                    <ArrowUpRight size={15} />
-                  </button>
-
-                  <a
-                    href="https://wa.me/966501234567"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/5 text-[#E8E3DC] border border-[rgba(255,255,255,0.14)] hover:border-[rgba(255,255,255,0.28)] px-7 py-4 rounded text-xs tracking-wider uppercase transition-all"
-                  >
-                    <span>WhatsApp Private Concierge</span>
-                  </a>
+                    <div className="pt-2 border-t border-white/10">
+                      <div className="h-px w-full shimmer-line mb-2" />
+                      <p className="text-[10px] text-white/50 text-center font-mono">Direct Developer Channel Clearance</p>
+                    </div>
+                  </div>
                 </div>
 
-                <p className="text-[#5A5A52] text-xs font-mono">
-                  Confidentiality assured under non-disclosure governance. No marketing unsolicited calls.
-                </p>
               </div>
 
               {/* Watermark Logo */}
