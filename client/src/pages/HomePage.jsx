@@ -5,11 +5,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   ArrowUpRight, ArrowRight, ShieldCheck, Building2, TrendingUp,
   CheckCircle2, Users, Landmark, Compass, ChevronRight, MapPin,
-  Sparkles, Activity, FileCheck, Layers
+  Sparkles, Activity, FileCheck, Layers, Radio, Sliders
 } from 'lucide-react';
 import PropertyCard from '../components/PropertyCard';
 import ScrollReveal from '../components/ScrollReveal';
 import MovingTextBand from '../components/MovingTextBand';
+import InteractiveRadarMap from '../components/InteractiveRadarMap';
+import YieldTrendChart from '../components/YieldTrendChart';
+import ExecutiveMandateConfigurator from '../components/ExecutiveMandateConfigurator';
 import { fetchProperties, fetchStats } from '../services/api';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -62,9 +65,10 @@ function StatCounter({ value, suffix = '', label, dark = false }) {
   );
 }
 
-/* ─── CityStorySection (Interactive Kingdom Triangle Matrix) ───── */
+/* ─── CityStorySection (Interactive Kingdom Triangle Matrix & Radar) ───── */
 function CityStorySection() {
   const [activeCity, setActiveCity] = useState(0);
+  const [viewMode, setViewMode] = useState('radar'); // 'radar' or 'photo'
   const timerRef = useRef(null);
   const sectionRef = useRef(null);
 
@@ -122,7 +126,7 @@ function CityStorySection() {
   useEffect(() => {
     timerRef.current = setInterval(() => {
       setActiveCity(prev => (prev + 1) % cities.length);
-    }, 6500);
+    }, 7000);
     return () => clearInterval(timerRef.current);
   }, [cities.length]);
 
@@ -131,7 +135,7 @@ function CityStorySection() {
     clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
       setActiveCity(prev => (prev + 1) % cities.length);
-    }, 6500);
+    }, 7000);
   };
 
   const c = cities[activeCity];
@@ -144,7 +148,7 @@ function CityStorySection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        {/* Section header */}
+        {/* Section header with View Mode Switcher */}
         <ScrollReveal animation="fade-up">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div className="space-y-3">
@@ -156,10 +160,35 @@ function CityStorySection() {
                 Three Capital Markets,<br />One Advisory Lens
               </h2>
             </div>
-            <Link to="/properties" className="inline-flex items-center gap-2 text-xs font-semibold text-[#B8913A] hover:text-[#D4A853] tracking-wider uppercase transition-colors">
-              <span>Explore All Listings</span>
-              <ArrowRight size={14} />
-            </Link>
+
+            {/* View Mode Switcher & Navigation Link */}
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1 p-1 bg-[#1A1A18] rounded-xl border border-[rgba(255,255,255,0.08)] text-xs">
+                <button
+                  type="button"
+                  onClick={() => setViewMode('radar')}
+                  className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
+                    viewMode === 'radar' ? 'bg-[#B8913A] text-[#FAF7F2] font-semibold' : 'text-[#8A8578] hover:text-white'
+                  }`}
+                >
+                  Radar Constellation
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode('photo')}
+                  className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
+                    viewMode === 'photo' ? 'bg-[#B8913A] text-[#FAF7F2] font-semibold' : 'text-[#8A8578] hover:text-white'
+                  }`}
+                >
+                  Architectural View
+                </button>
+              </div>
+
+              <Link to="/properties" className="inline-flex items-center gap-2 text-xs font-semibold text-[#B8913A] hover:text-[#D4A853] tracking-wider uppercase transition-colors">
+                <span>All Listings</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
           </div>
         </ScrollReveal>
 
@@ -217,104 +246,110 @@ function CityStorySection() {
           </div>
         </div>
 
-        {/* ─── City Detail Grid with Floating Satellites ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[480px]">
-          
-          {/* Left: Main City View with Floating Satellite Cards */}
-          <div className="lg:col-span-6 relative">
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[480px] border border-[rgba(255,255,255,0.10)] shadow-2xl group">
-              <img
-                key={c.city}
-                src={c.image}
-                alt={c.city}
-                className="w-full h-full object-cover transition-all duration-1000 transform scale-102 group-hover:scale-108"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0A]/85 via-transparent to-transparent pointer-events-none" />
-
-              {/* Coordinates chip */}
-              <div className="absolute top-4 left-4 bg-[#0C0C0A]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[rgba(255,255,255,0.12)]">
-                <p className="text-[10px] font-mono text-[#D4A853] tracking-wider">{c.coordinates}</p>
-              </div>
-
-              {/* Stat chip */}
-              <div className="absolute bottom-5 right-5 text-right bg-[#0C0C0A]/90 backdrop-blur-md px-5 py-3 rounded-xl border border-[rgba(255,255,255,0.12)] shadow-xl">
-                <p className="text-[9px] font-mono uppercase text-[#8A8578] mb-0.5">{c.statLabel}</p>
-                <p className="font-serif text-2xl font-bold text-[#D4A853]">{c.stat}</p>
-              </div>
-            </div>
-
-            {/* Floating Satellite Card 1 (Top Right) */}
-            <div className="absolute -top-6 -right-6 hidden sm:flex items-center gap-2.5 glass-card-dark p-3.5 rounded-xl float-slow-1 z-20 shadow-xl max-w-xs">
-              <div className="h-2 w-2 rounded-full bg-[#D4A853] animate-ping shrink-0" />
-              <div>
-                <p className="text-[9px] font-mono text-white/50 uppercase tracking-wider">{c.satellite1.label}</p>
-                <p className="text-xs font-semibold text-[#E8E3DC] font-sans">{c.satellite1.val}</p>
-              </div>
-            </div>
-
-            {/* Floating Satellite Card 2 (Bottom Left) */}
-            <div className="absolute -bottom-6 -left-6 hidden sm:flex items-center gap-2.5 glass-card-dark p-3.5 rounded-xl float-slow-2 z-20 shadow-xl max-w-xs">
-              <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-              <div>
-                <p className="text-[9px] font-mono text-white/50 uppercase tracking-wider">{c.satellite2.label}</p>
-                <p className="text-xs font-semibold text-[#E8E3DC] font-sans">{c.satellite2.val}</p>
-              </div>
-            </div>
+        {/* ─── Conditional Display: Radar Map vs Architectural Photo Grid ─── */}
+        {viewMode === 'radar' ? (
+          <div className="mb-6 animate-in fade-in zoom-in-95 duration-400">
+            <InteractiveRadarMap activeCity={activeCity} onSelectCity={handleCityClick} />
           </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[480px] animate-in fade-in duration-400">
+            
+            {/* Left: Main City View with Floating Satellite Cards */}
+            <div className="lg:col-span-6 relative">
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[480px] border border-[rgba(255,255,255,0.10)] shadow-2xl group">
+                <img
+                  key={c.city}
+                  src={c.image}
+                  alt={c.city}
+                  className="w-full h-full object-cover transition-all duration-1000 transform scale-102 group-hover:scale-108"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0A]/85 via-transparent to-transparent pointer-events-none" />
 
-          {/* Right: Content & Sectors */}
-          <div className="lg:col-span-6 space-y-8 animate-in fade-in duration-500" key={c.city + '-content'}>
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <h3 className="font-serif text-4xl sm:text-5xl font-bold text-[#E8E3DC]">{c.city}</h3>
-                <span className="font-serif text-2xl text-[#B8913A]/60 font-light">{c.arabic}</span>
+                {/* Coordinates chip */}
+                <div className="absolute top-4 left-4 bg-[#0C0C0A]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[rgba(255,255,255,0.12)]">
+                  <p className="text-[10px] font-mono text-[#D4A853] tracking-wider">{c.coordinates}</p>
+                </div>
+
+                {/* Stat chip */}
+                <div className="absolute bottom-5 right-5 text-right bg-[#0C0C0A]/90 backdrop-blur-md px-5 py-3 rounded-xl border border-[rgba(255,255,255,0.12)] shadow-xl">
+                  <p className="text-[9px] font-mono uppercase text-[#8A8578] mb-0.5">{c.statLabel}</p>
+                  <p className="font-serif text-2xl font-bold text-[#D4A853]">{c.stat}</p>
+                </div>
               </div>
-              <p className="text-[11px] font-mono uppercase tracking-widest text-[#B8913A] mb-4">{c.tagline}</p>
-              <p className="text-[#8A8578] text-sm sm:text-base leading-relaxed">{c.description}</p>
+
+              {/* Floating Satellite Card 1 (Top Right) */}
+              <div className="absolute -top-6 -right-6 hidden sm:flex items-center gap-2.5 glass-card-dark p-3.5 rounded-xl float-slow-1 z-20 shadow-xl max-w-xs">
+                <div className="h-2 w-2 rounded-full bg-[#D4A853] animate-ping shrink-0" />
+                <div>
+                  <p className="text-[9px] font-mono text-white/50 uppercase tracking-wider">{c.satellite1.label}</p>
+                  <p className="text-xs font-semibold text-[#E8E3DC] font-sans">{c.satellite1.val}</p>
+                </div>
+              </div>
+
+              {/* Floating Satellite Card 2 (Bottom Left) */}
+              <div className="absolute -bottom-6 -left-6 hidden sm:flex items-center gap-2.5 glass-card-dark p-3.5 rounded-xl float-slow-2 z-20 shadow-xl max-w-xs">
+                <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <div>
+                  <p className="text-[9px] font-mono text-white/50 uppercase tracking-wider">{c.satellite2.label}</p>
+                  <p className="text-xs font-semibold text-[#E8E3DC] font-sans">{c.satellite2.val}</p>
+                </div>
+              </div>
             </div>
 
-            {/* Key sectors with animated pill tags */}
-            <div>
-              <p className="text-[10px] font-mono uppercase tracking-wider text-[#6B6B5A] mb-3">Active Prime Sectors</p>
-              <div className="grid grid-cols-2 gap-2.5">
-                {c.highlights.map((h, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-[#C8C3BA] p-3 rounded-lg bg-[#161614] border border-[rgba(255,255,255,0.06)] hover:border-[#B8913A]/40 transition-colors">
-                    <span className="h-1.5 w-1.5 bg-[#B8913A] rounded-full shrink-0" />
-                    <span className="truncate">{h}</span>
-                  </div>
-                ))}
+            {/* Right: Content & Sectors */}
+            <div className="lg:col-span-6 space-y-8 animate-in fade-in duration-500" key={c.city + '-content'}>
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <h3 className="font-serif text-4xl sm:text-5xl font-bold text-[#E8E3DC]">{c.city}</h3>
+                  <span className="font-serif text-2xl text-[#B8913A]/60 font-light">{c.arabic}</span>
+                </div>
+                <p className="text-[11px] font-mono uppercase tracking-widest text-[#B8913A] mb-4">{c.tagline}</p>
+                <p className="text-[#8A8578] text-sm sm:text-base leading-relaxed">{c.description}</p>
               </div>
+
+              {/* Key sectors with animated pill tags */}
+              <div>
+                <p className="text-[10px] font-mono uppercase tracking-wider text-[#6B6B5A] mb-3">Active Prime Sectors</p>
+                <div className="grid grid-cols-2 gap-2.5">
+                  {c.highlights.map((h, i) => (
+                    <div key={i} className="flex items-center gap-2 text-xs text-[#C8C3BA] p-3 rounded-lg bg-[#161614] border border-[rgba(255,255,255,0.06)] hover:border-[#B8913A]/40 transition-colors">
+                      <span className="h-1.5 w-1.5 bg-[#B8913A] rounded-full shrink-0" />
+                      <span className="truncate">{h}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Metrics row */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-[#141412] border border-[rgba(255,255,255,0.08)] rounded-xl p-5 hover:border-[#B8913A]/40 transition-colors">
+                  <p className="text-[9px] font-mono uppercase text-[#6B6B5A] mb-1">{c.statLabel}</p>
+                  <p className="font-serif text-2xl sm:text-3xl font-bold text-[#D4A853]">{c.stat}</p>
+                </div>
+                <div className="bg-[#141412] border border-[rgba(255,255,255,0.08)] rounded-xl p-5 hover:border-[#B8913A]/40 transition-colors">
+                  <p className="text-[9px] font-mono uppercase text-[#6B6B5A] mb-1">{c.metric2Label}</p>
+                  <p className="font-serif text-2xl sm:text-3xl font-bold text-[#E8E3DC]">{c.metric2}</p>
+                </div>
+              </div>
+
+              <Link
+                to={`/properties?city=${c.city}`}
+                className="inline-flex items-center gap-2 text-xs font-semibold text-[#B8913A] hover:text-[#D4A853] tracking-wider uppercase transition-colors"
+              >
+                <span>Browse {c.city} Portfolio</span>
+                <ArrowRight size={14} />
+              </Link>
             </div>
 
-            {/* Metrics row */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-[#141412] border border-[rgba(255,255,255,0.08)] rounded-xl p-5 hover:border-[#B8913A]/40 transition-colors">
-                <p className="text-[9px] font-mono uppercase text-[#6B6B5A] mb-1">{c.statLabel}</p>
-                <p className="font-serif text-2xl sm:text-3xl font-bold text-[#D4A853]">{c.stat}</p>
-              </div>
-              <div className="bg-[#141412] border border-[rgba(255,255,255,0.08)] rounded-xl p-5 hover:border-[#B8913A]/40 transition-colors">
-                <p className="text-[9px] font-mono uppercase text-[#6B6B5A] mb-1">{c.metric2Label}</p>
-                <p className="font-serif text-2xl sm:text-3xl font-bold text-[#E8E3DC]">{c.metric2}</p>
-              </div>
-            </div>
-
-            <Link
-              to={`/properties?city=${c.city}`}
-              className="inline-flex items-center gap-2 text-xs font-semibold text-[#B8913A] hover:text-[#D4A853] tracking-wider uppercase transition-colors"
-            >
-              <span>Browse {c.city} Portfolio</span>
-              <ArrowRight size={14} />
-            </Link>
           </div>
-
-        </div>
+        )}
 
       </div>
     </section>
   );
 }
 
-/* ─── InvestmentIntelligence Section (With Constellation Satellites) ── */
+/* ─── InvestmentIntelligence Section (With Dynamic Spline Curve & Satellites) ── */
 function InvestmentIntelligence({ marketStats }) {
   const insightsRef = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -383,11 +418,9 @@ function InvestmentIntelligence({ marketStats }) {
           ))}
         </div>
 
-        {/* Animated Connecting Shimmer Line */}
-        <div className="flex items-center gap-3 px-4 pb-12">
-          <div className="h-px flex-1 shimmer-line" />
-          <span className="text-[9px] font-mono text-[#D4A853] uppercase tracking-[0.2em] font-semibold">Verified Registry Telemetry</span>
-          <div className="h-px flex-1 shimmer-line" />
+        {/* ─── Dynamic SVG Spline Yield Curve Chart ─── */}
+        <div className="mb-16">
+          <YieldTrendChart />
         </div>
 
         {/* Metrics Grid */}
@@ -859,7 +892,7 @@ export default function HomePage({ onOpenInquiry }) {
       </section>
 
       {/* ═══════════════════════════════════════════
-          3. CITY STORY SECTION (Interactive Kingdom Triangle Matrix)
+          3. CITY STORY SECTION (Interactive Kingdom Triangle Matrix & Radar)
          ═══════════════════════════════════════════ */}
       <CityStorySection />
 
@@ -967,14 +1000,25 @@ export default function HomePage({ onOpenInquiry }) {
       />
 
       {/* ═══════════════════════════════════════════
-          5. INVESTMENT INTELLIGENCE (Dark Section)
+          5. INVESTMENT INTELLIGENCE (Dark Section with Spline Curve & Satellites)
          ═══════════════════════════════════════════ */}
       <InvestmentIntelligence marketStats={marketStats} />
 
       {/* ═══════════════════════════════════════════
-          6. INVESTOR PATHWAYS — Ivory Section with Corridor Connectors
+          6. INTERACTIVE EXECUTIVE MANDATE CONFIGURATOR (Creative Capital Architect)
          ═══════════════════════════════════════════ */}
-      <section id="pathways-section" className="bg-[#FAF7F2] py-28 relative">
+      <section className="bg-[#FAF7F2] py-20 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal animation="fade-up">
+            <ExecutiveMandateConfigurator onOpenInquiry={onOpenInquiry} />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          7. INVESTOR PATHWAYS — Ivory Section with Corridor Connectors
+         ═══════════════════════════════════════════ */}
+      <section id="pathways-section" className="bg-[#FAF7F2] py-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <ScrollReveal animation="fade-up">
@@ -1085,7 +1129,7 @@ export default function HomePage({ onOpenInquiry }) {
       </section>
 
       {/* ═══════════════════════════════════════════
-          7. STATS ROW — Parchment Section
+          8. STATS ROW — Parchment Section
          ═══════════════════════════════════════════ */}
       <section className="bg-[#E8E1D5] py-20 border-y border-[rgba(15,15,14,0.08)]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1099,7 +1143,7 @@ export default function HomePage({ onOpenInquiry }) {
       </section>
 
       {/* ═══════════════════════════════════════════
-          8. PROMINENT CTA (Dark Section with Floating Concierge Status)
+          9. PROMINENT CTA (Dark Section with Floating Concierge Status)
          ═══════════════════════════════════════════ */}
       <section className="bg-[#0C0C0A] py-28 dark-section relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

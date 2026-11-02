@@ -1,13 +1,31 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Clock } from 'lucide-react';
 
 export default function Navbar({ onOpenInquiry }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isHeroSection, setIsHeroSection] = useState(true);
+  const [riyadhTime, setRiyadhTime] = useState('');
   const location = useLocation();
+
+  // Real-time Riyadh Clock (GMT+3)
+  useEffect(() => {
+    const updateTime = () => {
+      const options = {
+        timeZone: 'Asia/Riyadh',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      };
+      const formatter = new Intl.DateTimeFormat([], options);
+      setRiyadhTime(formatter.format(new Date()));
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,10 +65,6 @@ export default function Navbar({ onOpenInquiry }) {
     : isScrolled || !isHomePage
       ? 'bg-[#FAF7F2]/96 backdrop-blur-md border-b border-[rgba(15,15,14,0.10)] shadow-[0_2px_20px_rgba(15,15,14,0.06)]'
       : 'bg-[#FAF7F2]/90 backdrop-blur-sm';
-
-  const textColor = isHomePage && isHeroSection && !isMobileMenuOpen
-    ? 'text-white'
-    : 'text-[#3A3A35]';
 
   const logoNameColor = isHomePage && isHeroSection && !isMobileMenuOpen
     ? 'text-white group-hover:text-[#D4A853]'
@@ -142,8 +156,23 @@ export default function Navbar({ onOpenInquiry }) {
             })}
           </nav>
 
-          {/* CTA */}
+          {/* Actions & Riyadh Time Beacon */}
           <div className="hidden sm:flex items-center gap-4">
+            
+            {/* Real-time Riyadh AST indicator */}
+            {riyadhTime && (
+              <div className={`hidden xl:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] font-mono border transition-colors ${
+                isHomePage && isHeroSection && !isMobileMenuOpen
+                  ? 'bg-white/8 border-white/15 text-white/75'
+                  : 'bg-[#F0EBE1] border-[rgba(15,15,14,0.10)] text-[#6B6B5A]'
+              }`}>
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>{riyadhTime} AST</span>
+                <span className="opacity-40">·</span>
+                <span>Riyadh</span>
+              </div>
+            )}
+
             <button
               onClick={() => onOpenInquiry ? onOpenInquiry() : window.location.href = '/contact'}
               className={`inline-flex items-center gap-2 px-4 py-2 rounded text-xs tracking-wider uppercase font-semibold transition-all duration-200 cursor-pointer ${
