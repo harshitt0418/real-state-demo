@@ -144,7 +144,7 @@ function CityStorySection() {
       coordinates: '25°12′N 55°17′E',
       description: 'Iconic sky sanctuaries and beachfront penthouses across Dubai Marina and Palm Jumeirah for premier GCC capital diversification.',
       highlights: ['Dubai Marina Promenade', 'Palm Jumeirah', 'DIFC Financial Hub', 'Downtown Sky Mansions'],
-      image: '/assets/prop-khobar.jpg',
+      image: '/assets/prop-dubai.jpg',
       stat: '7.8%',
       statLabel: 'Marina Prime Yield',
       metric2: 'AED 14,250',
@@ -750,7 +750,7 @@ export default function HomePage({ onOpenInquiry }) {
                     city: 'Dubai',
                     stat: '7.8% Net',
                     statLabel: 'Marina Prime Yield',
-                    image: '/assets/prop-khobar.jpg',
+                    image: '/assets/prop-dubai.jpg',
                     coords: '25°12′N',
                     floatClass: 'float-slow-3'
                   },

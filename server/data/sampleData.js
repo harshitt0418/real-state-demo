@@ -184,9 +184,9 @@ export const sampleProperties = [
     completionYear: 2024,
     status: 'Available',
     featured: true,
-    image: '/assets/prop-khobar.jpg',
+    image: '/assets/prop-dubai.jpg',
     gallery: [
-      '/assets/prop-khobar.jpg',
+      '/assets/prop-dubai.jpg',
       '/assets/prop-penthouse.jpg',
       '/assets/hero.jpg'
     ],
@@ -488,7 +488,7 @@ export const companyMetrics = {
       averageAppreciation: '+11.5% YoY',
       primeYield: '7.8% Net',
       curatedPropertiesCount: 1,
-      image: '/assets/prop-khobar.jpg'
+      image: '/assets/prop-dubai.jpg'
     }
   ]
 };

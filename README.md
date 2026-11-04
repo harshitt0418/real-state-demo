@@ -1,18 +1,18 @@
-# MIRĀS Real Estate Advisory (مِيراث)
-### Full-Stack MERN Architecture · Saudi Arabia Capital & Architectural Property
+# Sadu Real Estate Development (سدو)
+### Full-Stack MERN Architecture · Riyadh · Jeddah · Mecca · Medina · Dubai
 
-A distinctive, full-stack real estate advisory platform purpose-built for the Kingdom of Saudi Arabia's primary economic corridors: **Riyadh Metropolitan**, **Jeddah Red Sea Waterfront**, and the **Al Khobar Eastern Gateway**.
+A distinctive real estate development platform purpose-built for the primary markets: **Riyadh**, **Jeddah**, **Mecca**, **Medina**, and **Dubai**.
 
-Engineered using the **MERN Stack** (MongoDB, Express.js, React, Node.js) with an editorial architectural aesthetic, comprehensive property due-diligence data, an interactive capital & yield mortgage model, and a persistent client inquiry pipeline.
+Engineered using the **MERN Stack** (MongoDB, Express.js, React, Node.js) with an editorial architectural aesthetic, comprehensive property due-diligence data, and a streamlined 3-column inquiry pipeline (Name, Mobile, Looking for).
 
 ---
 
 ## 🏛️ Brand & Strategic Concept
 
-Unlike generic retail broker websites, **MIRĀS** (meaning *Heritage & Enduring Asset* in Arabic: **مِيراث**) operates on a **fiduciary channel partner model**:
-1. **Who We Serve:** Discerning family offices, private wealth allocators, corporate owner-occupiers, and international investors seeking prime assets in Saudi Arabia.
-2. **Which Locations:** Riyadh (KAFD, Al Olaya, Hittin, Al Malqa), Jeddah (Al Shati Corniche, Al Salamah), and Al Khobar (Gulf Promenade).
-3. **Why Clients Trust Us:** Direct Tier-1 master developer channel agreements, zero broker markups, Wafi off-plan regulatory compliance, and end-to-end conveyance to electronic Ministry of Justice title deeds.
+**Sadu Real Estate Development** operates on a **direct developer partner model**:
+1. **Who We Serve:** Discerning family offices, private wealth allocators, corporate owner-occupiers, and international investors seeking prime assets.
+2. **Which Locations:** Exclusive markets: **Riyadh**, **Jeddah**, **Mecca**, and **Medina**, alongside **Dubai real estate**.
+3. **Why Clients Trust Us:** Direct developer channel agreements, zero broker markups, and end-to-end conveyance to official title deeds.
 4. **Transparent Preview Standards:** All listings and projections are realistic sample assets for concept review and can be seamlessly updated via the MongoDB database.
 
 ---
