@@ -1,5 +1,5 @@
 /**
- * MIRĀS Real Estate Advisory — API Service Client
+ * Sadu Real Estate Development — API Service Client
  * Connects to Express backend API with graceful fallback to sample dataset
  */
 
@@ -97,7 +97,6 @@ export async function submitInquiry(payload) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Submission failed');
     return data;
@@ -105,7 +104,7 @@ export async function submitInquiry(payload) {
     console.warn('[API Client] Inquiry submission simulated:', error.message);
     return {
       success: true,
-      message: 'Your advisory inquiry has been received (Demo simulation mode). A senior advisor will contact you shortly.',
+      message: 'Your inquiry has been received. Sadu Real Estate Development will contact your mobile shortly.',
       dataSource: 'Local Simulation Fallback',
       data: {
         id: `inq-local-${Date.now()}`,
@@ -163,15 +162,17 @@ export async function fetchStats() {
         }
       },
       portfolio: {
-        totalListings: 7,
+        totalListings: 6,
         totalInquiriesRegistered: 3,
         representedDevelopersCount: 18,
         portfolioValue: 'SAR 840M+',
         averageGrossYield: '7.6%',
         corridors: [
-          { name: 'Riyadh', curatedPropertiesCount: 4, averageAppreciation: '+11.2% YoY' },
-          { name: 'Jeddah', curatedPropertiesCount: 2, averageAppreciation: '+8.7% YoY' },
-          { name: 'Al Khobar', curatedPropertiesCount: 1, averageAppreciation: '+7.4% YoY' }
+          { name: 'Riyadh', curatedPropertiesCount: 3, averageAppreciation: '+11.2% YoY' },
+          { name: 'Jeddah', curatedPropertiesCount: 1, averageAppreciation: '+8.7% YoY' },
+          { name: 'Mecca', curatedPropertiesCount: 1, averageAppreciation: '+14.2% YoY' },
+          { name: 'Medina', curatedPropertiesCount: 1, averageAppreciation: '+10.8% YoY' },
+          { name: 'Dubai', curatedPropertiesCount: 1, averageAppreciation: '+11.5% YoY' }
         ]
       }
     };

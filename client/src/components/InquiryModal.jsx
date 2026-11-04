@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle, Send, Phone, Mail, Building, AlertCircle, Clock } from 'lucide-react';
+import { X, CheckCircle, Send, Phone, AlertCircle } from 'lucide-react';
 import { submitInquiry } from '../services/api';
 
 export default function InquiryModal({
@@ -9,26 +9,20 @@ export default function InquiryModal({
 }) {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
-    phone: '',
-    cityOfInterest: 'Riyadh',
-    inquiryType: 'Private Acquisition',
-    budgetRange: 'SAR 2M - 4M',
-    timeframe: 'Immediate (1-3 months)',
-    message: ''
+    mobile: '',
+    lookingFor: ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Pre-fill message if a specific property was passed
+  // Pre-fill lookingFor if a property was passed
   useEffect(() => {
     if (initialProperty) {
       setFormData(prev => ({
         ...prev,
-        cityOfInterest: initialProperty.city || 'Riyadh',
-        message: prev.message || `I would like to receive the investment prospectus and schedule a private advisory walkthrough for "${initialProperty.title}" (${initialProperty.district}, ${initialProperty.city}).`
+        lookingFor: prev.lookingFor || `Inquiry for ${initialProperty.title} (${initialProperty.city})`
       }));
     }
   }, [initialProperty]);
@@ -48,18 +42,24 @@ export default function InquiryModal({
     e.preventDefault();
     setErrorMessage('');
 
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      setErrorMessage('Please fill in your name, email address, and a brief description.');
+    if (!formData.name.trim() || !formData.mobile.trim() || !formData.lookingFor.trim()) {
+      setErrorMessage('Please fill in your Name, Mobile, and what you are Looking for.');
       return;
     }
 
     setIsSubmitting(true);
     try {
       const payload = {
-        ...formData,
+        name: formData.name.trim(),
+        mobile: formData.mobile.trim(),
+        phone: formData.mobile.trim(),
+        lookingFor: formData.lookingFor.trim(),
+        message: formData.lookingFor.trim(),
+        email: `${formData.mobile.replace(/\D/g, '') || 'client'}@sadu-development.sa`,
         propertyId: initialProperty ? initialProperty.id : null,
         propertyTitle: initialProperty ? initialProperty.title : null,
-        channel: 'Website Form'
+        cityOfInterest: initialProperty ? initialProperty.city : 'Riyadh',
+        channel: 'SADU Website Form'
       };
 
       const result = await submitInquiry(payload);
@@ -82,15 +82,13 @@ export default function InquiryModal({
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hello MIRĀS Advisory, I am inquiring regarding ${
-      initialProperty ? initialProperty.title : 'real estate advisory services'
-    }. My name is ${formData.name || 'a private investor'}.`
+    `Hello Sadu Real Estate Development, I am inquiring regarding ${formData.lookingFor || 'exclusive properties'}. My name is ${formData.name || 'a private investor'} (${formData.mobile || ''}).`
   );
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
       <div 
-        className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.14)] rounded-2xl max-w-xl w-full shadow-2xl overflow-hidden relative animate-in fade-in zoom-in-95 duration-200"
+        className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.14)] rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden relative animate-in fade-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         
@@ -98,14 +96,14 @@ export default function InquiryModal({
         <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(15,15,14,0.08)] bg-[#F0EBE1]">
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-serif font-bold text-lg text-[#0F0F0E]">MIRĀS</span>
+              <span className="font-serif font-bold text-lg text-[#0F0F0E]">SADU</span>
               <span className="text-[10px] tracking-widest uppercase font-mono text-[#B8913A] border-l border-[rgba(15,15,14,0.12)] pl-2">
-                Private Advisory Brief
+                Real Estate Development
               </span>
             </div>
             {initialProperty && (
               <p className="text-xs text-[#6B6B5A] truncate mt-0.5">
-                Target Asset: <span className="text-[#0F0F0E] font-medium">{initialProperty.title}</span> ({initialProperty.city})
+                Target: <span className="text-[#0F0F0E] font-medium">{initialProperty.title}</span> ({initialProperty.city})
               </p>
             )}
           </div>
@@ -130,21 +128,18 @@ export default function InquiryModal({
               </div>
 
               <div>
-                <h3 className="font-serif text-xl font-bold text-[#0F0F0E]">Inquiry Successfully Logged</h3>
-                <p className="text-xs text-[#6B6B5A] mt-1">Ref ID: {submittedData.id || 'INQ-SAVED-LOCAL'}</p>
+                <h3 className="font-serif text-xl font-bold text-[#0F0F0E]">Inquiry Received</h3>
+                <p className="text-xs text-[#6B6B5A] mt-1">Ref ID: {submittedData.id || 'SADU-INQ-SUCCESS'}</p>
               </div>
 
-              <div className="bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-3 text-left text-xs space-y-1.5 text-[#5A5A52]">
+              <div className="bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-4 text-left text-xs space-y-2 text-[#5A5A52]">
                 <p><strong className="text-[#0F0F0E]">Name:</strong> {submittedData.name}</p>
-                <p><strong className="text-[#0F0F0E]">Contact:</strong> {submittedData.email} {submittedData.phone ? `· ${submittedData.phone}` : ''}</p>
-                <p><strong className="text-[#0F0F0E]">Region:</strong> {submittedData.cityOfInterest}</p>
-                {submittedData.propertyTitle && (
-                  <p><strong className="text-[#0F0F0E]">Asset:</strong> {submittedData.propertyTitle}</p>
-                )}
+                <p><strong className="text-[#0F0F0E]">Mobile:</strong> {submittedData.mobile || submittedData.phone}</p>
+                <p><strong className="text-[#0F0F0E]">Looking for:</strong> {submittedData.lookingFor || submittedData.message}</p>
               </div>
 
               <p className="text-xs text-[#5A5A52] leading-relaxed max-w-sm mx-auto">
-                Your mandate has been recorded in our database ledger. An authorized advisor will review your criteria and respond within 24 business hours.
+                Thank you. A senior advisor from Sadu Real Estate Development will contact your mobile shortly.
               </p>
 
               <div className="pt-2 flex items-center justify-center gap-3">
@@ -155,19 +150,19 @@ export default function InquiryModal({
                   className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded text-xs font-semibold uppercase tracking-wider transition-colors"
                 >
                   <Phone size={13} />
-                  <span>Connect on WhatsApp</span>
+                  <span>Connect via WhatsApp</span>
                 </a>
 
                 <button
                   onClick={resetAndClose}
                   className="px-4 py-2 rounded bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#0F0F0E] text-xs font-medium transition-colors cursor-pointer"
                 >
-                  Close Window
+                  Done
                 </button>
               </div>
             </div>
           ) : (
-            /* Submission Form */
+            /* Submission Form: Exactly 3 Columns / Fields: Name, Mobile, Looking for */
             <form onSubmit={handleSubmit} className="space-y-4">
               
               {errorMessage && (
@@ -177,159 +172,76 @@ export default function InquiryModal({
                 </div>
               )}
 
-              {/* Row 1: Name and Email */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
-                    Your Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="e.g. Tariq Al-Ghamdi"
-                    className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md px-3 py-2 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="name@company.sa"
-                    className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md px-3 py-2 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
-                  />
-                </div>
-              </div>
-
-              {/* Row 2: Phone and City */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
-                    Phone / Mobile (Optional)
-                  </label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="+966 50 000 0000"
-                    className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md px-3 py-2 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
-                    Target Region
-                  </label>
-                  <select
-                    value={formData.cityOfInterest}
-                    onChange={(e) => setFormData({ ...formData, cityOfInterest: e.target.value })}
-                    className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md px-3 py-2 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
-                  >
-                    <option value="Riyadh">Riyadh Metropolitan</option>
-                    <option value="Jeddah">Jeddah Waterfront</option>
-                    <option value="Al Khobar">Al Khobar & Eastern Prov.</option>
-                    <option value="Multi-city">Multiple Markets</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Row 3: Inquiry Type and Capital Bracket */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
-                    Acquisition Focus
-                  </label>
-                  <select
-                    value={formData.inquiryType}
-                    onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
-                    className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md px-3 py-2 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
-                  >
-                    <option value="Private Acquisition">Private Residential Acquisition</option>
-                    <option value="Commercial Investment">Commercial / Office Floorplate</option>
-                    <option value="Developer Channel">Developer Channel Partner</option>
-                    <option value="General Consultation">Fiduciary Portfolio Review</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
-                    Capital Allocation Target
-                  </label>
-                  <select
-                    value={formData.budgetRange}
-                    onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                    className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md px-3 py-2 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
-                  >
-                    <option value="Under SAR 2M">Under SAR 2,000,000</option>
-                    <option value="SAR 2M - 4M">SAR 2,000,000 – 4,000,000</option>
-                    <option value="SAR 4M - 8M">SAR 4,000,000 – 8,000,000</option>
-                    <option value="SAR 8M+">Above SAR 8,000,000</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Row 4: Message */}
+              {/* Field 1: Name */}
               <div>
-                <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">
-                  Brief Details / Specific Requirements *
+                <label className="block text-[11px] uppercase font-mono tracking-wider text-[#6B6B5A] mb-1.5">
+                  Name <span className="text-[#B8913A]">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="Full Name"
+                  className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.12)] rounded-lg px-3.5 py-2.5 text-xs text-[#0F0F0E] placeholder:text-[#8A8A75] focus:border-[#B8913A] focus:outline-none transition-colors"
+                />
+              </div>
+
+              {/* Field 2: Mobile */}
+              <div>
+                <label className="block text-[11px] uppercase font-mono tracking-wider text-[#6B6B5A] mb-1.5">
+                  Mobile <span className="text-[#B8913A]">*</span>
+                </label>
+                <input
+                  type="tel"
+                  required
+                  value={formData.mobile}
+                  onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                  placeholder="+966 5X XXX XXXX / +971 5X XXX XXXX"
+                  className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.12)] rounded-lg px-3.5 py-2.5 text-xs text-[#0F0F0E] placeholder:text-[#8A8A75] focus:border-[#B8913A] focus:outline-none transition-colors"
+                />
+              </div>
+
+              {/* Field 3: Looking for */}
+              <div>
+                <label className="block text-[11px] uppercase font-mono tracking-wider text-[#6B6B5A] mb-1.5">
+                  Looking for <span className="text-[#B8913A]">*</span>
                 </label>
                 <textarea
                   required
                   rows={3}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Outline your acquisition criteria, preferred district, or questions regarding this unit..."
-                  className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-md p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none resize-none"
+                  value={formData.lookingFor}
+                  onChange={(e) => setFormData({ ...formData, lookingFor: e.target.value })}
+                  placeholder="e.g. 4-Bedroom Villa in Riyadh, Corniche Penthouse in Jeddah, Holy Sanctuary in Mecca/Medina, or Dubai Waterfront..."
+                  className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.12)] rounded-lg px-3.5 py-2.5 text-xs text-[#0F0F0E] placeholder:text-[#8A8A75] focus:border-[#B8913A] focus:outline-none transition-colors resize-none"
                 />
               </div>
 
-              {/* Actions & WhatsApp Direct */}
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[rgba(15,15,14,0.08)]">
-                <a
-                  href={`https://wa.me/966501234567?text=${whatsappMessage}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-xs text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5 font-medium"
+              <div className="pt-2 flex items-center justify-between gap-3">
+                <span className="text-[10px] font-mono text-[#8A8A75]">
+                  Strict Privacy Assured
+                </span>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="inline-flex items-center gap-2 bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] font-semibold px-6 py-2.5 rounded-lg text-xs tracking-wider uppercase transition-all shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
                 >
-                  <Phone size={13} />
-                  <span>Direct WhatsApp Concierge</span>
-                </a>
-
-                <div className="flex items-center gap-2 w-full sm:w-auto">
-                  <button
-                    type="button"
-                    onClick={resetAndClose}
-                    className="flex-1 sm:flex-none px-3 py-2 rounded bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#6B6B5A] text-xs font-medium transition-colors cursor-pointer"
-                  >
-                    Cancel
-                  </button>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="flex-1 sm:flex-none px-4 py-2 rounded bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
-                  >
-                    {isSubmitting ? (
-                      <span>Submitting...</span>
-                    ) : (
-                      <>
-                        <span>Submit Brief</span>
-                        <Send size={12} />
-                      </>
-                    )}
-                  </button>
-                </div>
+                  {isSubmitting ? (
+                    <span>Submitting...</span>
+                  ) : (
+                    <>
+                      <span>Submit Inquiry</span>
+                      <Send size={13} />
+                    </>
+                  )}
+                </button>
               </div>
 
             </form>
           )}
 
         </div>
-
       </div>
     </div>
   );

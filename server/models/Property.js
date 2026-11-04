@@ -20,7 +20,7 @@ const propertySchema = new mongoose.Schema(
     city: {
       type: String,
       required: true,
-      enum: ['Riyadh', 'Jeddah', 'Al Khobar', 'Other'],
+      enum: ['Riyadh', 'Jeddah', 'Mecca', 'Medina', 'Dubai', 'Other'],
       index: true
     },
     district: {
@@ -36,7 +36,7 @@ const propertySchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ['Residential', 'Commercial', 'Waterfront', 'Off-Plan'],
+      enum: ['Residential', 'Commercial', 'Waterfront', 'Off-Plan', 'Sanctuary'],
       default: 'Residential'
     },
     price: {
@@ -122,7 +122,7 @@ const propertySchema = new mongoose.Schema(
     },
     developerTier: {
       type: String,
-      default: 'Tier-1 Partner Developer'
+      default: 'Sadu Development Prime Channel'
     },
     handoverStatus: {
       type: String,

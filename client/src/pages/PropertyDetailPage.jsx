@@ -373,7 +373,7 @@ export default function PropertyDetailPage({ onOpenInquiry }) {
                 <span>Due Diligence Governance</span>
               </div>
               <p className="text-[#8A8578] leading-relaxed">
-                Every unit offered under the MIRĀS advisory mandate has been independently verified through the Wafi / REGA registry for developer solvency, building completion certificates, and unencumbered title deeds.
+                Every unit offered under the Sadu Real Estate Development mandate has been independently verified through official registries for developer solvency, completion milestones, and unencumbered title deeds.
               </p>
             </div>
           </ScrollReveal>

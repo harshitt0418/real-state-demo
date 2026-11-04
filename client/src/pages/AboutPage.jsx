@@ -8,23 +8,23 @@ export default function AboutPage({ onOpenInquiry }) {
   const pillars = [
     {
       icon: Scale,
-      title: 'Fiduciary Independence',
-      desc: 'We are structured to advise the capital, not to liquidate broker inventory. Our fee model is clear, transparent, and direct from developers with no hidden buyer commissions.'
+      title: 'Direct Fiduciary Focus',
+      desc: 'Transparent engagement structured directly with premier developers. Direct pricing and zero retail buyer markups.'
     },
     {
       icon: ShieldCheck,
-      title: 'Institutional Due Diligence',
-      desc: 'Every development undergoes multi-tiered vetting: Wafi off-plan regulatory status, contractor solvency, building engineering audits, and realistic rental comp stress tests.'
+      title: 'Rigorous Due Diligence',
+      desc: 'Every development undergoes multi-level vetting: Wafi licensing, Ministry of Justice escrow registration, and realistic yield modeling.'
     },
     {
       icon: Compass,
-      title: 'Local Urban Mastery',
-      desc: 'Deep territorial knowledge across Riyadh’s northern expansion (Hittin, Al Malqa, New Murabba), Jeddah’s redefined Corniche, and the Eastern Province industrial corridor.'
+      title: 'Five Strategic Corridors',
+      desc: 'Comprehensive market presence across Riyadh, coastal Jeddah, holy sanctuaries in Mecca and Medina, and luxury waterfront towers in Dubai.'
     },
     {
       icon: Building2,
-      title: 'Tier-1 Master Developer Network',
-      desc: 'Formal channel agreements with the Kingdom’s most accomplished builders provide our clients priority allocation, off-market opportunities, and favorable payment milestones.'
+      title: 'Prime Developer Network',
+      desc: 'Exclusive channel partnerships with the region’s premier master builders provide priority allocations and off-market opportunities.'
     }
   ];
 
@@ -36,13 +36,13 @@ export default function AboutPage({ onOpenInquiry }) {
         <div className="space-y-4 max-w-3xl">
           <div className="flex items-center gap-2 text-xs font-mono text-[#B8913A] uppercase tracking-widest">
             <Compass size={14} />
-            <span>About MIRĀS Advisory</span>
+            <span>About Sadu</span>
           </div>
           <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-[#0F0F0E] tracking-tight leading-tight">
-            A real estate consultancy built around capital protection.
+            Curated development for serious capital.
           </h1>
           <p className="text-[#5A5A52] text-sm sm:text-base leading-relaxed">
-            MIRĀS Real Estate Advisory was founded on a simple principle: serious property investors need an analytical, fiduciary counterweight in Saudi Arabia’s accelerating property market.
+            Sadu Real Estate Development was founded to provide discerning investors with direct access to prime real estate opportunities across Saudi Arabia and the UAE.
           </p>
         </div>
       </ScrollReveal>
@@ -50,19 +50,16 @@ export default function AboutPage({ onOpenInquiry }) {
       {/* Split Section: The Story & Editorial Imagery */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        <div className="lg:col-span-6 space-y-5 text-[#5A5A52] text-sm sm:text-base leading-relaxed">
+        <div className="lg:col-span-6 space-y-4 text-[#5A5A52] text-sm sm:text-base leading-relaxed">
           <ScrollReveal animation="fade-right">
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0F0F0E] mb-3">
-              The Evolution of Saudi Real Estate
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0F0F0E] mb-2">
+              Transforming Regional Property
             </h2>
             <p className="mb-3">
-              Under the transformative economic architecture of Vision 2030, the Saudi property market is undergoing historic institutionalization. Prime commercial floorplates, branded residences, and mixed-use districts are redefining the urban landscape of Riyadh, Jeddah, and Al Khobar.
-            </p>
-            <p className="mb-3">
-              Yet for private wealth, family offices, and cross-border allocators, navigating off-plan announcements, municipal zoning codes, and developer delivery histories requires more than high-pressure sales brokers. It demands rigorous architectural scrutiny, yield analysis, and transparent conveyance management.
+              Under Vision 2030, the regional property market is experiencing unprecedented institutional growth. Prime commercial floorplates, branded residences, and sacred sanctuary developments are redefining the urban landscape of Riyadh, Jeddah, Mecca, Medina, and Dubai.
             </p>
             <p>
-              MIRĀS acts as a dedicated channel partner: we bridge the gap between premier developers who build exceptional architecture and informed investors seeking genuine capital preservation.
+              Sadu Real Estate Development acts as an originate-and-filter counterweight, bridging high-caliber developers with qualified private and institutional capital under full regulatory transparency.
             </p>
           </ScrollReveal>
         </div>
@@ -72,13 +69,13 @@ export default function AboutPage({ onOpenInquiry }) {
             <div className="editorial-img-container aspect-[4/3] rounded-2xl border border-[rgba(15,15,14,0.10)] shadow-lg overflow-hidden relative">
               <img
                 src="/assets/advisory.jpg"
-                alt="MIRĀS strategic real estate advisory consultation"
+                alt="Sadu Real Estate Development consultation"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0E]/80 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 bg-[#FAF7F2]/95 backdrop-blur-md p-4 rounded-xl border border-[rgba(15,15,14,0.10)] text-xs text-[#0F0F0E]">
-                <p className="font-serif font-bold text-sm text-[#0F0F0E]">Fiduciary Counsel</p>
-                <p className="text-[#6B6B5A] text-[11px] mt-0.5">Direct representation from initial acquisition brief to title deed handover.</p>
+                <p className="font-serif font-bold text-sm text-[#0F0F0E]">Direct Representation</p>
+                <p className="text-[#6B6B5A] text-[11px] mt-0.5">Fiduciary counsel from allocation brief to key handover and title deed registration.</p>
               </div>
             </div>
           </ScrollReveal>
@@ -91,7 +88,7 @@ export default function AboutPage({ onOpenInquiry }) {
         <ScrollReveal animation="fade-up">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <p className="text-xs font-mono uppercase tracking-widest text-[#B8913A]">Our Operating Ethos</p>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0F0F0E]">The Four Foundations of MIRĀS</h2>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0F0F0E]">The Foundations of SADU</h2>
           </div>
         </ScrollReveal>
 
@@ -117,52 +114,35 @@ export default function AboutPage({ onOpenInquiry }) {
         </div>
       </div>
 
-      {/* Split Section 2: Channel Partner Model Explained */}
-      <ScrollReveal animation="fade-up" duration={700}>
-        <div className="bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-2xl p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          
-          <div className="lg:col-span-5">
-            <div className="editorial-img-container aspect-square rounded-xl overflow-hidden border border-[rgba(15,15,14,0.10)] relative shadow-sm">
-              <img
-                src="/assets/district.jpg"
-                alt="Contemporary master-planned district boulevard in Riyadh"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <div className="absolute bottom-4 left-4 text-xs font-mono text-[#D4A853]">
-                Master District Planning · Riyadh
-              </div>
-            </div>
+      {/* Moving text band */}
+      <MovingTextBand
+        items={['SADU REAL ESTATE DEVELOPMENT', 'RIYADH', 'JEDDAH', 'MECCA', 'MEDINA', 'DUBAI']}
+        speed="slow"
+      />
+
+      {/* Bottom CTA */}
+      <ScrollReveal animation="fade-up">
+        <div className="bg-[#F0EBE1] border border-[rgba(15,15,14,0.10)] rounded-2xl p-8 sm:p-12 text-center max-w-3xl mx-auto space-y-6">
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0F0F0E]">
+            Initiate a Confidential Dialogue
+          </h2>
+          <p className="text-xs sm:text-sm text-[#5A5A52] leading-relaxed max-w-xl mx-auto">
+            Discuss your acquisition parameters with a senior principal from Sadu Real Estate Development.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <button
+              onClick={() => onOpenInquiry ? onOpenInquiry() : window.location.href = '/contact'}
+              className="bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] font-semibold px-6 py-3 rounded text-xs tracking-wider uppercase transition-colors shadow-sm cursor-pointer"
+            >
+              Consult an Advisor
+            </button>
+            <Link
+              to="/properties"
+              className="bg-[#FAF7F2] hover:bg-[#E8E1D5] text-[#0F0F0E] font-medium px-6 py-3 rounded text-xs tracking-wider uppercase border border-[rgba(15,15,14,0.10)] transition-colors"
+            >
+              Browse Portfolio
+            </Link>
           </div>
-
-          <div className="lg:col-span-7 space-y-5">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#B8913A]">The Mechanism</p>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#0F0F0E]">
-              Why the Channel Partner Model Works Better
-            </h2>
-            <div className="space-y-3 text-xs sm:text-sm text-[#5A5A52] leading-relaxed">
-              <p>
-                Developers excel at construction, architecture, and municipal delivery. Investors excel at capital allocation. Yet direct interactions often break down over misaligned timeline expectations, lack of comparative market context, or bureaucratic friction.
-              </p>
-              <p>
-                As authorized channel partners, we bring developers pre-qualified, informed capital. For investors, we bring unfiltered access, institutional due diligence, and contract advocacy.
-              </p>
-              <p>
-                Because our remuneration is structured directly with the master developer, our clients enjoy institutional-grade advisory at zero retail broker surcharge.
-              </p>
-            </div>
-
-            <div className="pt-2 flex items-center gap-4">
-              <button
-                onClick={() => onOpenInquiry ? onOpenInquiry() : window.location.href = '/contact'}
-                className="inline-flex items-center gap-2 bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] font-semibold px-5 py-3 rounded text-xs tracking-wider uppercase cursor-pointer transition-colors"
-              >
-                <span>Schedule Strategic Consultation</span>
-                <ArrowUpRight size={14} />
-              </button>
-            </div>
-          </div>
-
         </div>
       </ScrollReveal>
 

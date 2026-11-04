@@ -65,7 +65,7 @@ function StatCounter({ value, suffix = '', label, dark = false }) {
   );
 }
 
-/* ─── CityStorySection (Interactive Kingdom Triangle Matrix & Radar) ───── */
+/* ─── CityStorySection (SADU Exclusive Corridors Matrix & Radar) ───── */
 function CityStorySection() {
   const [activeCity, setActiveCity] = useState(0);
   const [viewMode, setViewMode] = useState('radar'); // 'radar' or 'photo'
@@ -76,49 +76,81 @@ function CityStorySection() {
     {
       city: 'Riyadh',
       arabic: 'الرياض',
-      tagline: 'The Capital Growth Engine',
+      tagline: 'Capital Financial Core',
       coordinates: '24°42′N 46°40′E',
-      description: 'The administrative and institutional capital under Vision 2030, capturing national corporate headquarters, diplomatic estates, and prime residential developments across the northern corridor.',
-      highlights: ['King Abdullah Financial District', 'Al Olaya Tower Belt', 'Hittin & Al Malqa Villas', 'New Murabba District'],
+      description: 'The national capital under Vision 2030, capturing corporate headquarters, diplomatic estates, and prestige master communities.',
+      highlights: ['King Abdullah Financial District', 'Al Olaya Tower Spine', 'Hittin & Al Malqa Enclaves', 'New Murabba'],
       image: '/assets/hero.jpg',
       stat: '+11.2%',
-      statLabel: 'YoY Capital Growth',
+      statLabel: 'YoY Growth',
       metric2: 'SAR 18,400',
       metric2Label: 'Avg. Prime PSM',
-      satellite1: { label: 'Wafi Escrow Registry', val: 'Phase-4 Verified' },
-      satellite2: { label: 'Institutional Tenancy', val: 'Diplomatic & C-Suite' },
+      satellite1: { label: 'Ministry Escrow', val: 'Wafi Verified' },
+      satellite2: { label: 'Tenancy Profile', val: 'C-Suite & Diplomatic' },
       color: '#B8913A'
     },
     {
       city: 'Jeddah',
       arabic: 'جدة',
-      tagline: 'Red Sea Gateway & Waterfront Living',
+      tagline: 'Red Sea Waterfront Living',
       coordinates: '21°32′N 39°10′E',
-      description: "Saudi Arabia's cosmopolitan coastal metropolis undergoing historic waterfront regeneration — luxury marina communities, high-street boutique commerce, and record yield generation at the Corniche.",
-      highlights: ['Al Shati Corniche', 'Obhur Waterfront', 'Al Salamah Commercial', 'Jeddah Economic City'],
+      description: 'Prime coastal living along the Corniche promenade with luxury marina communities and steady rental yield performance.',
+      highlights: ['Al Shati Corniche', 'Obhur Waterfront', 'Yacht Club Marina', 'North Bay Estates'],
       image: '/assets/prop-jeddah.jpg',
       stat: '6.8%',
-      statLabel: 'Waterfront Net Yield',
+      statLabel: 'Waterfront Yield',
       metric2: 'SAR 14,200',
       metric2Label: 'Avg. Coastal PSM',
-      satellite1: { label: 'Coastal Regeneration', val: 'Corniche Marina Belt' },
-      satellite2: { label: 'Yield Capitalization', val: '6.8% Net Unlevered' },
+      satellite1: { label: 'Coastal Regeneration', val: 'Corniche Marina' },
+      satellite2: { label: 'Net Yield', val: '6.8% Unlevered' },
       color: '#8A6C2A'
     },
     {
-      city: 'Al Khobar',
-      arabic: 'الخبر',
-      tagline: 'Eastern Province Energy Corridor',
-      coordinates: '26°17′N 50°12′E',
-      description: 'A stable, high-income coastal corridor serving senior executive tenancy from the global energy sector with immediate transit connectivity to Bahrain and a rapidly maturing commercial spine.',
-      highlights: ['Corniche Promenade', 'Dhahran Energy Hub', 'King Fahd Causeway', 'Al Aqrabiyah Business'],
-      image: '/assets/prop-khobar.jpg',
-      stat: '94%',
-      statLabel: 'Executive Occupancy',
-      metric2: 'SAR 11,800',
+      city: 'Mecca',
+      arabic: 'مكة المكرمة',
+      tagline: 'Holy Sanctuary Core',
+      coordinates: '21°25′N 39°49′E',
+      description: 'Irreplaceable sanctuary real estate offering direct spiritual proximity to the Holy Mosque with perpetual legacy value.',
+      highlights: ['Haram Walking Distance', 'Abraj Precinct', 'Central Hospitality Suites', 'Jabal Omar Corridor'],
+      image: '/assets/district.jpg',
+      stat: '8.5%',
+      statLabel: 'Sanctuary Yield',
+      metric2: 'SAR 24,700',
       metric2Label: 'Avg. Prime PSM',
-      satellite1: { label: 'Energy Tenancy Index', val: '94% Sustained Occ.' },
-      satellite2: { label: 'Transit Connectivity', val: 'Causeway Corridor' },
+      satellite1: { label: 'Haram Proximity', val: '4-Min Walking Access' },
+      satellite2: { label: 'Legacy Security', val: 'Perpetual Title' },
+      color: '#B8913A'
+    },
+    {
+      city: 'Medina',
+      arabic: 'المدينة المنورة',
+      tagline: 'Sacred Heritage Precinct',
+      coordinates: '24°28′N 39°36′E',
+      description: 'Tranquil luxury residences and hospitality suites near the Prophet’s Mosque, providing peaceful privacy and enduring stability.',
+      highlights: ['Prophet’s Mosque Central', 'Northern Corridor', 'Haramain Link', 'Quba Heritage Zone'],
+      image: '/assets/advisory.jpg',
+      stat: '7.9%',
+      statLabel: 'Sacred Core Yield',
+      metric2: 'SAR 15,100',
+      metric2Label: 'Avg. Prime PSM',
+      satellite1: { label: 'Sacred Proximity', val: 'Central North Zone' },
+      satellite2: { label: 'Occupancy Rate', val: '96% Sustained' },
+      color: '#8A6C2A'
+    },
+    {
+      city: 'Dubai',
+      arabic: 'دبي',
+      tagline: 'Global Waterfront & Sky Towers',
+      coordinates: '25°12′N 55°17′E',
+      description: 'Iconic sky sanctuaries and beachfront penthouses across Dubai Marina and Palm Jumeirah for premier GCC capital diversification.',
+      highlights: ['Dubai Marina Promenade', 'Palm Jumeirah', 'DIFC Financial Hub', 'Downtown Sky Mansions'],
+      image: '/assets/prop-khobar.jpg',
+      stat: '7.8%',
+      statLabel: 'Marina Prime Yield',
+      metric2: 'AED 14,250',
+      metric2Label: 'Avg. Luxury PSM',
+      satellite1: { label: 'GCC Diversification', val: 'High-Demand Marina' },
+      satellite2: { label: 'Rental Spread', val: '7.8% Net Unlevered' },
       color: '#6B6B5A'
     }
   ];
@@ -154,10 +186,10 @@ function CityStorySection() {
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-[#D4A853] animate-ping" />
-                <p className="section-label text-[#B8913A]">Geographic Specialization</p>
+                <p className="section-label text-[#B8913A]">Exclusive Territories</p>
               </div>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#E8E3DC] leading-tight">
-                Three Capital Markets,<br />One Advisory Lens
+                Five Prime Markets,<br />One Signature Standard
               </h2>
             </div>
 
@@ -185,52 +217,46 @@ function CityStorySection() {
               </div>
 
               <Link to="/properties" className="inline-flex items-center gap-2 text-xs font-semibold text-[#B8913A] hover:text-[#D4A853] tracking-wider uppercase transition-colors">
-                <span>All Listings</span>
+                <span>View Portfolio</span>
                 <ArrowRight size={14} />
               </Link>
             </div>
           </div>
         </ScrollReveal>
 
-        {/* ─── Interactive Kingdom Triangle Constellation Bar ─── */}
+        {/* ─── Interactive Regional Network Bar ─── */}
         <div className="mb-14 p-4 rounded-2xl bg-[#141412] border border-[rgba(255,255,255,0.08)] shadow-2xl relative overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 relative z-10">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 relative z-10">
             {cities.map((city, i) => {
               const isSelected = activeCity === i;
               return (
                 <button
                   key={city.city}
                   onClick={() => handleCityClick(i)}
-                  className={`group relative flex items-center justify-between p-4 rounded-xl transition-all duration-300 text-left cursor-pointer ${
+                  className={`group relative flex items-center justify-between p-3.5 rounded-xl transition-all duration-300 text-left cursor-pointer ${
                     isSelected
                       ? 'bg-white/10 border border-[#B8913A] shadow-lg shadow-[#B8913A]/10 scale-102'
                       : 'bg-white/4 border border-[rgba(255,255,255,0.05)] hover:bg-white/8 hover:border-white/20'
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    {/* Glowing Node Dot */}
-                    <div className="relative">
-                      <div className={`h-3 w-3 rounded-full transition-colors ${isSelected ? 'bg-[#D4A853]' : 'bg-white/30'}`} />
+                  <div className="flex items-center gap-2.5">
+                    <div className="relative shrink-0">
+                      <div className={`h-2.5 w-2.5 rounded-full transition-colors ${isSelected ? 'bg-[#D4A853]' : 'bg-white/30'}`} />
                       {isSelected && (
                         <div className="absolute inset-0 rounded-full bg-[#D4A853] animate-ping opacity-75" />
                       )}
                     </div>
                     <div>
-                      <div className="flex items-center gap-2">
-                        <span className={`font-serif font-bold text-base transition-colors ${isSelected ? 'text-[#E8E3DC]' : 'text-white/70'}`}>
-                          {city.city}
-                        </span>
-                        <span className="text-[10px] font-mono text-white/30">{city.coordinates.split(' ')[0]}</span>
-                      </div>
-                      <p className="text-[10px] font-mono text-[#8A8578] uppercase">{city.tagline.split(' ')[0]} · {city.statLabel}</p>
+                      <span className={`font-serif font-bold text-sm block ${isSelected ? 'text-[#E8E3DC]' : 'text-white/70'}`}>
+                        {city.city}
+                      </span>
+                      <span className="text-[9px] font-mono text-[#8A8578] uppercase">{city.statLabel}</span>
                     </div>
                   </div>
 
-                  <div className="text-right">
-                    <span className={`font-serif text-lg font-bold block ${isSelected ? 'text-[#D4A853]' : 'text-white/60'}`}>
-                      {city.stat}
-                    </span>
-                  </div>
+                  <span className={`font-serif text-sm font-bold ${isSelected ? 'text-[#D4A853]' : 'text-white/60'}`}>
+                    {city.stat}
+                  </span>
                 </button>
               );
             })}
@@ -240,7 +266,7 @@ function CityStorySection() {
           <div className="flex items-center gap-3 px-4 pt-3 mt-2 border-t border-[rgba(255,255,255,0.06)]">
             <div className="h-px flex-1 shimmer-line" />
             <span className="text-[9px] font-mono text-[#D4A853] uppercase tracking-[0.2em] font-semibold flex items-center gap-1.5">
-              <Sparkles size={11} className="text-[#D4A853]" /> Interactive Regional Node Network
+              <Sparkles size={11} className="text-[#D4A853]" /> SADU Strategic Regional Network
             </span>
             <div className="h-px flex-1 shimmer-line" />
           </div>
@@ -297,22 +323,22 @@ function CityStorySection() {
             </div>
 
             {/* Right: Content & Sectors */}
-            <div className="lg:col-span-6 space-y-8 animate-in fade-in duration-500" key={c.city + '-content'}>
+            <div className="lg:col-span-6 space-y-7 animate-in fade-in duration-500" key={c.city + '-content'}>
               <div>
                 <div className="flex items-center gap-3 mb-2">
                   <h3 className="font-serif text-4xl sm:text-5xl font-bold text-[#E8E3DC]">{c.city}</h3>
                   <span className="font-serif text-2xl text-[#B8913A]/60 font-light">{c.arabic}</span>
                 </div>
-                <p className="text-[11px] font-mono uppercase tracking-widest text-[#B8913A] mb-4">{c.tagline}</p>
-                <p className="text-[#8A8578] text-sm sm:text-base leading-relaxed">{c.description}</p>
+                <p className="text-[11px] font-mono uppercase tracking-widest text-[#B8913A] mb-3">{c.tagline}</p>
+                <p className="text-[#8A8578] text-sm leading-relaxed">{c.description}</p>
               </div>
 
               {/* Key sectors with animated pill tags */}
               <div>
-                <p className="text-[10px] font-mono uppercase tracking-wider text-[#6B6B5A] mb-3">Active Prime Sectors</p>
-                <div className="grid grid-cols-2 gap-2.5">
+                <p className="text-[10px] font-mono uppercase tracking-wider text-[#6B6B5A] mb-2.5">Active Prime Sectors</p>
+                <div className="grid grid-cols-2 gap-2">
                   {c.highlights.map((h, i) => (
-                    <div key={i} className="flex items-center gap-2 text-xs text-[#C8C3BA] p-3 rounded-lg bg-[#161614] border border-[rgba(255,255,255,0.06)] hover:border-[#B8913A]/40 transition-colors">
+                    <div key={i} className="flex items-center gap-2 text-xs text-[#C8C3BA] p-2.5 rounded-lg bg-[#161614] border border-[rgba(255,255,255,0.06)] hover:border-[#B8913A]/40 transition-colors">
                       <span className="h-1.5 w-1.5 bg-[#B8913A] rounded-full shrink-0" />
                       <span className="truncate">{h}</span>
                     </div>
@@ -322,13 +348,13 @@ function CityStorySection() {
 
               {/* Metrics row */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#141412] border border-[rgba(255,255,255,0.08)] rounded-xl p-5 hover:border-[#B8913A]/40 transition-colors">
-                  <p className="text-[9px] font-mono uppercase text-[#6B6B5A] mb-1">{c.statLabel}</p>
-                  <p className="font-serif text-2xl sm:text-3xl font-bold text-[#D4A853]">{c.stat}</p>
+                <div className="bg-[#141412] border border-[rgba(255,255,255,0.08)] rounded-xl p-4 hover:border-[#B8913A]/40 transition-colors">
+                  <p className="text-[9px] font-mono uppercase text-[#6B6B5A] mb-0.5">{c.statLabel}</p>
+                  <p className="font-serif text-2xl font-bold text-[#D4A853]">{c.stat}</p>
                 </div>
-                <div className="bg-[#141412] border border-[rgba(255,255,255,0.08)] rounded-xl p-5 hover:border-[#B8913A]/40 transition-colors">
-                  <p className="text-[9px] font-mono uppercase text-[#6B6B5A] mb-1">{c.metric2Label}</p>
-                  <p className="font-serif text-2xl sm:text-3xl font-bold text-[#E8E3DC]">{c.metric2}</p>
+                <div className="bg-[#141412] border border-[rgba(255,255,255,0.08)] rounded-xl p-4 hover:border-[#B8913A]/40 transition-colors">
+                  <p className="text-[9px] font-mono uppercase text-[#6B6B5A] mb-0.5">{c.metric2Label}</p>
+                  <p className="font-serif text-2xl font-bold text-[#E8E3DC]">{c.metric2}</p>
                 </div>
               </div>
 
@@ -364,10 +390,10 @@ function InvestmentIntelligence({ marketStats }) {
   }, []);
 
   const metrics = [
-    { label: 'Avg. Capital Growth — Riyadh Prime', value: 11, suffix: '%', sub: 'Year-on-year residential' },
-    { label: 'Waterfront Net Yield — Jeddah', value: 68, suffix: '%', sub: 'Corniche corridor assets', displayVal: '6.8' },
-    { label: 'Executive Occupancy — Al Khobar', value: 94, suffix: '%', sub: 'Senior energy tenancy' },
-    { label: 'Developer Channel Inventory', value: 7, suffix: '+', sub: 'Curated advisory units' },
+    { label: 'Riyadh Capital Appreciation', value: 11, suffix: '%', sub: 'YoY residential expansion' },
+    { label: 'Jeddah Waterfront Yield', value: 68, suffix: '%', sub: 'Corniche marina assets', displayVal: '6.8' },
+    { label: 'Mecca Sanctuary Yield', value: 85, suffix: '%', sub: 'Haram proximity occupancy', displayVal: '8.5' },
+    { label: 'Dubai Luxury Yield', value: 78, suffix: '%', sub: 'Marina & waterfront towers', displayVal: '7.8' },
   ];
 
   return (
@@ -379,17 +405,17 @@ function InvestmentIntelligence({ marketStats }) {
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <Activity size={14} className="text-[#B8913A]" />
-                <p className="section-label text-[#B8913A]">Market Intelligence</p>
+                <p className="section-label text-[#B8913A]">Intelligence</p>
               </div>
               <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#E8E3DC] leading-tight">
-                Investment Data,<br />Not Market Noise
+                Verified Market Yields
               </h2>
               <p className="text-[#8A8578] text-sm leading-relaxed max-w-lg">
-                Verified figures from municipal land registries and direct master developer channels provided to clients under fiduciary advisory mandate.
+                Independent diligence, title verification, and direct developer terms across the GCC’s primary property corridors.
               </p>
             </div>
             <Link to="/services" className="inline-flex items-center gap-2 text-xs font-semibold text-[#B8913A] hover:text-[#D4A853] tracking-wider uppercase transition-colors">
-              <span>Full Intelligence Service</span>
+              <span>Our Services</span>
               <ArrowRight size={14} />
             </Link>
           </div>
@@ -398,9 +424,9 @@ function InvestmentIntelligence({ marketStats }) {
         {/* ─── Floating Constellation Matrix Above Intelligence ─── */}
         <div className="mb-12 grid grid-cols-1 sm:grid-cols-3 gap-4">
           {[
-            { label: 'Riyadh Alpha Corridor', stat: '+14.8%', sub: 'Corporate HQ Influx', floatClass: 'float-slow-1' },
-            { label: 'Jeddah Waterfront Yield', stat: '6.8% Net', sub: 'Corniche Marina Asset', floatClass: 'float-slow-2' },
-            { label: 'Al Khobar Tenancy', stat: '94% Occ.', sub: 'Executive Energy Lease', floatClass: 'float-slow-3' },
+            { label: 'Riyadh Growth Hub', stat: '+11.2%', sub: 'Capital HQ Influx', floatClass: 'float-slow-1' },
+            { label: 'Jeddah Waterfront', stat: '6.8% Net', sub: 'Corniche Marina', floatClass: 'float-slow-2' },
+            { label: 'Dubai Sky Tower', stat: '7.8% Net', sub: 'Marina Waterfront', floatClass: 'float-slow-3' },
           ].map((item, idx) => (
             <div
               key={idx}
@@ -428,14 +454,14 @@ function InvestmentIntelligence({ marketStats }) {
           {metrics.map((m, i) => (
             <ScrollReveal key={i} animation="fade-up" delay={i * 100}>
               <div className="bg-[#141412] border border-[rgba(255,255,255,0.08)] rounded-xl p-6 hover:border-[#B8913A]/50 transition-all duration-300 hover:-translate-y-1 shadow-sm">
-                <p className="text-[10px] font-mono uppercase tracking-wider text-[#6B6B5A] mb-4 leading-snug">{m.label}</p>
+                <p className="text-[10px] font-mono uppercase tracking-wider text-[#6B6B5A] mb-3 leading-snug">{m.label}</p>
                 <div className="flex items-baseline gap-1">
                   <span className="font-serif text-4xl font-bold text-[#E8E3DC] count-num">
                     {visible ? (m.displayVal || m.value) : '0'}
                   </span>
                   <span className="text-xl font-sans text-[#B8913A]">{m.suffix}</span>
                 </div>
-                <p className="text-[11px] text-[#8A8578] mt-2">{m.sub}</p>
+                <p className="text-[11px] text-[#8A8578] mt-1.5">{m.sub}</p>
               </div>
             </ScrollReveal>
           ))}
@@ -446,9 +472,9 @@ function InvestmentIntelligence({ marketStats }) {
           <div className="border border-[rgba(255,255,255,0.08)] rounded-2xl p-8 sm:p-10 bg-[#141412] shadow-xl">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
               {[
-                { icon: ShieldCheck, label: 'REGA Channel Certified', sub: 'Regulated real estate authority' },
-                { icon: Building2, label: 'Tier-1 Master Developers', sub: 'Direct allocation access' },
-                { icon: TrendingUp, label: 'Verified Title Conveyance', sub: 'Ministry of Justice registered' },
+                { icon: ShieldCheck, label: 'REGA Channel Certified', sub: 'Strict regulatory standards' },
+                { icon: Building2, label: 'Prime Developer Channels', sub: 'Direct off-market allocations' },
+                { icon: TrendingUp, label: 'Verified Title Deeds', sub: 'Ministry registry assurance' },
               ].map((item, i) => (
                 <div key={i} className="flex flex-col items-center gap-3 group">
                   <div className="h-11 w-11 rounded-full bg-[#B8913A]/10 border border-[#B8913A]/25 flex items-center justify-center text-[#B8913A] group-hover:scale-110 group-hover:border-[#B8913A] transition-all">
@@ -552,10 +578,10 @@ export default function HomePage({ onOpenInquiry }) {
   };
 
   const advisorySteps = [
-    { num: '01', title: 'Mandate & Capital Brief', desc: 'We define your precise criteria: yield targets, risk profile, holding period, and asset class preferences across commercial and residential inventory.', tag: 'Phase 01' },
-    { num: '02', title: 'Direct Channel Origination', desc: 'We access off-market and pre-launch units directly through our formal Tier-1 developer channel partnerships, eliminating intermediaries and markups.', tag: 'Phase 02' },
-    { num: '03', title: 'Technical & Yield Diligence', desc: 'Independent assessment of building specs, construction quality, title registration, and realistic rental comps based on municipal market data.', tag: 'Phase 03' },
-    { num: '04', title: 'Conveyance to Handover', desc: 'Full fiduciary oversight through developer contract execution, escrow payment milestones, REGA compliance, and key handover.', tag: 'Phase 04' },
+    { num: '01', title: 'Target Brief', desc: 'Define your yield criteria, risk profile, and preferred typology across our exclusive regional markets.', tag: 'Phase 01' },
+    { num: '02', title: 'Direct Allocation', desc: 'Access off-market and pre-launch units directly with zero broker surcharges.', tag: 'Phase 02' },
+    { num: '03', title: 'Technical Diligence', desc: 'Independent evaluation of build specifications, title deeds, and realistic rental comps.', tag: 'Phase 03' },
+    { num: '04', title: 'Handover Oversight', desc: 'Complete fiduciary guidance through developer contract signing, escrow milestones, and handover.', tag: 'Phase 04' },
   ];
 
   return (
@@ -585,7 +611,7 @@ export default function HomePage({ onOpenInquiry }) {
             alt="Riyadh skyline at dusk showcasing contemporary architectural landmarks"
             className="w-full h-full object-cover object-center"
           />
-          {/* Dual luxury scrim */}
+          {/* Scrim */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#0F0F0E]/85 via-[#0F0F0E]/60 to-[#0F0F0E]/25" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0E]/85 via-transparent to-[#0F0F0E]/40" />
         </div>
@@ -608,13 +634,13 @@ export default function HomePage({ onOpenInquiry }) {
                 >
                   <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs text-white/90 shadow-lg">
                     <span className="h-2 w-2 rounded-full bg-[#D4A853] animate-ping" />
-                    <span className="font-mono tracking-wider text-[11px] uppercase text-[#D4A853] font-semibold">Kingdom of Saudi Arabia</span>
+                    <span className="font-mono tracking-wider text-[11px] uppercase text-[#D4A853] font-semibold">Sadu Real Estate Development</span>
                     <span className="text-white/40">·</span>
-                    <span className="text-white/80 font-mono text-[10.5px]">Riyadh · Jeddah · Al Khobar</span>
+                    <span className="text-white/80 font-mono text-[10.5px]">Riyadh · Jeddah · Mecca · Medina · Dubai</span>
                   </div>
                 </div>
 
-                {/* Headline with Stagger Reveal */}
+                {/* Headline */}
                 <div
                   style={{
                     opacity: heroLoaded ? 1 : 0,
@@ -623,8 +649,8 @@ export default function HomePage({ onOpenInquiry }) {
                   }}
                 >
                   <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-white leading-[1.08]">
-                    Fiduciary property<br />
-                    <span className="text-[#D4A853]">advisory</span> for<br />
+                    Curated property<br />
+                    <span className="text-[#D4A853]">development</span> for<br />
                     serious capital.
                   </h1>
                 </div>
@@ -638,7 +664,7 @@ export default function HomePage({ onOpenInquiry }) {
                   }}
                 >
                   <p className="text-base sm:text-lg text-white/80 font-normal leading-relaxed max-w-xl">
-                    MIRĀS connects family offices, institutional allocators, and discerning individuals directly with the Kingdom's most accomplished master developers. Disciplined acquisitions, verified titles, and zero broker markups.
+                    Sadu Real Estate Development orchestrates prime residential, commercial, and sanctuary acquisitions across Riyadh, Jeddah, Mecca, Medina, and Dubai with direct developer transparency.
                   </p>
                 </div>
 
@@ -655,7 +681,7 @@ export default function HomePage({ onOpenInquiry }) {
                       to="/properties"
                       className="inline-flex items-center justify-center gap-2 bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] font-semibold px-7 py-4 rounded text-xs tracking-wider uppercase transition-all shadow-xl hover:shadow-[#B8913A]/40 cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
                     >
-                      <span>Explore Curated Portfolio</span>
+                      <span>Explore Portfolio</span>
                       <ArrowRight size={15} />
                     </Link>
 
@@ -683,11 +709,11 @@ export default function HomePage({ onOpenInquiry }) {
                     </div>
                     <div className="flex items-center gap-2">
                       <Building2 size={15} className="text-[#D4A853] shrink-0" />
-                      <span>Tier-1 Developers</span>
+                      <span>Direct Channels</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <TrendingUp size={15} className="text-[#D4A853] shrink-0" />
-                      <span>Direct Pricing</span>
+                      <span>Verified Titles</span>
                     </div>
                   </div>
                 </div>
@@ -721,11 +747,11 @@ export default function HomePage({ onOpenInquiry }) {
                     floatClass: 'float-slow-2'
                   },
                   {
-                    city: 'Al Khobar',
-                    stat: '94%',
-                    statLabel: 'Occupancy',
+                    city: 'Dubai',
+                    stat: '7.8% Net',
+                    statLabel: 'Marina Prime Yield',
                     image: '/assets/prop-khobar.jpg',
-                    coords: '26°17′N',
+                    coords: '25°12′N',
                     floatClass: 'float-slow-3'
                   },
                 ].map((item, i) => (
@@ -760,10 +786,10 @@ export default function HomePage({ onOpenInquiry }) {
                   </Link>
                 ))}
 
-                {/* Animated Brass Connection Line with traveling shimmer */}
+                {/* Animated Brass Connection Line */}
                 <div className="flex items-center gap-3 px-4 pt-2">
                   <div className="h-px flex-1 shimmer-line" />
-                  <span className="text-[10px] font-mono text-[#D4A853] uppercase tracking-widest font-semibold">KSA Growth Triangle</span>
+                  <span className="text-[10px] font-mono text-[#D4A853] uppercase tracking-widest font-semibold">SADU Regional Network</span>
                   <div className="h-px flex-1 shimmer-line" />
                 </div>
               </div>
@@ -775,8 +801,8 @@ export default function HomePage({ onOpenInquiry }) {
         {/* Bottom Continuous Scrolling Ticker */}
         <div className="relative z-10 border-t border-white/10 bg-[#0F0F0E]/75 backdrop-blur-md overflow-hidden py-3.5">
           <div className="hero-ticker-track">
-            {['RIYADH', 'JEDDAH', 'AL KHOBAR', 'CURATED CAPITAL', 'FIDUCIARY ADVISORY', 'VERIFIED TITLES', 'DIRECT DEVELOPER CHANNEL',
-              'RIYADH', 'JEDDAH', 'AL KHOBAR', 'CURATED CAPITAL', 'FIDUCIARY ADVISORY', 'VERIFIED TITLES', 'DIRECT DEVELOPER CHANNEL'
+            {['RIYADH', 'JEDDAH', 'MECCA', 'MEDINA', 'DUBAI', 'SADU DEVELOPMENT', 'DIRECT CHANNELS', 'VERIFIED TITLES',
+              'RIYADH', 'JEDDAH', 'MECCA', 'MEDINA', 'DUBAI', 'SADU DEVELOPMENT', 'DIRECT CHANNELS', 'VERIFIED TITLES'
             ].map((text, i) => (
               <React.Fragment key={i}>
                 <span className="text-[11px] font-mono tracking-[0.24em] uppercase text-white/40 px-6 whitespace-nowrap hover:text-white transition-colors">{text}</span>
@@ -789,12 +815,12 @@ export default function HomePage({ onOpenInquiry }) {
 
       {/* Moving text band 1 */}
       <MovingTextBand
-        items={['FIDUCIARY ADVISORY', 'DIRECT DEVELOPER CHANNEL', 'VERIFIED TITLES', 'CURATED CAPITAL', 'RIYADH · JEDDAH · AL KHOBAR']}
+        items={['SADU REAL ESTATE DEVELOPMENT', 'RIYADH · JEDDAH · MECCA · MEDINA · DUBAI', 'DIRECT DEVELOPER CHANNEL', 'VERIFIED TITLES']}
         speed="slow"
       />
 
       {/* ═══════════════════════════════════════════
-          2. FEATURED PROPERTIES — Editorial Grid with Floating Diligence Constellation
+          2. FEATURED PROPERTIES — Editorial Grid
          ═══════════════════════════════════════════ */}
       <section id="curated-section" className="bg-[#FAF7F2] py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -804,32 +830,32 @@ export default function HomePage({ onOpenInquiry }) {
               <div className="space-y-3 max-w-xl">
                 <div className="flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-[#B8913A] animate-ping" />
-                  <p className="section-label">Curated Opportunities</p>
+                  <p className="section-label">Curated Inventory</p>
                 </div>
                 <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F0F0E] leading-tight">
                   Selected Prime Units
                 </h2>
-                <p className="text-[#6B6B5A] text-sm sm:text-base leading-relaxed">
-                  A selection of vetted residential villas, high-floor penthouses, and commercial headquarters floors under advisory representation.
+                <p className="text-[#6B6B5A] text-sm leading-relaxed">
+                  Prime residential residences, waterfront penthouses, and holy sanctuary suites under development representation.
                 </p>
               </div>
               <Link
                 to="/properties"
                 className="inline-flex items-center gap-2 bg-[#F0EBE1] hover:bg-[#E8E1D5] text-[#3A3A35] text-xs font-semibold px-6 py-3 rounded border border-[rgba(15,15,14,0.10)] transition-all hover:-translate-y-0.5 whitespace-nowrap shadow-sm"
               >
-                <span>View All Properties</span>
+                <span>View Full Portfolio</span>
                 <ArrowRight size={14} />
               </Link>
             </div>
           </ScrollReveal>
 
-          {/* ─── Floating Growth-Triangle Style Constellation Bar ─── */}
+          {/* Floating Assurance Matrix */}
           <div className="mb-14 p-5 rounded-2xl bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] shadow-sm relative overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
               {[
-                { title: 'Verified Ministry Titles', stat: '100% Escrow', sub: 'Wafi Regulated Channel', floatClass: 'float-slow-1' },
-                { title: 'Tier-1 Master Builders', stat: '0 Broker Surcharge', sub: 'Direct Allocation Terms', floatClass: 'float-slow-2' },
-                { title: 'Unlevered Yield Spread', stat: '6.8% – 11.2%', sub: 'Stress-Tested Comps', floatClass: 'float-slow-3' },
+                { title: 'Registered Ministry Titles', stat: '100% Escrow', sub: 'Wafi Regulated', floatClass: 'float-slow-1' },
+                { title: 'Direct Developer Channel', stat: 'Zero Markup', sub: 'Direct Allocation', floatClass: 'float-slow-2' },
+                { title: 'Projected Net Yield', stat: '6.8% – 11.2%', sub: 'Stress-Tested', floatClass: 'float-slow-3' },
               ].map((matrix, idx) => (
                 <div
                   key={idx}
@@ -852,7 +878,7 @@ export default function HomePage({ onOpenInquiry }) {
             {/* Traveling Shimmer Connector */}
             <div className="flex items-center gap-3 px-4 pt-3 mt-3 border-t border-[rgba(15,15,14,0.06)]">
               <div className="h-px flex-1 shimmer-line" />
-              <span className="text-[9px] font-mono text-[#B8913A] uppercase tracking-[0.2em] font-semibold">Institutional Portfolio Assurance Matrix</span>
+              <span className="text-[9px] font-mono text-[#B8913A] uppercase tracking-[0.2em] font-semibold">SADU Quality Assurance Matrix</span>
               <div className="h-px flex-1 shimmer-line" />
             </div>
           </div>
@@ -876,28 +902,16 @@ export default function HomePage({ onOpenInquiry }) {
             </div>
           )}
 
-          {/* Transparency Disclaimer */}
-          <ScrollReveal animation="fade-up" delay={200}>
-            <div className="mt-12 p-5 rounded-xl bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] text-[#6B6B5A] text-xs flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
-              <p>
-                <strong className="text-[#0F0F0E]">Catalogue Transparency:</strong> Listings represent realistic sample properties for advisory demonstration and client briefing purposes.
-              </p>
-              <Link to="/properties" className="text-[#B8913A] hover:underline font-mono text-[11px] font-semibold whitespace-nowrap">
-                Filtered Search →
-              </Link>
-            </div>
-          </ScrollReveal>
-
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════
-          3. CITY STORY SECTION (Interactive Kingdom Triangle Matrix & Radar)
+          3. CITY STORY SECTION (Exclusive Regional Network & Radar)
          ═══════════════════════════════════════════ */}
       <CityStorySection />
 
       {/* ═══════════════════════════════════════════
-          4. ADVISORY MODEL — Circuit Flow Pipeline
+          4. ADVISORY MODEL
          ═══════════════════════════════════════════ */}
       <section id="advisory-section" className="bg-[#F0EBE1] py-28 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -910,30 +924,21 @@ export default function HomePage({ onOpenInquiry }) {
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="h-2 w-2 rounded-full bg-[#B8913A] animate-ping" />
-                    <p className="section-label">Our Structural Advantage</p>
+                    <p className="section-label">Our Approach</p>
                   </div>
                   <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F0F0E] leading-tight">
-                    Why Institutional Capital Chooses the Channel Partner Model
+                    Direct Developer Partnership
                   </h2>
                 </div>
                 <p className="text-[#6B6B5A] text-sm leading-relaxed mt-4">
-                  Traditional real estate brokers rely on transactional churn and public listings. MIRĀS operates on a fiduciary advisory arc: we act as an originate-and-filter counterweight between master developers and qualified buyers.
+                  Sadu Real Estate Development operates as an originate-and-filter partner between master builders and private capital, removing brokerage friction.
                 </p>
 
-                {/* Floating Satellite Assurance Pill */}
-                <div className="glass-card-light p-4 rounded-xl flex items-center gap-3 float-slow-1 shadow-sm">
-                  <div className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                  <div>
-                    <p className="text-[10px] font-mono uppercase tracking-wider text-[#B8913A] font-semibold">Strict Advisory Filtering</p>
-                    <p className="text-xs text-[#0F0F0E] font-medium">Over 70% of potential market inventory is rejected prior to mandate presentation.</p>
-                  </div>
-                </div>
-
-                <div className="space-y-4 text-xs text-[#5A5A52] pt-2">
+                <div className="space-y-3 text-xs text-[#5A5A52] pt-2">
                   {[
-                    { title: 'Direct Developer Conveyance:', desc: 'Contracts executed directly with the master developer under regulated escrow accounts with zero intermediate brokerage surcharge.' },
-                    { title: 'Rigorous Technical Filtering:', desc: 'We reject approximately 70% of potential inventory based on construction milestone track record, build quality, and realistic yield modeling.' },
-                    { title: 'Complete Handover Advocacy:', desc: 'Our involvement continues beyond signature to snagging inspections, title deed registration with the Ministry of Justice, and tenant placement advisory.' },
+                    { title: 'Direct Developer Conveyance', desc: 'Contracts executed directly under regulated escrow accounts with zero intermediate surcharges.' },
+                    { title: 'Rigorous Technical Filtering', desc: 'Every asset is evaluated for construction milestone track record, build quality, and rental viability.' },
+                    { title: 'Complete Handover Advocacy', desc: 'Guidance through title deed registration with the Ministry of Justice and tenant onboarding.' },
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-[#FAF7F2] border border-[rgba(15,15,14,0.06)] hover:border-[#B8913A]/30 transition-colors">
                       <div className="p-1 rounded bg-[#B8913A]/15 text-[#B8913A] mt-0.5 shrink-0">
@@ -948,20 +953,19 @@ export default function HomePage({ onOpenInquiry }) {
                 </div>
                 <div className="pt-4">
                   <Link to="/about" className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#B8913A] hover:text-[#8A6C2A] transition-colors">
-                    <span>Read Full Corporate Philosophy</span>
+                    <span>Learn More About SADU</span>
                     <ArrowRight size={13} />
                   </Link>
                 </div>
               </ScrollReveal>
             </div>
 
-            {/* Right: advisory steps with connected circuit line */}
+            {/* Right: advisory steps */}
             <div className="lg:col-span-7">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative">
                 {advisorySteps.map((step, idx) => (
                   <ScrollReveal key={step.num} animation="fade-up" delay={idx * 110}>
                     <div className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.08)] rounded-xl p-7 group hover:border-[#B8913A]/45 transition-all duration-300 hover:-translate-y-1.5 h-full shadow-sm hover:shadow-md relative overflow-hidden">
-                      {/* Step Tag */}
                       <div className="flex items-center justify-between mb-3">
                         <span className="font-serif text-4xl font-bold text-[#E8E1D5] group-hover:text-[#D4A853] transition-colors">
                           {step.num}
@@ -973,17 +977,15 @@ export default function HomePage({ onOpenInquiry }) {
                       <h3 className="font-serif text-base font-semibold text-[#0F0F0E] mb-2">{step.title}</h3>
                       <p className="text-xs text-[#6B6B5A] leading-relaxed">{step.desc}</p>
 
-                      {/* Subtle golden bottom accent */}
                       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#B8913A]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                   </ScrollReveal>
                 ))}
               </div>
 
-              {/* Connecting circuit line at bottom */}
               <div className="flex items-center gap-3 px-4 pt-4 mt-3">
                 <div className="h-px flex-1 shimmer-line" />
-                <span className="text-[9px] font-mono text-[#B8913A] uppercase tracking-widest font-semibold">Regulated Acquisition Sequence</span>
+                <span className="text-[9px] font-mono text-[#B8913A] uppercase tracking-widest font-semibold">Acquisition Lifecycle</span>
                 <div className="h-px flex-1 shimmer-line" />
               </div>
             </div>
@@ -994,18 +996,18 @@ export default function HomePage({ onOpenInquiry }) {
 
       {/* Moving text band 2 (Reversed) */}
       <MovingTextBand
-        items={['MANDATE REVIEW', 'ORIGINATION', 'DILIGENCE', 'CONVEYANCE', 'HANDOVER ADVOCACY']}
+        items={['MANDATE REVIEW', 'DIRECT ORIGINATION', 'TECHNICAL DILIGENCE', 'TITLE CONVEYANCE', 'HANDOVER ADVOCACY']}
         reverse={true}
         speed="slow"
       />
 
       {/* ═══════════════════════════════════════════
-          5. INVESTMENT INTELLIGENCE (Dark Section with Spline Curve & Satellites)
+          5. INVESTMENT INTELLIGENCE
          ═══════════════════════════════════════════ */}
       <InvestmentIntelligence marketStats={marketStats} />
 
       {/* ═══════════════════════════════════════════
-          6. INTERACTIVE EXECUTIVE MANDATE CONFIGURATOR (Creative Capital Architect)
+          6. INTERACTIVE EXECUTIVE MANDATE CONFIGURATOR
          ═══════════════════════════════════════════ */}
       <section className="bg-[#FAF7F2] py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1016,7 +1018,7 @@ export default function HomePage({ onOpenInquiry }) {
       </section>
 
       {/* ═══════════════════════════════════════════
-          7. INVESTOR PATHWAYS — Ivory Section with Corridor Connectors
+          7. INVESTOR PATHWAYS
          ═══════════════════════════════════════════ */}
       <section id="pathways-section" className="bg-[#FAF7F2] py-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1025,13 +1027,13 @@ export default function HomePage({ onOpenInquiry }) {
             <div className="text-center max-w-2xl mx-auto space-y-3 mb-16">
               <div className="flex items-center justify-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-[#B8913A] animate-ping" />
-                <p className="section-label">Tailored Engagement Paths</p>
+                <p className="section-label">Engagement Pathways</p>
               </div>
               <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0F0F0E] leading-tight">
-                How We Structure Your Acquisition
+                Tailored Acquisition Pathways
               </h2>
               <p className="text-[#6B6B5A] text-sm leading-relaxed">
-                Every client arrives with distinct capital constraints, tax residency parameters, and timeline needs.
+                Structured solutions for private buyers, institutional allocators, and developer partners.
               </p>
             </div>
           </ScrollReveal>
@@ -1041,9 +1043,9 @@ export default function HomePage({ onOpenInquiry }) {
             {[
               {
                 icon: Users,
-                title: 'Private Residential Buyers',
-                sub: 'Villas · Penthouses · Family Estates',
-                desc: "For discerning families and private professionals seeking iconic living in Riyadh's northern quarters (Hittin, Al Malqa) or coastal Jeddah. We handle architectural inspection, title deed verification, and bespoke interior fit-out introductions.",
+                title: 'Private Residential',
+                sub: 'Villas · Penthouses · Sanctuary Estates',
+                desc: 'For discerning individuals seeking iconic residences in Riyadh, coastal Jeddah, or sacred sanctuaries in Mecca and Medina. Full inspection and title verification included.',
                 cta: 'Submit Residential Brief',
                 type: 'Private Residential Acquisition',
                 variant: 'outline',
@@ -1051,9 +1053,9 @@ export default function HomePage({ onOpenInquiry }) {
               },
               {
                 icon: Landmark,
-                title: 'Family Offices & Allocators',
-                sub: 'Commercial Floorplates · Yield Blocks',
-                desc: 'Structured acquisitions of Grade-A office floors along King Fahd Road, high-street retail parades, and multi-unit residential portfolios. Detailed financial pro formas, tenancy covenants, and yield stress testing provided.',
+                title: 'Institutional & Family Office',
+                sub: 'Commercial Floorplates · Yield Portfolios',
+                desc: 'Structured acquisitions of prime office towers, high-street retail parades, and Dubai high-rise blocks with comprehensive cash-flow pro formas and lease stress-testing.',
                 cta: 'Request Commercial Portfolio',
                 type: 'Family Office Commercial Allocation',
                 variant: 'brass',
@@ -1063,8 +1065,8 @@ export default function HomePage({ onOpenInquiry }) {
                 icon: Building2,
                 title: 'Master Developers',
                 sub: 'Channel Representation · Off-Plan',
-                desc: 'For premier real estate developers with licensed off-plan or completed developments. We provide qualified institutional origination, international investor roadshows, and structured sales channel representation.',
-                cta: 'Developer Partnership Terms',
+                desc: 'Strategic sales channel representation and qualified capital introduction for licensed master developers across the Kingdom and the GCC region.',
+                cta: 'Developer Channel Terms',
                 href: '/partnerships',
                 variant: 'outline',
                 floatClass: 'float-slow-3'
@@ -1102,7 +1104,7 @@ export default function HomePage({ onOpenInquiry }) {
                     </Link>
                   ) : (
                     <button
-                      onClick={() => onOpenInquiry ? onOpenInquiry({ type: pathway.type }) : null}
+                      onClick={() => onOpenInquiry ? onOpenInquiry({ lookingFor: `${pathway.title} (${pathway.sub})` }) : null}
                       className={`w-full py-3.5 px-4 rounded text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
                         pathway.variant === 'brass'
                           ? 'bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2]'
@@ -1118,10 +1120,9 @@ export default function HomePage({ onOpenInquiry }) {
             ))}
           </div>
 
-          {/* Animated Connecting Shimmer Line */}
           <div className="flex items-center gap-3 px-4 pt-10">
             <div className="h-px flex-1 shimmer-line" />
-            <span className="text-[9px] font-mono text-[#B8913A] uppercase tracking-widest font-semibold">Structured Capital Gateway</span>
+            <span className="text-[9px] font-mono text-[#B8913A] uppercase tracking-widest font-semibold">SADU Capital Gateway</span>
             <div className="h-px flex-1 shimmer-line" />
           </div>
 
@@ -1129,21 +1130,21 @@ export default function HomePage({ onOpenInquiry }) {
       </section>
 
       {/* ═══════════════════════════════════════════
-          8. STATS ROW — Parchment Section
+          8. STATS ROW
          ═══════════════════════════════════════════ */}
       <section className="bg-[#E8E1D5] py-20 border-y border-[rgba(15,15,14,0.08)]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-            <StatCounter value={7} suffix="+" label="Advisory Units" />
-            <StatCounter value={3} suffix="" label="KSA Prime Markets" />
+            <StatCounter value={7} suffix="+" label="Active Developments" />
+            <StatCounter value={5} suffix="" label="Prime Markets" />
             <StatCounter value={100} suffix="%" label="Verified Titles" />
-            <StatCounter value={0} suffix="" label="Broker Markups" />
+            <StatCounter value={0} suffix="" label="Broker Markup" />
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════
-          9. PROMINENT CTA (Dark Section with Floating Concierge Status)
+          9. PROMINENT CTA
          ═══════════════════════════════════════════ */}
       <section className="bg-[#0C0C0A] py-28 dark-section relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1160,11 +1161,11 @@ export default function HomePage({ onOpenInquiry }) {
                   </div>
 
                   <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#E8E3DC] leading-tight">
-                    Begin your acquisition conversation with confidence.
+                    Start your acquisition dialogue with clarity.
                   </h2>
 
-                  <p className="text-[#8A8578] text-sm sm:text-base leading-relaxed max-w-xl">
-                    Whether you are evaluating a specific Riyadh commercial floorplate, a Red Sea oceanfront residence, or a broad capital allocation strategy, our advisory team is prepared to review your mandate.
+                  <p className="text-[#8A8578] text-sm leading-relaxed max-w-xl">
+                    Whether you are considering a villa in Riyadh, a beachfront residence in Jeddah, a sanctuary near the Haram, or a high-floor sky suite in Dubai, our private desk is ready to advise.
                   </p>
 
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
@@ -1182,38 +1183,38 @@ export default function HomePage({ onOpenInquiry }) {
                       rel="noreferrer"
                       className="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/5 text-[#E8E3DC] border border-[rgba(255,255,255,0.14)] hover:border-[rgba(255,255,255,0.28)] px-7 py-4 rounded text-xs tracking-wider uppercase transition-all"
                     >
-                      <span>WhatsApp Private Concierge</span>
+                      <span>WhatsApp Concierge</span>
                     </a>
                   </div>
 
                   <p className="text-[#5A5A52] text-xs font-mono">
-                    Confidentiality assured under non-disclosure governance. No marketing unsolicited calls.
+                    Confidentiality guaranteed. Direct developer channel terms.
                   </p>
                 </div>
 
-                {/* Right: Floating VIP Concierge Telemetry Card (Growth Triangle Style) */}
+                {/* Right: Floating VIP Concierge Telemetry Card */}
                 <div className="lg:col-span-4 hidden lg:flex flex-col gap-3">
                   <div className="glass-card-dark p-5 rounded-2xl float-slow-1 border border-[rgba(255,255,255,0.15)] shadow-2xl space-y-4">
                     <div className="flex items-center justify-between border-b border-white/10 pb-3">
                       <div className="flex items-center gap-2">
                         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping" />
-                        <span className="font-mono text-xs font-semibold text-white uppercase">Advisory Desk Online</span>
+                        <span className="font-mono text-xs font-semibold text-white uppercase">SADU Private Desk</span>
                       </div>
                       <span className="text-[10px] font-mono text-[#D4A853] uppercase">Riyadh HQ</span>
                     </div>
 
                     <div className="space-y-2 text-xs">
                       <div className="flex justify-between text-white/70">
-                        <span>Mandate Partner:</span>
-                        <span className="text-white font-medium font-mono">Senior Principal</span>
+                        <span>Mandate Lead:</span>
+                        <span className="text-white font-medium font-mono">Managing Partner</span>
                       </div>
                       <div className="flex justify-between text-white/70">
                         <span>Average Response:</span>
                         <span className="text-[#D4A853] font-mono font-bold">&lt; 15 mins</span>
                       </div>
                       <div className="flex justify-between text-white/70">
-                        <span>Conveyance Protocol:</span>
-                        <span className="text-white font-mono">REGA Licensed</span>
+                        <span>Conveyance Standard:</span>
+                        <span className="text-white font-mono">REGA Certified</span>
                       </div>
                     </div>
 
@@ -1228,7 +1229,7 @@ export default function HomePage({ onOpenInquiry }) {
 
               {/* Watermark Logo */}
               <div className="absolute -right-8 -bottom-8 opacity-[0.03] pointer-events-none select-none font-serif text-[280px] leading-none text-white">
-                M
+                S
               </div>
             </div>
           </ScrollReveal>

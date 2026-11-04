@@ -1,9 +1,6 @@
 /**
- * MIRĀS Real Estate Advisory — Curated Property Data
- * 
- * NOTE: Listings shown are realistic sample assets designed for this architectural
- * advisory mockup. Financial metrics and specs represent market-aligned baselines
- * and can be seamlessly updated via the MongoDB database or admin endpoints.
+ * Sadu Real Estate Development — Curated Sample Dataset
+ * Realistic data across Riyadh, Jeddah, Mecca, Medina, and Dubai
  */
 
 export const sampleProperties = [
@@ -31,8 +28,8 @@ export const sampleProperties = [
       '/assets/district.jpg',
       '/assets/hero.jpg'
     ],
-    blurb: 'A disciplined, precision-designed two-bedroom residence located in the heart of Riyadh’s premier financial corridor. Created for executive tenancy with optimized thermal acoustic glazing, minimalist stone finishes, and direct connectivity to King Fahd Road.',
-    overview: 'Positioned on the 14th floor of a recently delivered residential tower, this apartment exemplifies the modern Riyadh urban lifestyle. With immediate proximity to major corporate headquarters, upscale hospitality, and Metro line stations, it offers steady capital resilience and consistent rental yields for portfolio allocators.',
+    blurb: 'A disciplined, precision-designed two-bedroom residence located in the heart of Riyadh’s premier financial corridor. Created for executive tenancy with optimized thermal acoustic glazing and direct connectivity to King Fahd Road.',
+    overview: 'Positioned on the 14th floor of a recently delivered residential tower, this apartment exemplifies the modern Riyadh urban lifestyle with immediate proximity to major corporate headquarters, upscale hospitality, and Metro line stations.',
     architecturalHighlights: [
       'Floor-to-ceiling double-glazed thermal facade maximizing ambient daylight',
       'Engineered European oak millwork with concealed flush door assemblies',
@@ -57,7 +54,7 @@ export const sampleProperties = [
         { label: 'King Khalid International Airport', distance: '24 mins' }
       ]
     },
-    developerTier: 'Tier-1 Institutional Developer',
+    developerTier: 'Sadu Development Prime Channel',
     handoverStatus: 'Immediate Handover',
     zoning: 'High-Density Mixed-Use Residential'
   },
@@ -85,8 +82,8 @@ export const sampleProperties = [
       '/assets/district.jpg',
       '/assets/advisory.jpg'
     ],
-    blurb: 'A striking contemporary courtyard villa in Riyadh’s most coveted northern residential enclave, blending sheltered inward-facing courtyards with expansive light-filled family entertaining spaces.',
-    overview: 'The Hittin Sanctuary Villa reinterprets traditional Najdi climate-responsive architecture through a razor-sharp modern lens. High perimeter walls surround landscaped desert gardens and water elements, offering absolute acoustic privacy within 5 minutes of Boulevard Riyadh City and the future New Murabba.',
+    blurb: 'A contemporary courtyard villa in Riyadh’s most coveted northern residential enclave, blending sheltered inward-facing courtyards with expansive light-filled family entertaining spaces.',
+    overview: 'The Hittin Sanctuary Villa reinterprets traditional Najdi climate-responsive architecture through a modern lens with complete acoustic privacy within 5 minutes of Boulevard Riyadh City.',
     architecturalHighlights: [
       'Central interior courtyard patio bringing microclimatic cooling and light',
       'Full-height sliding glass systems seamlessly connecting living to private garden',
@@ -101,181 +98,233 @@ export const sampleProperties = [
       serviceCharge: 'Independent Private Title'
     },
     location: {
-      address: 'Prince Turki Al Awwal Corridor, Hittin, Riyadh 13516',
-      coordinates: { lat: 24.7738, lng: 46.6022 },
+      address: 'Prince Turki Al Awwal Road, Hittin, Riyadh 13512',
+      coordinates: { lat: 24.7742, lng: 46.5982 },
       districtCode: 'RUH-NW-04',
       nearby: [
-        { label: 'Boulevard Riyadh City & World', distance: '5 mins' },
-        { label: 'King Abdullah Financial District', distance: '7 mins' },
-        { label: 'King Saud University Campus', distance: '9 mins' },
-        { label: 'Diriyah Heritage UNESCO Quarter', distance: '12 mins' }
+        { label: 'Boulevard Riyadh City & World', distance: '4 mins' },
+        { label: 'King Saud University Campus', distance: '7 mins' },
+        { label: 'Diplomatic Quarter (DQ)', distance: '11 mins' },
+        { label: 'Diriyah Gate Cultural Heritage Zone', distance: '9 mins' }
       ]
     },
-    developerTier: 'Bespoke Master Villa Builder',
-    handoverStatus: 'Ready for Immediate Furnishing',
-    zoning: 'Low-Density Luxury Residential R1'
+    developerTier: 'Sadu Development Prime Channel',
+    handoverStatus: 'Immediate Handover',
+    zoning: 'Exclusive Low-Density Residential R-1'
   },
   {
     id: 'jeddah-corniche-apartment',
     title: 'The Red Sea Horizon Residence',
-    subtitle: 'High-Floor 3-Bedroom Oceanfront Unit on Al Shati Corniche',
+    subtitle: '3-Bedroom Panoramic Waterfront Apartment, Jeddah Corniche',
     city: 'Jeddah',
     district: 'Al Shati',
     type: 'Apartment',
     category: 'Waterfront',
-    price: 2100000,
-    priceLabel: 'SAR 2,100,000',
-    pricePerSqm: 12727,
+    price: 2150000,
+    priceLabel: 'SAR 2,150,000',
+    pricePerSqm: 11436,
     beds: 3,
-    baths: 3,
-    area: 165,
+    baths: 3.5,
+    area: 188,
     parkingSpaces: 2,
-    completionYear: 2023,
+    completionYear: 2024,
     status: 'Available',
     featured: true,
     image: '/assets/prop-jeddah.jpg',
     gallery: [
       '/assets/prop-jeddah.jpg',
       '/assets/hero.jpg',
-      '/assets/district.jpg'
+      '/assets/prop-apartment.jpg'
     ],
-    blurb: 'Commanding uninterrupted vistas across the Red Sea and Jeddah Corniche, this high-floor residence marries nautical openness with refined privacy.',
-    overview: 'Constructed within one of Jeddah’s landmark waterfront towers, this residence provides floor-to-ceiling glass wrapping around the sea-facing salon. Residents enjoy 24/7 concierge, private health spa, infinity pool overlooking the coastline, and direct access to the redesigned Corniche promenade.',
+    blurb: 'Front-row maritime living along the Al Shati Corniche in Jeddah, featuring floor-to-ceiling glass expanses framing direct western sunset vistas across the Red Sea waters.',
+    overview: 'Located in Jeddah’s most distinguished coastal tower, this high-floor unit combines the serenity of waterfront living with instant access to the northern business corridor.',
     architecturalHighlights: [
-      '270-degree wraparound panoramic oceanfront balcony with frameless glass balustrades',
-      'Custom Italian kitchen with book-matched Calacatta marble island and Miele suite',
-      'Dual master suites with deep soaking tubs overlooking the Red Sea sunset',
-      'Dedicated private elevator foyer with keycard biometric access',
-      'Sub-surface resident parking and temperature-controlled wine/cigar storage'
+      'Deep cantilevered shaded balcony positioned for year-round coastal breezes',
+      'Custom Italian kitchen with integrated Miele appliances and quartz surfaces',
+      'Floor-to-ceiling soundproof acoustic curtain wall system facing the sea',
+      'Private elevator lobby with biometric access control',
+      'Exclusive resident access to 25m infinity pool overlooking the marina'
     ],
     financialMetrics: {
-      estimatedYield: '6.8% Prime Coastal Yield',
-      capitalAppreciation: '+9.1% 3-Year Trend',
-      occupancyProfile: 'Executive Second Home & Premium Holiday Leasing',
+      estimatedYield: '6.8% Net Waterfront Yield',
+      capitalAppreciation: '+9.1% 3-Year Coastal Trend',
+      occupancyProfile: 'C-Suite Executive & Seasonal Diplomatic Leases',
       serviceCharge: 'SAR 60 / m² per annum'
     },
     location: {
-      address: 'Corniche Road, Al Shati District, Jeddah 23610',
-      coordinates: { lat: 21.6033, lng: 39.1093 },
+      address: 'Corniche Road, Al Shati District, Jeddah 23414',
+      coordinates: { lat: 21.5892, lng: 39.1098 },
       districtCode: 'JED-WF-02',
       nearby: [
-        { label: 'Jeddah Yacht Club & Marina', distance: '4 mins' },
-        { label: 'Red Sea Mall & Entertainment Hub', distance: '6 mins' },
-        { label: 'King Abdulaziz International Airport', distance: '15 mins' },
-        { label: 'Al Rahma Floating Mosque', distance: '5 mins' }
+        { label: 'Jeddah Yacht Club & Marina', distance: '3 mins' },
+        { label: 'Red Sea Mall & Luxury Retail', distance: '5 mins' },
+        { label: 'King Abdulaziz International Airport', distance: '16 mins' },
+        { label: 'Al Rahma Floating Mosque', distance: '6 mins' }
       ]
     },
-    developerTier: 'Tier-1 Coastal Waterfront Consortium',
-    handoverStatus: 'Fully Completed & Verified Title',
-    zoning: 'High-Rise Waterfront Residential W-1'
+    developerTier: 'Sadu Development Prime Channel',
+    handoverStatus: 'Immediate Handover',
+    zoning: 'Luxury Waterfront Mixed-Use'
   },
   {
-    id: 'riyadh-kfrd-office',
-    title: 'The King Fahd Tower Corporate Floorplate',
-    subtitle: 'Grade-A Commercial Office Floor on Riyadh Principal Financial Spine',
-    city: 'Riyadh',
-    district: 'King Fahd Road',
-    type: 'Commercial',
-    category: 'Commercial',
-    price: 4800000,
-    priceLabel: 'SAR 4,800,000',
-    pricePerSqm: 8888,
-    beds: null,
-    baths: 2,
-    area: 540,
-    parkingSpaces: 8,
+    id: 'dubai-marina-penthouse',
+    title: 'The Dubai Marina Sky Sanctuary',
+    subtitle: 'Panoramic Waterfront Penthouse, Dubai Marina & Palm Horizon',
+    city: 'Dubai',
+    district: 'Dubai Marina',
+    type: 'Penthouse',
+    category: 'Waterfront',
+    price: 3850000,
+    priceLabel: 'AED 3,850,000',
+    pricePerSqm: 14259,
+    beds: 3,
+    baths: 4,
+    area: 270,
+    parkingSpaces: 2,
     completionYear: 2024,
     status: 'Available',
     featured: true,
-    image: '/assets/prop-commercial.jpg',
-    gallery: [
-      '/assets/prop-commercial.jpg',
-      '/assets/advisory.jpg',
-      '/assets/district.jpg'
-    ],
-    blurb: 'A full-floor corporate office shell offering 540 m² of flexible column-free floorplate on Riyadh’s most recognized commercial avenue.',
-    overview: 'Engineered to institutional headquarters specifications, this commercial floor offers floor-to-ceiling solar-attenuated glass facades, high raised floor access for IT cabling, dual wet blocks, and generous allocated basement parking. An exceptional acquisition for corporate owner-occupiers or commercial yield investors.',
-    architecturalHighlights: [
-      'Column-free 540 m² contiguous floorplate allowing optimal modular space planning',
-      'High-speed destination-controlled Schindler passenger elevators',
-      'Dedicated dual-source fiber optic backbone and redundant emergency backup power',
-      'LEED Gold building efficiency rating lowering operating overhead by 22%',
-      'Eight allocated secure subterranean parking bays with visitor validation'
-    ],
-    financialMetrics: {
-      estimatedYield: '8.4% Net Commercial Yield',
-      capitalAppreciation: '+11.5% Commercial Corridor Expansion',
-      occupancyProfile: 'Regional Headquarters & Professional Financial Services',
-      serviceCharge: 'SAR 55 / m² per annum'
-    },
-    location: {
-      address: 'King Fahd Road, Al Mohammadiyyah / Olaya, Riyadh 12363',
-      coordinates: { lat: 24.7335, lng: 46.6631 },
-      districtCode: 'RUH-COR-09',
-      nearby: [
-        { label: 'KAFD Metro Exchange', distance: '5 mins' },
-        { label: 'Saudi Central Bank (SAMA)', distance: '10 mins' },
-        { label: 'Ministry of Investment HQ', distance: '12 mins' },
-        { label: 'Riyadh Exhibition & Convention Center', distance: '14 mins' }
-      ]
-    },
-    developerTier: 'Institutional Commercial REIT Asset',
-    handoverStatus: 'Core & Shell Handover Ready',
-    zoning: 'Commercial Mixed High-Rise C-3'
-  },
-  {
-    id: 'khobar-corniche-apartment',
-    title: 'The Arabian Gulf Coastal Residence',
-    subtitle: '3-Bedroom Panoramic Promenade Apartment, Al Khobar',
-    city: 'Al Khobar',
-    district: 'Al Corniche',
-    type: 'Apartment',
-    category: 'Waterfront',
-    price: 1600000,
-    priceLabel: 'SAR 1,600,000',
-    pricePerSqm: 10666,
-    beds: 3,
-    baths: 3,
-    area: 150,
-    parkingSpaces: 1,
-    completionYear: 2023,
-    status: 'Available',
-    featured: false,
     image: '/assets/prop-khobar.jpg',
     gallery: [
       '/assets/prop-khobar.jpg',
-      '/assets/hero.jpg',
-      '/assets/district.jpg'
+      '/assets/prop-penthouse.jpg',
+      '/assets/hero.jpg'
     ],
-    blurb: 'Directly positioned along the lush Corniche walkway in Al Khobar, presenting a balanced coastal lifestyle for executives in the Eastern Province industrial corridor.',
-    overview: 'Combining calm gulf waters with rapid road access to Dhahran, Saudi Aramco headquarters, and the King Fahd Causeway to Bahrain, this unit is highly favored by senior energy sector executives. Built with coastal-resistant marine-grade masonry and finished with clean Scandinavian-inspired neutral interiors.',
+    blurb: 'An ultra-exclusive sky sanctuary over Dubai Marina with floor-to-ceiling glass capturing yachts, Palm Jumeirah, and sunset over the Arabian Gulf.',
+    overview: 'Curated by Sadu Real Estate Development for high-net-worth investors seeking prime GCC diversification with robust net rental returns.',
     architecturalHighlights: [
-      'Direct unobstructed maritime views over the Gulf with morning sun exposure',
-      'Open-concept kitchen and entertaining terrace with integrated outdoor BBQ station',
-      'Marine-grade anodized aluminum window joinery with acoustic soundproofing',
-      'Resident wellness suite including heated indoor pool, squash court, and gym',
-      'Secure storage lockup and private underground parking'
+      'Wraparound terrace with panoramic views of Dubai Marina and the Gulf',
+      'Double-height ceiling volume in the central living and dining salons',
+      'Custom European stone finishes with bespoke ambient brass illumination',
+      'Private lift vestibule and dedicated valet parking bays',
+      'State-of-the-art gym, infinity pool, and private residents lounge'
     ],
     financialMetrics: {
-      estimatedYield: '7.1% Net Yield',
-      capitalAppreciation: '+7.5% Eastern Province Corridor',
-      occupancyProfile: 'Energy Sector Leadership & Regional Families',
-      serviceCharge: 'SAR 40 / m² per annum'
+      estimatedYield: '7.8% Net Projected Yield',
+      capitalAppreciation: '+11.5% YoY Marina Trend',
+      occupancyProfile: 'Global Executives & International Investors',
+      serviceCharge: 'AED 18 / sq ft per annum'
     },
     location: {
-      address: 'Prince Turki Street, Al Corniche, Al Khobar 34414',
-      coordinates: { lat: 26.2917, lng: 50.2185 },
-      districtCode: 'EP-KHB-01',
+      address: 'Marina Walk, Dubai Marina, Dubai, UAE',
+      coordinates: { lat: 25.0805, lng: 55.1403 },
+      districtCode: 'DXB-MRN-01',
       nearby: [
-        { label: 'Corniche Seaside Promenade', distance: '1 min walking' },
-        { label: 'Saudi Aramco Core Campus (Dhahran)', distance: '14 mins' },
-        { label: 'King Fahd Causeway (Bahrain Access)', distance: '12 mins' },
-        { label: 'Al Rashid Mall & Dining District', distance: '8 mins' }
+        { label: 'Marina Walk & Promenade', distance: '1 min walking' },
+        { label: 'JBR Beach & Dining', distance: '5 mins' },
+        { label: 'DIFC Financial District', distance: '18 mins' },
+        { label: 'Dubai International Airport (DXB)', distance: '25 mins' }
       ]
     },
-    developerTier: 'Eastern Province Landmark Developer',
+    developerTier: 'Sadu Development Prime Channel',
     handoverStatus: 'Immediate Handover',
-    zoning: 'Prime Coastal Urban Zone'
+    zoning: 'Ultra-Luxury Waterfront High-Rise'
+  },
+  {
+    id: 'mecca-abraj-residence',
+    title: 'The Mecca Holy Sanctuary Suite',
+    subtitle: 'Haram Proximity Landmark Residence, Central Mecca',
+    city: 'Mecca',
+    district: 'Central Haram District',
+    type: 'Apartment',
+    category: 'Sanctuary',
+    price: 4200000,
+    priceLabel: 'SAR 4,200,000',
+    pricePerSqm: 24700,
+    beds: 2,
+    baths: 2.5,
+    area: 170,
+    parkingSpaces: 1,
+    completionYear: 2024,
+    status: 'Available',
+    featured: false,
+    image: '/assets/district.jpg',
+    gallery: [
+      '/assets/district.jpg',
+      '/assets/hero.jpg',
+      '/assets/advisory.jpg'
+    ],
+    blurb: 'Rare, irreplaceable real estate within direct walking distance of the Holy Mosque in Mecca, offering unprecedented spiritual connectivity and enduring multigenerational value.',
+    overview: 'An exclusive sanctuary property in the central precinct of Mecca. Engineered to five-star hospitality standards with dedicated audio feeds directly connected to the Grand Mosque prayer calls.',
+    architecturalHighlights: [
+      'Direct walking connectivity and clear lines of sight to the Holy Haram',
+      'Acoustic soundproof glass preserving tranquil interior contemplation',
+      'Five-star hotel concierge and round-the-clock private security',
+      'Direct elevator access to concourse retail and prayer facilities',
+      'Enduring legacy asset with perpetual multigenerational ownership security'
+    ],
+    financialMetrics: {
+      estimatedYield: '8.5% Net Seasonal & Annual Yield',
+      capitalAppreciation: '+14.2% Prime Haram Corridor',
+      occupancyProfile: 'High-Net-Worth Pilgrims & Institutional Sovereign Tenancy',
+      serviceCharge: 'SAR 85 / m² per annum'
+    },
+    location: {
+      address: 'Ibrahim Al Khalil Road, Central District, Mecca',
+      coordinates: { lat: 21.4225, lng: 39.8262 },
+      districtCode: 'MAK-HRM-01',
+      nearby: [
+        { label: 'Grand Mosque (Masjid al-Haram)', distance: '4 mins walking' },
+        { label: 'Haramain High-Speed Railway Station', distance: '10 mins' },
+        { label: 'Abraj Al-Bait Complex', distance: '3 mins' }
+      ]
+    },
+    developerTier: 'Sadu Development Prime Channel',
+    handoverStatus: 'Immediate Handover',
+    zoning: 'Prime Sacred Core Zone'
+  },
+  {
+    id: 'medina-central-suite',
+    title: 'The Medina Central Heritage Residence',
+    subtitle: 'Prestige 3-Bedroom Residence, Central Northern Corridor, Medina',
+    city: 'Medina',
+    district: 'Central Sacred District',
+    type: 'Apartment',
+    category: 'Sanctuary',
+    price: 2950000,
+    priceLabel: 'SAR 2,950,000',
+    pricePerSqm: 15128,
+    beds: 3,
+    baths: 3,
+    area: 195,
+    parkingSpaces: 1,
+    completionYear: 2024,
+    status: 'Available',
+    featured: false,
+    image: '/assets/advisory.jpg',
+    gallery: [
+      '/assets/advisory.jpg',
+      '/assets/hero.jpg',
+      '/assets/prop-apartment.jpg'
+    ],
+    blurb: 'Distinguished luxury living in Medina within minutes of the Prophet’s Mosque, providing peaceful sanctuary, classic stone finishes, and perpetual asset stability.',
+    overview: 'Constructed to sovereign development specifications, this residence blends peaceful privacy with exceptional accessibility to the sacred heart of Medina and high-speed rail links.',
+    architecturalHighlights: [
+      'Short walking access to the Prophet’s Mosque piazza',
+      'Private family reception with traditional Mashrabiya light shading',
+      'High-grade thermal acoustic insulation for total interior peace',
+      'Dedicated underground parking with private secure storage',
+      'Full facility management and concierge service'
+    ],
+    financialMetrics: {
+      estimatedYield: '7.9% Net Annual Yield',
+      capitalAppreciation: '+10.8% Medina Central Zone',
+      occupancyProfile: 'Devout Private Families & High-End Seasonal Tenancy',
+      serviceCharge: 'SAR 50 / m² per annum'
+    },
+    location: {
+      address: 'King Fahd Road, Central Sacred Area, Medina',
+      coordinates: { lat: 24.4686, lng: 39.6142 },
+      districtCode: 'MED-CTR-01',
+      nearby: [
+        { label: 'The Prophet’s Mosque (Al-Masjid an-Nabawi)', distance: '6 mins walking' },
+        { label: 'Haramain High-Speed Train Station', distance: '8 mins' },
+        { label: 'Prince Mohammad Bin Abdulaziz Airport', distance: '18 mins' }
+      ]
+    },
+    developerTier: 'Sadu Development Prime Channel',
+    handoverStatus: 'Immediate Handover',
+    zoning: 'Central Sacred Residential'
   },
   {
     id: 'riyadh-malqa-penthouse',
@@ -285,105 +334,51 @@ export const sampleProperties = [
     district: 'Al Malqa',
     type: 'Penthouse',
     category: 'Residential',
-    price: 3900000,
-    priceLabel: 'SAR 3,900,000',
-    pricePerSqm: 12580,
+    price: 4800000,
+    priceLabel: 'SAR 4,800,000',
+    pricePerSqm: 9876,
     beds: 4,
-    baths: 4.5,
-    area: 310,
-    parkingSpaces: 2,
+    baths: 5,
+    area: 486,
+    parkingSpaces: 3,
     completionYear: 2024,
     status: 'Available',
     featured: true,
     image: '/assets/prop-penthouse.jpg',
     gallery: [
       '/assets/prop-penthouse.jpg',
-      '/assets/district.jpg',
-      '/assets/advisory.jpg'
+      '/assets/prop-villa.jpg',
+      '/assets/hero.jpg'
     ],
-    blurb: 'A duplex penthouse featuring double-height glass walls, an expansive private rooftop garden terrace, and panoramic views across Riyadh’s northern expansion corridor.',
-    overview: 'The Sky Villa at Al Malqa represents top-tier vertical living in one of Riyadh’s most affluent northern districts. Offering the privacy and spatial volume of a detached villa alongside the security and low-maintenance convenience of an upscale boutique residence.',
+    blurb: 'A statement duplex penthouse spanning the top two floors of an architectural boutique building in Al Malqa, crowned with an expansive 160m² open-sky private terrace.',
+    overview: 'The Sky Villa Penthouse provides the volume, privacy, and outdoor flow of a detached suburban villa within the secure, elevated perimeter of a fully managed building in Riyadh’s prime expansion corridor.',
     architecturalHighlights: [
-      '6.4-meter double-height great room with motorized solar louvers',
-      '95 m² private landscaped sky terrace with outdoor kitchen and pergola lounge',
-      'Private internal hydraulic glass elevator connecting both penthouse levels',
-      'Primary retreat with dual dressing salons and freestanding marble soaking bath',
-      'High-security biometric building entrance and 2 dedicated garage spots'
+      'Two-story 6.2m ceiling volume in the main formal reception gallery',
+      'Private rooftop sky terrace with integrated infinity plunge pool',
+      'Chef kitchen equipped with Gaggenau appliances plus separate service kitchen',
+      'Four en-suite bedroom chambers with custom walk-in dressing rooms',
+      'Three dedicated basement parking spaces with private direct elevator access'
     ],
     financialMetrics: {
-      estimatedYield: '6.2% Net Yield',
-      capitalAppreciation: '+13.8% Northern Riyadh Corridor',
-      occupancyProfile: 'Private Wealth, Tech Founders & Senior Partners',
-      serviceCharge: 'SAR 50 / m² per annum'
+      estimatedYield: '6.4% Net Yield',
+      capitalAppreciation: '+13.8% 3-Year District Trend',
+      occupancyProfile: 'Managing Partners, Senior C-Suite & Family Offices',
+      serviceCharge: 'SAR 55 / m² per annum'
     },
     location: {
       address: 'Anas Ibn Malik Road, Al Malqa, Riyadh 13524',
-      coordinates: { lat: 24.8123, lng: 46.6198 },
+      coordinates: { lat: 24.8118, lng: 46.6195 },
       districtCode: 'RUH-NW-02',
       nearby: [
-        { label: 'King Salman Park Access Corridor', distance: '10 mins' },
-        { label: 'KAFD Financial Center', distance: '9 mins' },
-        { label: 'Riyadh Golf Club & Equestrian', distance: '15 mins' },
-        { label: 'King Khalid International Airport', distance: '18 mins' }
+        { label: 'King Abdullah Financial District (KAFD)', distance: '9 mins' },
+        { label: 'Riyadh Golf Club & Equestrian Club', distance: '12 mins' },
+        { label: 'King Khalid International Airport', distance: '16 mins' },
+        { label: 'Dr. Sulaiman Al Habib Hospital', distance: '6 mins' }
       ]
     },
-    developerTier: 'Boutique Architectural Atelier',
-    handoverStatus: 'Ready for Immediate Occupation',
-    zoning: 'Luxury Low-Density Multi-Family'
-  },
-  {
-    id: 'jeddah-salamah-retail',
-    title: 'The Al Salamah Avenue Commercial Unit',
-    subtitle: 'Street-Fronting Commercial Showroom & Retail Asset in Jeddah',
-    city: 'Jeddah',
-    district: 'Al Salamah',
-    type: 'Retail',
-    category: 'Commercial',
-    price: 1850000,
-    priceLabel: 'SAR 1,850,000',
-    pricePerSqm: 19473,
-    beds: null,
-    baths: 1,
-    area: 95,
-    parkingSpaces: 3,
-    completionYear: 2023,
-    status: 'Available',
-    featured: false,
-    image: '/assets/prop-retail.jpg',
-    gallery: [
-      '/assets/prop-retail.jpg',
-      '/assets/district.jpg',
-      '/assets/hero.jpg'
-    ],
-    blurb: 'A glass-fronted commercial boutique showroom occupying a corner position on a lively commercial boulevard in Al Salamah, Jeddah.',
-    overview: 'Positioned to capture both vehicular and pedestrian footfall, this unit features a 12-meter continuous display facade, generous 4.2m clear slab-to-slab ceiling height, dedicated customer parking bays, and pre-installed grease-trap and three-phase power provisions suitable for luxury specialty retail or specialty food & beverage.',
-    architecturalHighlights: [
-      '12-meter full-height architectural glass frontage providing prime visibility',
-      '4.2m ceiling volume facilitating high-end custom interior fit-out',
-      'Pre-approved civil defense permits and commercial retail zoning license',
-      'Three dedicated curbside customer parking bays directly in front',
-      'Three-phase 100A power capacity with auxiliary exhaust shaft'
-    ],
-    financialMetrics: {
-      estimatedYield: '8.9% High-Street Retail Yield',
-      capitalAppreciation: '+8.0% Jeddah Urban Regeneration',
-      occupancyProfile: 'Luxury Specialty Retail, Clinic or Gourmet Cafe Tenant',
-      serviceCharge: 'SAR 35 / m² per annum'
-    },
-    location: {
-      address: 'Prince Sultan Branch Road, Al Salamah, Jeddah 23436',
-      coordinates: { lat: 21.5794, lng: 39.1558 },
-      districtCode: 'JED-COM-07',
-      nearby: [
-        { label: 'Prince Sultan Commercial Spine', distance: '1 min' },
-        { label: 'Madinah Road Arterial', distance: '4 mins' },
-        { label: 'Sari Street Dining Quarter', distance: '5 mins' },
-        { label: 'Jeddah Corniche Waterfront', distance: '11 mins' }
-      ]
-    },
-    developerTier: 'Urban Commercial Development Group',
-    handoverStatus: 'Core & Shell Ready for Fit-Out',
-    zoning: 'Commercial High-Street Retail C-1'
+    developerTier: 'Sadu Development Prime Channel',
+    handoverStatus: 'Immediate Handover',
+    zoning: 'Prime Boutique High-Density Residential'
   }
 ];
 
@@ -393,45 +388,51 @@ export const sampleInquiries = [
     propertyId: 'riyadh-olaya-apartment',
     propertyTitle: 'The Olaya Executive Residence',
     name: 'Faisal Al-Otaibi',
-    email: 'faisal.otaibi@domain-example.sa',
+    mobile: '+966 55 491 8820',
     phone: '+966 55 491 8820',
+    lookingFor: 'Seeking two executive units in Al Olaya for corporate allocation.',
+    message: 'Seeking two executive units in Al Olaya for corporate allocation.',
+    email: 'faisal.otaibi@sadu-development.sa',
     cityOfInterest: 'Riyadh',
     inquiryType: 'Private Acquisition',
-    budgetRange: 'SAR 1M - 2M',
-    timeframe: 'Immediate (1-3 months)',
-    message: 'We are seeking two executive 2-bedroom units in Al Olaya for a corporate portfolio. Please share lease history and yield schedule.',
+    budgetRange: 'SAR 2M - 4M',
+    timeframe: 'Immediate',
     channel: 'Website Form',
     status: 'Under Review',
     createdAt: new Date(Date.now() - 36 * 3600 * 1000).toISOString()
   },
   {
     id: 'inq-102',
-    propertyId: 'riyadh-kfrd-office',
-    propertyTitle: 'The King Fahd Tower Corporate Floorplate',
+    propertyId: 'dubai-marina-penthouse',
+    propertyTitle: 'The Dubai Marina Sky Sanctuary',
     name: 'Noura Mansour',
-    email: 'n.mansour@investments-sample.com',
-    phone: '+966 50 219 7733',
-    cityOfInterest: 'Riyadh',
+    mobile: '+971 50 219 7733',
+    phone: '+971 50 219 7733',
+    lookingFor: 'Interested in Dubai Marina penthouse and waterfront yield options.',
+    message: 'Interested in Dubai Marina penthouse and waterfront yield options.',
+    email: 'n.mansour@sadu-development.sa',
+    cityOfInterest: 'Dubai',
     inquiryType: 'Commercial Investment',
     budgetRange: 'SAR 4M - 6M',
-    timeframe: 'Within 6 months',
-    message: 'Inquiring on behalf of a regional asset management firm regarding full-floor office acquisitions along King Fahd Road.',
+    timeframe: 'Within 3 months',
     channel: 'Website Form',
     status: 'Advisory Scheduled',
     createdAt: new Date(Date.now() - 14 * 3600 * 1000).toISOString()
   },
   {
     id: 'inq-103',
-    propertyId: 'jeddah-corniche-apartment',
-    propertyTitle: 'The Red Sea Horizon Residence',
+    propertyId: 'mecca-abraj-residence',
+    propertyTitle: 'The Mecca Holy Sanctuary Suite',
     name: 'Tariq Bin Zaid',
-    email: 'tariq.binzaid@familyoffice-demo.sa',
+    mobile: '+966 54 812 4490',
     phone: '+966 54 812 4490',
-    cityOfInterest: 'Jeddah',
+    lookingFor: 'Sanctuary residence near Haram in Mecca for private family heritage.',
+    message: 'Sanctuary residence near Haram in Mecca for private family heritage.',
+    email: 'tariq.binzaid@sadu-development.sa',
+    cityOfInterest: 'Mecca',
     inquiryType: 'Family Office Allocation',
-    budgetRange: 'SAR 2M - 4M',
-    timeframe: 'Immediate (1-3 months)',
-    message: 'Requesting private walkthrough of the Red Sea Horizon Residence during our Jeddah delegation visit next Thursday.',
+    budgetRange: 'SAR 4M+',
+    timeframe: 'Immediate',
     channel: 'WhatsApp Concierge',
     status: 'In Progress',
     createdAt: new Date(Date.now() - 4 * 3600 * 1000).toISOString()
@@ -439,35 +440,53 @@ export const sampleInquiries = [
 ];
 
 export const companyMetrics = {
-  activeCorridors: 3,
+  activeCorridors: 5,
   curatedPortfolioValue: 'SAR 840M+',
   tier1DevelopersRepresented: 18,
   averageYieldUnderAdvisory: '7.6%',
   cities: [
     {
       name: 'Riyadh',
-      role: 'Capital Metropolitan Spine',
-      description: 'The commercial and administrative heart of Vision 2030, anchored by KAFD, Diriyah, and high-density commercial demand.',
+      role: 'Capital Metropolitan Core',
+      description: 'The commercial and administrative heart of Vision 2030, anchored by KAFD and high-density commercial demand.',
       averageAppreciation: '+11.2% YoY',
       primeYield: '7.2% - 8.5%',
-      curatedPropertiesCount: 4,
+      curatedPropertiesCount: 3,
       image: '/assets/hero.jpg'
     },
     {
       name: 'Jeddah',
       role: 'Red Sea Gateway & Waterfront',
-      description: 'A cosmopolitan coastal hub undergoing massive waterfront regeneration, lifestyle residential developments, and hospitality growth.',
+      description: 'Cosmopolitan coastal hub undergoing waterfront regeneration, marina residences, and hospitality growth.',
       averageAppreciation: '+8.7% YoY',
       primeYield: '6.5% - 7.8%',
-      curatedPropertiesCount: 2,
+      curatedPropertiesCount: 1,
       image: '/assets/prop-jeddah.jpg'
     },
     {
-      name: 'Al Khobar',
-      role: 'Eastern Province Energy Corridor',
-      description: 'High-income economic corridor bordering the Gulf with steady executive housing demand and gateway proximity to Bahrain.',
-      averageAppreciation: '+7.4% YoY',
-      primeYield: '7.0% - 8.1%',
+      name: 'Mecca',
+      role: 'Holy Sanctuary Core',
+      description: 'Rare, irreplaceable sanctuary real estate with immediate spiritual proximity to the Grand Mosque.',
+      averageAppreciation: '+14.2% YoY',
+      primeYield: '8.5% Net',
+      curatedPropertiesCount: 1,
+      image: '/assets/district.jpg'
+    },
+    {
+      name: 'Medina',
+      role: 'Sacred Heritage Precinct',
+      description: 'Tranquil luxury residences and hospitality suites near the Prophet’s Mosque.',
+      averageAppreciation: '+10.8% YoY',
+      primeYield: '7.9% Net',
+      curatedPropertiesCount: 1,
+      image: '/assets/advisory.jpg'
+    },
+    {
+      name: 'Dubai',
+      role: 'Global Waterfront & Sky Towers',
+      description: 'Iconic sky sanctuaries and beachfront penthouses across Dubai Marina and Palm Jumeirah.',
+      averageAppreciation: '+11.5% YoY',
+      primeYield: '7.8% Net',
       curatedPropertiesCount: 1,
       image: '/assets/prop-khobar.jpg'
     }

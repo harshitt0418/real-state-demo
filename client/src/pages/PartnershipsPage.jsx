@@ -249,8 +249,9 @@ export default function PartnershipsPage() {
                       >
                         <option value="Riyadh">Riyadh Metropolitan</option>
                         <option value="Jeddah">Jeddah Waterfront</option>
-                        <option value="Al Khobar">Al Khobar & Eastern Prov.</option>
-                        <option value="Other">Other Saudi City</option>
+                        <option value="Mecca">Mecca Holy Precinct</option>
+                        <option value="Medina">Medina Central Corridor</option>
+                        <option value="Dubai">Dubai Luxury High-Rise</option>
                       </select>
                     </div>
                     <div>

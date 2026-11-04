@@ -7,7 +7,7 @@ import { sampleProperties, sampleInquiries } from '../data/sampleData.js';
 dotenv.config();
 
 const seedDatabase = async () => {
-  const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/miras_real_estate';
+  const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/sadu_real_estate';
 
   console.log(`[Seed Script] Attempting connection to MongoDB at: ${uri}`);
 

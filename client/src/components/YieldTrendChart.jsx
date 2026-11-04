@@ -10,24 +10,24 @@ export default function YieldTrendChart() {
       title: 'Capital Appreciation Trajectory',
       unit: '% Cumulative',
       data: [
-        { year: '2021', riyadh: 100, jeddah: 100, khobar: 100, label: 'Base Year 100' },
-        { year: '2022', riyadh: 112, jeddah: 107, khobar: 106, label: '+12% Riyadh' },
-        { year: '2023', riyadh: 126, jeddah: 115, khobar: 113, label: '+26% Riyadh' },
-        { year: '2024', riyadh: 142, jeddah: 124, khobar: 120, label: '+42% Riyadh' },
-        { year: '2025', riyadh: 158, jeddah: 132, khobar: 126, label: '+58% Riyadh' },
-        { year: '2026', riyadh: 172, jeddah: 141, khobar: 133, label: '+72% Riyadh Peak' }
+        { year: '2021', riyadh: 100, jeddah: 100, dubai: 100, label: 'Base Year 100' },
+        { year: '2022', riyadh: 112, jeddah: 107, dubai: 110, label: '+12% Riyadh' },
+        { year: '2023', riyadh: 126, jeddah: 115, dubai: 122, label: '+26% Riyadh' },
+        { year: '2024', riyadh: 142, jeddah: 124, dubai: 135, label: '+42% Riyadh' },
+        { year: '2025', riyadh: 158, jeddah: 132, dubai: 148, label: '+58% Riyadh' },
+        { year: '2026', riyadh: 172, jeddah: 141, dubai: 162, label: '+72% Riyadh Peak' }
       ]
     },
     yield: {
       title: 'Net Unlevered Yield Spread',
       unit: '% Net',
       data: [
-        { year: '2021', riyadh: 6.2, jeddah: 5.9, khobar: 6.8, label: '6.2% Avg' },
-        { year: '2022', riyadh: 6.5, jeddah: 6.1, khobar: 7.1, label: '6.5% Avg' },
-        { year: '2023', riyadh: 6.8, jeddah: 6.4, khobar: 7.5, label: '6.8% Avg' },
-        { year: '2024', riyadh: 7.1, jeddah: 6.6, khobar: 7.8, label: '7.1% Avg' },
-        { year: '2025', riyadh: 7.3, jeddah: 6.7, khobar: 8.0, label: '7.3% Avg' },
-        { year: '2026', riyadh: 7.6, jeddah: 6.8, khobar: 8.2, label: '7.6% Avg Target' }
+        { year: '2021', riyadh: 6.2, jeddah: 5.9, dubai: 6.8, label: '6.2% Avg' },
+        { year: '2022', riyadh: 6.5, jeddah: 6.1, dubai: 7.1, label: '6.5% Avg' },
+        { year: '2023', riyadh: 6.8, jeddah: 6.4, dubai: 7.4, label: '6.8% Avg' },
+        { year: '2024', riyadh: 7.1, jeddah: 6.6, dubai: 7.7, label: '7.1% Avg' },
+        { year: '2025', riyadh: 7.3, jeddah: 6.7, dubai: 7.9, label: '7.3% Avg' },
+        { year: '2026', riyadh: 7.6, jeddah: 6.8, dubai: 8.2, label: '7.6% Avg Target' }
       ]
     }
   };
@@ -41,8 +41,8 @@ export default function YieldTrendChart() {
   const paddingX = 50;
   const paddingY = 40;
 
-  const minVal = Math.min(...points.map(p => Math.min(p.riyadh, p.jeddah, p.khobar))) * 0.95;
-  const maxVal = Math.max(...points.map(p => Math.max(p.riyadh, p.jeddah, p.khobar))) * 1.05;
+  const minVal = Math.min(...points.map(p => Math.min(p.riyadh, p.jeddah, p.dubai))) * 0.95;
+  const maxVal = Math.max(...points.map(p => Math.max(p.riyadh, p.jeddah, p.dubai))) * 1.05;
 
   const getX = (index) => paddingX + (index / (points.length - 1)) * (width - paddingX * 2);
   const getY = (val) => height - paddingY - ((val - minVal) / (maxVal - minVal)) * (height - paddingY * 2);
@@ -63,74 +63,76 @@ export default function YieldTrendChart() {
 
   const riyadhPath = generatePath('riyadh');
   const jeddahPath = generatePath('jeddah');
-  const khobarPath = generatePath('khobar');
+  const dubaiPath = generatePath('dubai');
 
   return (
-    <div className="bg-[#141412] border border-[rgba(255,255,255,0.08)] rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+    <div className="bg-[#121210] border border-[rgba(255,255,255,0.08)] rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
       
-      {/* Header with Mode Toggle */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[rgba(255,255,255,0.08)] pb-5 mb-6">
+      {/* Background Ambience */}
+      <div className="absolute top-0 right-0 w-80 h-80 bg-[#B8913A]/5 blur-[90px] rounded-full pointer-events-none" />
+
+      {/* Header and Toggle Controls */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[rgba(255,255,255,0.08)] pb-5 mb-6 relative z-10">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="h-2 w-2 rounded-full bg-[#D4A853] animate-pulse" />
-            <p className="text-[10px] font-mono uppercase tracking-widest text-[#B8913A] font-semibold">
-              Predictive Market Analytics
-            </p>
+            <span className="h-2 w-2 rounded-full bg-[#D4A853] animate-ping" />
+            <span className="text-[10px] font-mono uppercase tracking-widest text-[#D4A853]">
+              Market Yield Intelligence
+            </span>
           </div>
-          <h3 className="font-serif font-bold text-lg sm:text-xl text-[#E8E3DC]">
+          <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#E8E3DC]">
             {currentMetric.title}
           </h3>
         </div>
 
-        {/* Toggle Pills */}
-        <div className="flex items-center gap-1.5 p-1 bg-[#1A1A18] rounded-lg border border-[rgba(255,255,255,0.06)]">
+        {/* Metric Switcher */}
+        <div className="flex items-center gap-1 p-1 bg-[#1A1A18] rounded-xl border border-[rgba(255,255,255,0.08)] self-start sm:self-auto">
           <button
             onClick={() => setActiveMetric('appreciation')}
-            className={`px-3 py-1.5 rounded-md text-xs font-medium font-sans transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
               activeMetric === 'appreciation'
-                ? 'bg-[#B8913A] text-[#FAF7F2] font-semibold shadow-sm'
+                ? 'bg-[#B8913A] text-[#FAF7F2] shadow-sm'
                 : 'text-[#8A8578] hover:text-white'
             }`}
           >
-            Capital Growth Index
+            Capital Growth
           </button>
           <button
             onClick={() => setActiveMetric('yield')}
-            className={`px-3 py-1.5 rounded-md text-xs font-medium font-sans transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
               activeMetric === 'yield'
-                ? 'bg-[#B8913A] text-[#FAF7F2] font-semibold shadow-sm'
+                ? 'bg-[#B8913A] text-[#FAF7F2] shadow-sm'
                 : 'text-[#8A8578] hover:text-white'
             }`}
           >
-            Yield Spread %
+            Net Yield %
           </button>
         </div>
       </div>
 
-      {/* Corridor Legend Bar */}
-      <div className="flex flex-wrap items-center gap-5 text-xs mb-6">
+      {/* Legend */}
+      <div className="flex items-center gap-6 mb-4 text-xs font-mono">
         <div className="flex items-center gap-2">
-          <span className="h-2.5 w-6 rounded-full bg-[#D4A853]" />
-          <span className="text-white font-medium">Riyadh Prime (+72% Peak)</span>
+          <span className="h-2.5 w-2.5 rounded-full bg-[#D4A853]" />
+          <span className="text-[#E8E3DC] font-semibold">Riyadh Prime (+72%)</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="h-2.5 w-6 rounded-full bg-[#8A6C2A]" />
-          <span className="text-white/70">Jeddah Waterfront (+41%)</span>
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+          <span className="text-white/70">Dubai Luxury (+62%)</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="h-2.5 w-6 rounded-full bg-[#6B6B5A]" />
-          <span className="text-white/50">Al Khobar Energy (+33%)</span>
+          <span className="h-2.5 w-2.5 rounded-full bg-[#8A6C2A]" />
+          <span className="text-white/60">Jeddah Coastal (+41%)</span>
         </div>
       </div>
 
-      {/* SVG Interactive Chart */}
-      <div className="relative aspect-[16/8] w-full select-none">
-        <svg 
-          viewBox={`0 0 ${width} ${height}`} 
+      {/* SVG Bezier Spline Chart */}
+      <div className="relative w-full aspect-[16/7] max-h-[300px]">
+        <svg
+          viewBox={`0 0 ${width} ${height}`}
           className="w-full h-full overflow-visible"
         >
           <defs>
-            {/* Riyadh Area Gradient */}
             <linearGradient id="riyadhGradient" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#D4A853" stopOpacity="0.3" />
               <stop offset="100%" stopColor="#D4A853" stopOpacity="0.0" />
@@ -160,7 +162,7 @@ export default function YieldTrendChart() {
           />
 
           {/* Curves */}
-          <path d={khobarPath} fill="none" stroke="#6B6B5A" strokeWidth="2" strokeDasharray="3 3" />
+          <path d={dubaiPath} fill="none" stroke="#34D399" strokeWidth="2" strokeDasharray="3 3" />
           <path d={jeddahPath} fill="none" stroke="#8A6C2A" strokeWidth="2.5" />
           <path d={riyadhPath} fill="none" stroke="#D4A853" strokeWidth="3" className="transition-all duration-700" />
 
@@ -239,8 +241,8 @@ export default function YieldTrendChart() {
 
       {/* Bottom Transparency Note */}
       <div className="pt-4 border-t border-[rgba(255,255,255,0.06)] flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] font-mono text-[#8A8578]">
-        <span>Model Source: REGA Registered Index Comps & Tier-1 Master Developer Drawdowns</span>
-        <span className="text-[#D4A853]">Interactive Spline Intelligence</span>
+        <span>Sadu Real Estate Development — Multi-Market Index</span>
+        <span className="text-[#D4A853]">Interactive Telemetry</span>
       </div>
 
     </div>

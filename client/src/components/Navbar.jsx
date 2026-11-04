@@ -103,25 +103,25 @@ export default function Navbar({ onOpenInquiry }) {
           {/* Brand */}
           <Link to="/" className="group flex items-center gap-3">
             <div className={`h-9 w-9 rounded-sm border flex items-center justify-center font-serif font-bold text-lg transition-all duration-300 ${logoMarkBg}`}>
-              M
+              S
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
                 <span className={`font-serif text-lg tracking-wider font-semibold transition-colors duration-300 ${logoNameColor}`}>
-                  MIRĀS
+                  SADU
                 </span>
                 <span className={`text-[10px] tracking-widest uppercase font-sans font-light border-l pl-2 transition-colors duration-300 ${
                   isHomePage && isHeroSection && !isMobileMenuOpen
                     ? 'text-[#D4A853] border-white/20'
                     : 'text-[#B8913A] border-[rgba(15,15,14,0.14)]'
                 }`}>
-                  مِيراث
+                  سدو
                 </span>
               </div>
-              <span className={`text-[10px] tracking-[0.16em] uppercase font-sans font-medium transition-colors duration-300 ${
+              <span className={`text-[9.5px] tracking-[0.16em] uppercase font-sans font-medium transition-colors duration-300 ${
                 isHomePage && isHeroSection && !isMobileMenuOpen ? 'text-white/60' : 'text-[#6B6B5A]'
               }`}>
-                Real Estate Advisory
+                Real Estate Development
               </span>
             </div>
           </Link>

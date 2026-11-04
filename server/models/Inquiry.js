@@ -7,12 +7,19 @@ const inquirySchema = new mongoose.Schema(
       required: [true, 'Please provide your full name'],
       trim: true
     },
+    mobile: {
+      type: String,
+      trim: true
+    },
+    lookingFor: {
+      type: String,
+      trim: true
+    },
     email: {
       type: String,
-      required: [true, 'Please provide your email address'],
       trim: true,
       lowercase: true,
-      match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email address']
+      default: ''
     },
     phone: {
       type: String,
@@ -51,7 +58,7 @@ const inquirySchema = new mongoose.Schema(
     },
     message: {
       type: String,
-      required: [true, 'Please provide details on your investment requirements or brief'],
+      default: '',
       trim: true
     },
     channel: {

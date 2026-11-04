@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { MapPin, Radio, Compass, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Radio, Sparkles } from 'lucide-react';
 
 /**
  * InteractiveRadarMap — Stylized SVG Architectural Constellation Radar
- * Displays the geographical growth triangle of Saudi Arabia: Riyadh, Jeddah, Al Khobar
+ * Exclusive Sadu Corridors: Riyadh, Jeddah, Mecca, Medina, Dubai
  */
-export default function InteractiveRadarMap({ activeCity, onSelectCity }) {
+export default function InteractiveRadarMap({ activeCity = 0, onSelectCity }) {
   const [hoveredNode, setHoveredNode] = useState(null);
 
   const nodes = [
@@ -13,43 +13,61 @@ export default function InteractiveRadarMap({ activeCity, onSelectCity }) {
       id: 0,
       name: 'Riyadh',
       arabic: 'الرياض',
-      tag: 'Capital Financial Hub',
+      tag: 'Capital Financial Core & Sovereign HQ',
       coords: '24°42′N 46°40′E',
-      x: 340,
-      y: 190,
+      x: 330,
+      y: 200,
       stat: '+11.2% YoY',
       statLabel: 'Capital Growth',
-      elevation: '612m ASL',
-      distanceToJeddah: '850 km',
-      distanceToKhobar: '410 km'
+      elevation: '612m ASL'
     },
     {
       id: 1,
       name: 'Jeddah',
       arabic: 'جدة',
-      tag: 'Red Sea Coastal Gateway',
+      tag: 'Red Sea Gateway & Waterfront Living',
       coords: '21°32′N 39°10′E',
-      x: 170,
-      y: 280,
+      x: 130,
+      y: 290,
       stat: '6.8% Net',
       statLabel: 'Waterfront Yield',
-      elevation: '12m ASL',
-      distanceToRiyadh: '850 km',
-      distanceToKhobar: '1,240 km'
+      elevation: '12m ASL'
     },
     {
       id: 2,
-      name: 'Al Khobar',
-      arabic: 'الخبر',
-      tag: 'Eastern Energy Corridor',
-      coords: '26°17′N 50°12′E',
-      x: 480,
-      y: 155,
-      stat: '94% Occ.',
-      statLabel: 'Executive Tenancy',
-      elevation: '8m ASL',
-      distanceToRiyadh: '410 km',
-      distanceToJeddah: '1,240 km'
+      name: 'Mecca',
+      arabic: 'مكة المكرمة',
+      tag: 'Holy Sanctuary & Perpetual Heritage',
+      coords: '21°25′N 39°49′E',
+      x: 175,
+      y: 250,
+      stat: '8.5% Net',
+      statLabel: 'Sanctuary Yield',
+      elevation: '277m ASL'
+    },
+    {
+      id: 3,
+      name: 'Medina',
+      arabic: 'المدينة المنورة',
+      tag: 'Sacred Heritage & Central Precinct',
+      coords: '24°28′N 39°36′E',
+      x: 190,
+      y: 140,
+      stat: '7.9% Net',
+      statLabel: 'Sacred Core Yield',
+      elevation: '608m ASL'
+    },
+    {
+      id: 4,
+      name: 'Dubai',
+      arabic: 'دبي',
+      tag: 'Global Waterfront & Luxury Towers',
+      coords: '25°12′N 55°17′E',
+      x: 500,
+      y: 130,
+      stat: '7.8% Net',
+      statLabel: 'Marina Prime Yield',
+      elevation: '16m ASL'
     }
   ];
 
@@ -76,10 +94,10 @@ export default function InteractiveRadarMap({ activeCity, onSelectCity }) {
           </div>
           <div>
             <h3 className="font-serif font-bold text-sm sm:text-base text-[#E8E3DC]">
-              Geographic Constellation Radar
+              SADU Strategic Territory Radar
             </h3>
             <p className="text-[10px] font-mono text-[#8A8578] uppercase tracking-wider">
-              Autonomous Growth Triangle Telemetry
+              Exclusive Corridors: Riyadh · Jeddah · Mecca · Medina · Dubai
             </p>
           </div>
         </div>
@@ -99,77 +117,41 @@ export default function InteractiveRadarMap({ activeCity, onSelectCity }) {
           viewBox="0 0 600 360" 
           className="w-full h-full overflow-visible"
         >
-          <defs>
-            {/* Linear gradient for triangle lines */}
-            <linearGradient id="triangleBeam" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#B8913A" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#D4A853" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#B8913A" stopOpacity="0.8" />
-            </linearGradient>
+          {/* Radar range circles centered at Riyadh */}
+          <circle cx="330" cy="200" r="70" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="1" strokeDasharray="3 3" />
+          <circle cx="330" cy="200" r="140" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="1" strokeDasharray="4 4" />
+          <circle cx="330" cy="200" r="220" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" strokeDasharray="6 6" />
 
-            {/* Radar scanner sweep gradient */}
-            <radialGradient id="radarGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#D4A853" stopOpacity="0.25" />
-              <stop offset="100%" stopColor="#D4A853" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-
-          {/* Concentric radar range rings centered around Riyadh */}
-          <circle cx="340" cy="190" r="70" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="1" strokeDasharray="3 3" />
-          <circle cx="340" cy="190" r="140" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="1" strokeDasharray="4 4" />
-          <circle cx="340" cy="190" r="220" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" strokeDasharray="6 6" />
-
-          {/* Connecting Triangle Geometry */}
-          {/* Riyadh to Jeddah */}
-          <line 
-            x1="340" y1="190" 
-            x2="170" y2="280" 
-            stroke="rgba(184, 145, 58, 0.35)" 
-            strokeWidth="1.5" 
-            strokeDasharray="5 5"
-            className="circuit-line"
-          />
-          {/* Riyadh to Al Khobar */}
-          <line 
-            x1="340" y1="190" 
-            x2="480" y2="155" 
-            stroke="rgba(184, 145, 58, 0.35)" 
-            strokeWidth="1.5" 
-            strokeDasharray="5 5"
-            className="circuit-line"
-          />
-          {/* Jeddah to Al Khobar (base) */}
-          <line 
-            x1="170" y1="280" 
-            x2="480" y2="155" 
-            stroke="rgba(184, 145, 58, 0.20)" 
-            strokeWidth="1" 
-            strokeDasharray="6 6"
-          />
-
-          {/* Distance Labels */}
-          <text x="240" y="245" fill="#8A8578" fontSize="9" fontFamily="monospace" textAnchor="middle">850 KM</text>
-          <text x="415" y="165" fill="#8A8578" fontSize="9" fontFamily="monospace" textAnchor="middle">410 KM</text>
+          {/* Interconnecting Circuit Lines */}
+          {/* Riyadh to Medina */}
+          <line x1="330" y1="200" x2="190" y2="140" stroke="rgba(184, 145, 58, 0.35)" strokeWidth="1.2" strokeDasharray="4 4" />
+          {/* Medina to Mecca */}
+          <line x1="190" y1="140" x2="175" y2="250" stroke="rgba(184, 145, 58, 0.40)" strokeWidth="1.2" strokeDasharray="4 4" />
+          {/* Mecca to Jeddah */}
+          <line x1="175" y1="250" x2="130" y2="290" stroke="rgba(184, 145, 58, 0.45)" strokeWidth="1.5" strokeDasharray="4 4" />
+          {/* Jeddah to Riyadh */}
+          <line x1="130" y1="290" x2="330" y2="200" stroke="rgba(184, 145, 58, 0.35)" strokeWidth="1.2" strokeDasharray="4 4" />
+          {/* Riyadh to Dubai */}
+          <line x1="330" y1="200" x2="500" y2="130" stroke="rgba(184, 145, 58, 0.40)" strokeWidth="1.2" strokeDasharray="4 4" />
 
           {/* Interactive Nodes */}
           {nodes.map((node) => {
             const isSelected = activeCity === node.id;
-            const isHovered = hoveredNode === node.id;
 
             return (
               <g 
                 key={node.id} 
                 className="cursor-pointer group"
-                onClick={() => onSelectCity(node.id)}
+                onClick={() => onSelectCity && onSelectCity(node.id)}
                 onMouseEnter={() => setHoveredNode(node.id)}
                 onMouseLeave={() => setHoveredNode(null)}
               >
-                {/* Sonar Pulse Ring */}
+                {/* Sonar Pulse */}
                 {isSelected && (
                   <circle 
                     cx={node.x} 
                     cy={node.y} 
-                    r="24" 
+                    r="22" 
                     fill="none" 
                     stroke="#D4A853" 
                     strokeWidth="1" 
@@ -181,7 +163,7 @@ export default function InteractiveRadarMap({ activeCity, onSelectCity }) {
                 <circle 
                   cx={node.x} 
                   cy={node.y} 
-                  r={isSelected ? "16" : "12"} 
+                  r={isSelected ? "15" : "11"} 
                   fill={isSelected ? "rgba(184, 145, 58, 0.25)" : "rgba(255,255,255,0.06)"} 
                   stroke={isSelected ? "#B8913A" : "rgba(255,255,255,0.2)"} 
                   strokeWidth="1.5"
@@ -200,7 +182,7 @@ export default function InteractiveRadarMap({ activeCity, onSelectCity }) {
                 {/* City Label */}
                 <text 
                   x={node.x} 
-                  y={node.y - 20} 
+                  y={node.y - 18} 
                   fill={isSelected ? "#D4A853" : "#C8C3BA"} 
                   fontSize="12" 
                   fontWeight="bold" 
@@ -214,7 +196,7 @@ export default function InteractiveRadarMap({ activeCity, onSelectCity }) {
                 {/* Stat Pill */}
                 <text 
                   x={node.x} 
-                  y={node.y + 26} 
+                  y={node.y + 24} 
                   fill={isSelected ? "#E8E3DC" : "#8A8578"} 
                   fontSize="9.5" 
                   fontFamily="monospace" 
@@ -229,15 +211,15 @@ export default function InteractiveRadarMap({ activeCity, onSelectCity }) {
         </svg>
 
         {/* Floating live inspection telemetry panel */}
-        <div className="absolute bottom-2 left-2 right-2 sm:right-auto sm:w-80 glass-card-dark p-3.5 rounded-xl border border-[rgba(255,255,255,0.12)] space-y-1.5 shadow-xl animate-in fade-in">
+        <div className="absolute bottom-2 left-2 right-2 sm:right-auto sm:w-80 glass-card-dark p-3.5 rounded-xl border border-[rgba(255,255,255,0.12)] space-y-1 shadow-xl animate-in fade-in">
           <div className="flex items-center justify-between">
-            <span className="font-serif font-bold text-sm text-[#E8E3DC]">{current.name} Corridor</span>
-            <span className="text-[10px] font-mono text-[#D4A853]">{current.stat}</span>
+            <span className="font-serif font-bold text-sm text-[#E8E3DC]">{current.name}</span>
+            <span className="text-[10px] font-mono text-[#D4A853] font-semibold">{current.stat}</span>
           </div>
           <p className="text-[11px] text-[#8A8578] leading-tight">{current.tag}</p>
           <div className="flex items-center justify-between pt-1 border-t border-[rgba(255,255,255,0.06)] text-[9.5px] font-mono text-white/50">
-            <span>Elevation: {current.elevation}</span>
-            <span>Click node to inspect</span>
+            <span>{current.coords}</span>
+            <span>Click node to switch</span>
           </div>
         </div>
 

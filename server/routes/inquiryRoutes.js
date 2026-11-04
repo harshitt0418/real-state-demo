@@ -61,12 +61,14 @@ router.get('/', async (req, res) => {
 
 /**
  * POST /api/inquiries
- * Submit a new consultation or property inquiry
+ * Submit a new consultation or property inquiry (Name, Mobile, Looking for)
  */
 router.post('/', async (req, res) => {
   try {
     const {
       name,
+      mobile,
+      lookingFor,
       email,
       phone,
       cityOfInterest,
@@ -79,33 +81,34 @@ router.post('/', async (req, res) => {
       channel
     } = req.body;
 
-    // Basic validation
-    if (!name || !email || !message) {
+    // Support 3-column format (Name, Mobile, Looking for) and legacy fallback
+    const contactMobile = (mobile || phone || '').toString().trim();
+    const requirement = (lookingFor || message || '').toString().trim();
+
+    if (!name || (!contactMobile && !email) || !requirement) {
       return res.status(400).json({
         success: false,
-        message: 'Name, email, and message are required fields.'
+        message: 'Name, Mobile, and Looking for are required.'
       });
     }
 
-    const emailRegex = /^\S+@\S+\.\S+$/;
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({
-        success: false,
-        message: 'Please provide a valid email address.'
-      });
-    }
+    const cleanEmail = email && /^\S+@\S+\.\S+$/.test(email)
+      ? email.trim().toLowerCase()
+      : `${contactMobile.replace(/\D/g, '') || 'client'}@sadu-development.sa`;
 
     const inquiryPayload = {
       name: name.trim(),
-      email: email.trim().toLowerCase(),
-      phone: phone ? phone.trim() : '',
+      mobile: contactMobile,
+      phone: contactMobile,
+      lookingFor: requirement,
+      message: requirement,
+      email: cleanEmail,
       cityOfInterest: cityOfInterest || 'Riyadh',
-      inquiryType: inquiryType || 'Private Acquisition',
+      inquiryType: inquiryType || 'Development Acquisition',
       propertyId: propertyId || null,
       propertyTitle: propertyTitle || null,
-      budgetRange: budgetRange || 'Not Specified',
-      timeframe: timeframe || 'Flexible',
-      message: message.trim(),
+      budgetRange: budgetRange || 'Exclusive Mandate',
+      timeframe: timeframe || 'Immediate',
       channel: channel || 'Website Form',
       status: 'New',
       createdAt: new Date().toISOString()
@@ -115,10 +118,10 @@ router.post('/', async (req, res) => {
 
     if (dbStatus.connected) {
       const createdInquiry = await Inquiry.create(inquiryPayload);
-      console.log(`[MongoDB] New inquiry registered from ${createdInquiry.name} (${createdInquiry.email})`);
+      console.log(`[MongoDB] New inquiry registered: ${createdInquiry.name} (${createdInquiry.mobile || createdInquiry.phone})`);
       return res.status(201).json({
         success: true,
-        message: 'Your advisory inquiry has been received. A senior advisor will contact you shortly.',
+        message: 'Your inquiry has been received. Sadu Real Estate Development will contact your mobile shortly.',
         dataSource: 'MongoDB Live',
         data: createdInquiry
       });
@@ -130,11 +133,11 @@ router.post('/', async (req, res) => {
       ...inquiryPayload
     };
     inMemoryInquiries.unshift(mockCreated);
-    console.log(`[In-Memory Store] New inquiry registered from ${mockCreated.name} (${mockCreated.email})`);
+    console.log(`[In-Memory Store] New inquiry registered: ${mockCreated.name} (${mockCreated.mobile || mockCreated.phone})`);
 
     return res.status(201).json({
       success: true,
-      message: 'Your advisory inquiry has been received. A senior advisor will contact you shortly.',
+      message: 'Your inquiry has been received. Sadu Real Estate Development will contact your mobile shortly.',
       dataSource: 'In-Memory Fallback (Demo Mode)',
       data: mockCreated
     });

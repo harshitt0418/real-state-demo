@@ -91,7 +91,7 @@ export default function PropertiesPage({ onOpenInquiry }) {
             Vetted Real Estate Assets
           </h1>
           <p className="text-[#5A5A52] text-sm sm:text-base leading-relaxed">
-            Explore prime residential residences, architectural villas, and commercial floorplates across Riyadh, Jeddah, and Al Khobar. Sourced directly through regulated master developer channels with verified titles.
+            Explore prime residences, waterfront penthouses, and holy sanctuary suites across Riyadh, Jeddah, Mecca, Medina, and Dubai. Sourced directly through regulated master developer channels with verified titles.
           </p>
         </div>
       </ScrollReveal>

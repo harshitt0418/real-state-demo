@@ -16,55 +16,52 @@ export default function Footer() {
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
               <div className="h-8 w-8 rounded-sm bg-[#161614] border border-[#B8913A]/40 flex items-center justify-center text-[#B8913A] font-serif font-bold text-base">
-                M
+                S
               </div>
               <div className="flex flex-col">
                 <span className="font-serif text-lg tracking-wider font-semibold text-[#E8E3DC]">
-                  MIRĀS ADVISORY
+                  SADU
                 </span>
                 <span className="text-[9px] tracking-[0.2em] uppercase text-[#B8913A]">
-                  Capital & Architectural Property
+                  Real Estate Development
                 </span>
               </div>
             </div>
 
             <p className="text-[#8A8578] text-xs leading-relaxed max-w-md">
-              A specialized real estate consultancy and institutional channel partner connecting discerning capital with vetted developments across the Kingdom of Saudi Arabia.
+              Prime developments and curated real estate acquisitions across Riyadh, Jeddah, Mecca, Medina, and Dubai.
             </p>
 
             <div className="pt-2 flex items-center gap-2 text-[#8A8578] text-[11px]">
               <ShieldCheck size={14} className="text-[#B8913A]" />
-              <span>Compliant with REGA (Real Estate General Authority) Channel Standards</span>
+              <span>REGA Registered & Regulated Development Standards</span>
             </div>
 
             <div className="pt-1 flex items-center gap-2 text-[#8A8578] text-[11px]">
               <Clock size={14} className="text-[#B8913A]" />
-              <span>Advisory Hours: Sun – Thu · 09:00 – 18:00 (GMT+3 Riyadh)</span>
+              <span>Private Desk: Sun – Thu · 09:00 – 18:00 (AST)</span>
             </div>
           </div>
 
           {/* Locations */}
           <div className="space-y-3">
-            <p className="font-serif font-semibold text-[#E8E3DC] tracking-wider text-sm uppercase">Key Corridors</p>
-            <div className="space-y-3 text-[11.5px] leading-relaxed">
-              <div>
-                <p className="text-[#C8C3BA] font-medium flex items-center gap-1.5">
-                  <MapPin size={11} className="text-[#B8913A]" /> Riyadh Headquarters
-                </p>
-                <p className="text-[#8A8578] pl-4">King Fahd Road, Al Olaya District</p>
-              </div>
-              <div>
-                <p className="text-[#C8C3BA] font-medium flex items-center gap-1.5">
-                  <MapPin size={11} className="text-[#B8913A]" /> Jeddah Advisory
-                </p>
-                <p className="text-[#8A8578] pl-4">Corniche Road, Al Shati District</p>
-              </div>
-              <div>
-                <p className="text-[#C8C3BA] font-medium flex items-center gap-1.5">
-                  <MapPin size={11} className="text-[#B8913A]" /> Al Khobar Gateway
-                </p>
-                <p className="text-[#8A8578] pl-4">Prince Turki Street, Al Corniche</p>
-              </div>
+            <p className="font-serif font-semibold text-[#E8E3DC] tracking-wider text-sm uppercase">Exclusive Markets</p>
+            <div className="space-y-2 text-[11.5px] leading-relaxed">
+              <p className="text-[#C8C3BA] flex items-center gap-1.5">
+                <MapPin size={11} className="text-[#B8913A]" /> Riyadh Headquarters
+              </p>
+              <p className="text-[#C8C3BA] flex items-center gap-1.5">
+                <MapPin size={11} className="text-[#B8913A]" /> Jeddah Waterfront
+              </p>
+              <p className="text-[#C8C3BA] flex items-center gap-1.5">
+                <MapPin size={11} className="text-[#B8913A]" /> Mecca Holy Precinct
+              </p>
+              <p className="text-[#C8C3BA] flex items-center gap-1.5">
+                <MapPin size={11} className="text-[#B8913A]" /> Medina Central Corridor
+              </p>
+              <p className="text-[#C8C3BA] flex items-center gap-1.5">
+                <MapPin size={11} className="text-[#B8913A]" /> Dubai Luxury High-Rise
+              </p>
             </div>
           </div>
 
@@ -73,23 +70,23 @@ export default function Footer() {
             <p className="font-serif font-semibold text-[#E8E3DC] tracking-wider text-sm uppercase">Navigation</p>
             <ul className="space-y-2 text-[12px]">
               <li>
-                <Link to="/properties" className="hover:text-[#B8913A] transition-colors">Curated Portfolio</Link>
+                <Link to="/properties" className="hover:text-[#B8913A] transition-colors">Portfolio</Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-[#B8913A] transition-colors">Our Advisory Model</Link>
+                <Link to="/about" className="hover:text-[#B8913A] transition-colors">About SADU</Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-[#B8913A] transition-colors">Investor Services</Link>
+                <Link to="/services" className="hover:text-[#B8913A] transition-colors">Services</Link>
               </li>
               <li>
-                <Link to="/partnerships" className="hover:text-[#B8913A] transition-colors">Developer Channel</Link>
+                <Link to="/partnerships" className="hover:text-[#B8913A] transition-colors">Partnerships</Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-[#B8913A] transition-colors">Schedule Consultation</Link>
+                <Link to="/contact" className="hover:text-[#B8913A] transition-colors">Contact</Link>
               </li>
               <li>
                 <Link to="/inquiries" className="hover:text-[#B8913A] transition-colors flex items-center gap-1">
-                  <span>Inquiries DB Panel</span>
+                  <span>Inquiries DB</span>
                   <span className="text-[9px] bg-[#161614] border border-[rgba(255,255,255,0.08)] text-[#B8913A] px-1 rounded">Live</span>
                 </Link>
               </li>
@@ -100,17 +97,17 @@ export default function Footer() {
           <div className="space-y-3">
             <p className="font-serif font-semibold text-[#E8E3DC] tracking-wider text-sm uppercase">Direct Desk</p>
             <div className="space-y-2 text-xs">
-              <p className="text-[#8A8578]">Direct telephone:</p>
+              <p className="text-[#8A8578]">Phone:</p>
               <a href="tel:+966114567890" className="text-[#C8C3BA] hover:text-[#B8913A] block font-mono">
                 +966 (11) 456-7890
               </a>
 
-              <p className="text-[#8A8578] pt-2">Institutional inquiries:</p>
-              <a href="mailto:capital@miras-advisory.sa" className="text-[#C8C3BA] hover:text-[#B8913A] block font-mono">
-                capital@miras-advisory.sa
+              <p className="text-[#8A8578] pt-1">Inquiries:</p>
+              <a href="mailto:contact@sadu-development.sa" className="text-[#C8C3BA] hover:text-[#B8913A] block font-mono">
+                contact@sadu-development.sa
               </a>
 
-              <div className="pt-3">
+              <div className="pt-2">
                 <a
                   href="https://wa.me/966501234567"
                   target="_blank"
@@ -126,18 +123,12 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom Disclaimers */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-[#5A5A52]">
-          <div className="flex flex-wrap items-center gap-4">
-            <p>&copy; {currentYear} MIRĀS Real Estate Advisory Ltd. All rights reserved.</p>
-            <span>·</span>
-            <p>Kingdom of Saudi Arabia</p>
-            <span>·</span>
-            <p className="font-mono text-[#8A8578]">Commercial Reg. 1010-XXXXXX</p>
-          </div>
-
-          <div className="text-right">
-            <p>Architectural Mockup & Advisory System · MERN Stack Demo</p>
+        {/* Bottom bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[#6B6B5A] text-[11px]">
+          <p>© {currentYear} Sadu Real Estate Development. All rights reserved.</p>
+          <div className="flex items-center gap-6">
+            <span>Riyadh · Jeddah · Mecca · Medina · Dubai</span>
+            <span>REGA Compliant</span>
           </div>
         </div>
 

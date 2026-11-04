@@ -161,10 +161,12 @@ export default function InquiriesDashboardPage() {
             onChange={(e) => setCityFilter(e.target.value)}
             className="bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded px-2.5 py-1 text-xs text-[#0F0F0E] focus:outline-none"
           >
-            <option value="all">All Regions</option>
+            <option value="all">All Corridors</option>
             <option value="Riyadh">Riyadh</option>
             <option value="Jeddah">Jeddah</option>
-            <option value="Al Khobar">Al Khobar</option>
+            <option value="Mecca">Mecca</option>
+            <option value="Medina">Medina</option>
+            <option value="Dubai">Dubai</option>
           </select>
         </div>
       </div>
@@ -222,24 +224,23 @@ export default function InquiriesDashboardPage() {
                   </div>
                 </div>
 
-                {/* Details Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs text-[#5A5A52]">
-                  <div className="flex items-center gap-2">
-                    <Mail size={13} className="text-[#B8913A] shrink-0" />
-                    <span className="truncate">{inq.email}</span>
+                {/* Three Core Columns: Name, Mobile, Looking for */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-[#5A5A52] bg-[#F0EBE1]/60 p-3 rounded-lg border border-[rgba(15,15,14,0.06)]">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#8A8578] block">Column 1: Name</span>
+                    <strong className="text-[#0F0F0E] text-xs font-semibold">{inq.name}</strong>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Phone size={13} className="text-[#B8913A] shrink-0" />
-                    <span>{inq.phone || 'Not provided'}</span>
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#8A8578] block">Column 2: Mobile</span>
+                    <span className="font-mono text-xs text-[#0F0F0E] flex items-center gap-1.5 mt-0.5">
+                      <Phone size={12} className="text-[#B8913A]" />
+                      {inq.mobile || inq.phone || '—'}
+                    </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin size={13} className="text-[#B8913A] shrink-0" />
-                    <span>{inq.cityOfInterest || 'Riyadh'}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock size={13} className="text-[#B8913A] shrink-0" />
-                    <span className="font-mono text-[11px]">
-                      {inq.createdAt ? new Date(inq.createdAt).toLocaleDateString() : 'Recent'}
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-[#8A8578] block">Market / Date</span>
+                    <span className="text-[11px] text-[#6B6B5A]">
+                      {inq.cityOfInterest || 'Riyadh'} · {inq.createdAt ? new Date(inq.createdAt).toLocaleDateString() : 'Recent'}
                     </span>
                   </div>
                 </div>
@@ -252,9 +253,10 @@ export default function InquiriesDashboardPage() {
                   </div>
                 )}
 
-                {/* Message Body */}
-                <div className="p-3 bg-[#F0EBE1] rounded-lg border border-[rgba(15,15,14,0.06)] text-xs text-[#5A5A52] leading-relaxed whitespace-pre-wrap">
-                  {inq.message}
+                {/* Column 3: Looking for */}
+                <div className="p-3 bg-[#F0EBE1] rounded-lg border border-[rgba(15,15,14,0.06)] text-xs text-[#3A3A35] leading-relaxed">
+                  <span className="text-[10px] font-mono uppercase text-[#B8913A] font-semibold block mb-1">Column 3: Looking for</span>
+                  <p className="whitespace-pre-wrap">{inq.lookingFor || inq.message}</p>
                 </div>
               </div>
             );

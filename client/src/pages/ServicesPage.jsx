@@ -16,7 +16,7 @@ export default function ServicesPage({ onOpenInquiry }) {
       icon: Home,
       title: 'Private Residential Acquisitions',
       badge: 'Villas · Penthouses · Horizon Units',
-      desc: 'Discreet acquisition representation for high-net-worth individuals and family offices seeking prime personal residences or trophy real estate in Riyadh, Jeddah, and Al Khobar.',
+      desc: 'Discreet acquisition representation for high-net-worth individuals and family offices seeking prime personal residences or trophy real estate in Riyadh, Jeddah, Mecca, Medina, and Dubai.',
       deliverables: [
         'Curated shortlist of unlisted and private developer releases',
         'Independent architectural snagging and finishes audit',

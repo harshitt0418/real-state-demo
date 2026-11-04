@@ -7,7 +7,7 @@ export default function PropertyFilter({
   onReset,
   totalResults
 }) {
-  const cities = ['all', 'Riyadh', 'Jeddah', 'Al Khobar'];
+  const cities = ['all', 'Riyadh', 'Jeddah', 'Mecca', 'Medina', 'Dubai'];
   const types = ['all', 'Apartment', 'Villa', 'Commercial', 'Penthouse', 'Retail'];
   const bedOptions = [
     { label: 'Any Beds', value: 'all' },

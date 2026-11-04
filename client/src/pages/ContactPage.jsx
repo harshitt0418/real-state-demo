@@ -19,14 +19,9 @@ export default function ContactPage() {
 
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
-    phone: '',
-    cityOfInterest: 'Riyadh',
-    inquiryType: 'Private Acquisition',
-    budgetRange: 'SAR 2M - 4M',
-    timeframe: 'Immediate (1-3 months)',
-    message: prefillPropertyId 
-      ? `Inquiring specifically on property unit ID "${prefillPropertyId}". Please provide current title status and walkthrough availability.`
+    mobile: '',
+    lookingFor: prefillPropertyId 
+      ? `Inquiry for property reference: "${prefillPropertyId}". Please provide current title status and walkthrough details.`
       : ''
   });
 
@@ -36,8 +31,8 @@ export default function ContactPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      setErrorMessage('Please fill in your name, email address, and a brief description.');
+    if (!formData.name.trim() || !formData.mobile.trim() || !formData.lookingFor.trim()) {
+      setErrorMessage('Please fill in your Name, Mobile, and what you are Looking for.');
       return;
     }
 
@@ -46,9 +41,14 @@ export default function ContactPage() {
 
     try {
       const payload = {
-        ...formData,
+        name: formData.name.trim(),
+        mobile: formData.mobile.trim(),
+        phone: formData.mobile.trim(),
+        lookingFor: formData.lookingFor.trim(),
+        message: formData.lookingFor.trim(),
+        email: `${formData.mobile.replace(/\D/g, '') || 'client'}@sadu-development.sa`,
         propertyId: prefillPropertyId || null,
-        channel: 'Contact Page Web Form'
+        channel: 'Contact Page Form'
       };
 
       const res = await submitInquiry(payload);
@@ -66,43 +66,43 @@ export default function ContactPage() {
 
   const offices = [
     {
-      city: 'Riyadh Metropolitan Headquarters',
+      city: 'Riyadh Headquarters',
       address: 'King Fahd Road, Al Olaya District, Riyadh 12214',
-      coordinates: '24°42′43″N 46°40′50″E',
-      hours: 'Sun – Thu · 09:00 – 18:00 (Riyadh GMT+3)',
+      coordinates: '24°42′N 46°40′E',
+      hours: 'Sun – Thu · 09:00 – 18:00 (AST)',
       phone: '+966 11 482 9900',
-      email: 'riyadh@miras-re.sa'
+      email: 'riyadh@sadu-development.sa'
     },
     {
-      city: 'Jeddah Red Sea Advisory Desk',
+      city: 'Jeddah Waterfront Desk',
       address: 'Corniche Road, Al Shati District, Jeddah 23610',
-      coordinates: '21°36′12″N 39°06′33″E',
-      hours: 'Sun – Thu · 09:00 – 18:00 (Riyadh GMT+3)',
+      coordinates: '21°32′N 39°10′E',
+      hours: 'Sun – Thu · 09:00 – 18:00 (AST)',
       phone: '+966 12 690 4422',
-      email: 'jeddah@miras-re.sa'
+      email: 'jeddah@sadu-development.sa'
     },
     {
-      city: 'Al Khobar Eastern Gateway Office',
-      address: 'Prince Turki Street, Al Corniche, Al Khobar 34414',
-      coordinates: '26°17′30″N 50°13′07″E',
-      hours: 'Sun – Thu · 09:00 – 18:00 (Riyadh GMT+3)',
-      phone: '+966 13 881 7733',
-      email: 'khobar@miras-re.sa'
+      city: 'Dubai Prime Office',
+      address: 'DIFC Gate Village & Marina Walk, Dubai, UAE',
+      coordinates: '25°12′N 55°17′E',
+      hours: 'Mon – Fri · 09:00 – 18:00 (GST)',
+      phone: '+971 4 390 1200',
+      email: 'dubai@sadu-development.sa'
     }
   ];
 
   const faqs = [
     {
-      q: 'Do you charge buyer advisory commissions?',
-      a: 'Under our master developer channel agreements, our advisory and transaction representation fees are remunerated directly by the developer. Private buyers and institutional allocators pay zero retail broker markup.'
+      q: 'Which markets does Sadu Real Estate Development cover?',
+      a: 'We operate exclusively across five prime territories: Riyadh, Jeddah, Mecca, Medina, and Dubai.'
     },
     {
-      q: 'Can non-Saudi / international investors acquire real estate through MIRĀS?',
-      a: 'Yes. Saudi Arabia’s updated foreign property ownership law permits international entities and individuals to acquire residential and commercial real estate within designated zones, subject to REGA registration.'
+      q: 'How are development titles verified?',
+      a: 'All inventory is validated against official Ministry of Justice deed records, Wafi escrow licensing, and developer milestones.'
     },
     {
-      q: 'How do you verify off-plan developer projects?',
-      a: 'We verify every project through the Wafi licensing system, confirm that dedicated project escrow accounts are opened with approved Saudi banks, and review historical delivery performance.'
+      q: 'Are there buyer brokerage markups?',
+      a: 'No. Acquisitions are conducted directly under developer channel terms with transparent direct pricing.'
     }
   ];
 
@@ -111,16 +111,16 @@ export default function ContactPage() {
       
       {/* Page Header */}
       <ScrollReveal animation="fade-down">
-        <div className="space-y-4 max-w-3xl">
+        <div className="space-y-3 max-w-2xl">
           <div className="flex items-center gap-2 text-xs font-mono text-[#B8913A] uppercase tracking-widest">
             <Clock size={14} />
-            <span>Fiduciary Inquiry & Consultation</span>
+            <span>Direct Client Desk</span>
           </div>
           <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-[#0F0F0E] tracking-tight leading-tight">
-            Direct Advisory & Inquiries
+            Contact Sadu
           </h1>
           <p className="text-[#5A5A52] text-sm sm:text-base leading-relaxed">
-            Share your acquisition parameters or schedule a confidential advisory discussion with our principals. Every inquiry is handled with strict professional discretion.
+            Connect directly with our development and acquisition principals across Riyadh, Jeddah, Mecca, Medina, and Dubai.
           </p>
         </div>
       </ScrollReveal>
@@ -128,16 +128,16 @@ export default function ContactPage() {
       {/* Main Grid: Form + Office Locations */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         
-        {/* Form Container */}
+        {/* Form Container (Strictly 3 Columns / Fields: Name, Mobile, Looking for) */}
         <div className="lg:col-span-7">
           <ScrollReveal animation="fade-right">
             <div className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.12)] rounded-2xl p-6 sm:p-8 shadow-sm">
               <div className="border-b border-[rgba(15,15,14,0.08)] pb-4 mb-6">
                 <h2 className="font-serif text-2xl font-bold text-[#0F0F0E]">
-                  Submit Your Acquisition Brief
+                  Inquiry Brief
                 </h2>
                 <p className="text-[#6B6B5A] text-xs mt-1">
-                  Your inquiry is logged directly in our MERN stack database and reviewed by a designated advisor.
+                  Share your parameters. An advisor will reach out to your mobile.
                 </p>
               </div>
 
@@ -146,9 +146,14 @@ export default function ContactPage() {
                   <div className="h-14 w-14 rounded-full bg-[#B8913A]/15 border border-[#B8913A] text-[#B8913A] flex items-center justify-center mx-auto">
                     <CheckCircle2 size={28} />
                   </div>
-                  <h3 className="font-serif text-xl font-bold text-[#0F0F0E]">Brief Registered</h3>
+                  <h3 className="font-serif text-xl font-bold text-[#0F0F0E]">Inquiry Registered</h3>
+                  <div className="bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-4 text-left text-xs space-y-1.5 max-w-sm mx-auto text-[#5A5A52]">
+                    <p><strong className="text-[#0F0F0E]">Name:</strong> {submittedData.name}</p>
+                    <p><strong className="text-[#0F0F0E]">Mobile:</strong> {submittedData.mobile || submittedData.phone}</p>
+                    <p><strong className="text-[#0F0F0E]">Looking for:</strong> {submittedData.lookingFor || submittedData.message}</p>
+                  </div>
                   <p className="text-xs text-[#5A5A52] max-w-md mx-auto leading-relaxed">
-                    Thank you, <strong className="text-[#0F0F0E]">{submittedData.name}</strong>. Your inquiry has been saved to the database (ID: {submittedData.id || 'INQ-SUCCESS'}). An advisor will review your criteria for {submittedData.cityOfInterest} and reply shortly.
+                    Thank you. A senior advisor from Sadu Real Estate Development will contact your mobile shortly.
                   </p>
                   <div className="pt-2">
                     <button
@@ -160,6 +165,7 @@ export default function ContactPage() {
                   </div>
                 </div>
               ) : (
+                /* Strictly 3 Fields: Name, Mobile, Looking for */
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {errorMessage && (
                     <div className="p-3 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded flex items-center gap-2">
@@ -168,107 +174,59 @@ export default function ContactPage() {
                     </div>
                   )}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Full Name *</label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Faisal Al-Otaibi"
-                        className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Corporate or Private Email *</label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="name@organization.com"
-                        className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Phone / WhatsApp</label>
-                      <input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="+966 50 000 0000"
-                        className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Primary Region of Interest</label>
-                      <select
-                        value={formData.cityOfInterest}
-                        onChange={(e) => setFormData({ ...formData, cityOfInterest: e.target.value })}
-                        className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
-                      >
-                        <option value="Riyadh">Riyadh Metropolitan</option>
-                        <option value="Jeddah">Jeddah Waterfront & Red Sea</option>
-                        <option value="Al Khobar">Al Khobar & Eastern Province</option>
-                        <option value="Cross-Kingdom">Cross-Kingdom Portfolio</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Engagement Pathway</label>
-                      <select
-                        value={formData.inquiryType}
-                        onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
-                        className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
-                      >
-                        <option value="Private Acquisition">Private Residential Acquisition</option>
-                        <option value="Commercial Investment">Commercial / Office Floorplate</option>
-                        <option value="Family Office Allocation">Family Office Allocation</option>
-                        <option value="Developer Channel">Developer Channel Inquiry</option>
-                        <option value="General Consultation">General Strategic Advisory</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Target Capital Scale</label>
-                      <select
-                        value={formData.budgetRange}
-                        onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                        className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-2.5 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none"
-                      >
-                        <option value="SAR 1M - 2M">SAR 1,000,000 – 2,000,000</option>
-                        <option value="SAR 2M - 4M">SAR 2,000,000 – 4,000,000</option>
-                        <option value="SAR 4M - 7M">SAR 4,000,000 – 7,000,000</option>
-                        <option value="SAR 7M+">Above SAR 7,000,000</option>
-                      </select>
-                    </div>
-                  </div>
-
+                  {/* 1. Name */}
                   <div>
-                    <label className="block text-[11px] uppercase font-mono text-[#6B6B5A] mb-1">Brief Details *</label>
+                    <label className="block text-[11px] uppercase font-mono tracking-wider text-[#6B6B5A] mb-1.5">
+                      Name <span className="text-[#B8913A]">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="Full Name"
+                      className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.12)] rounded-lg px-3.5 py-2.5 text-xs text-[#0F0F0E] placeholder:text-[#8A8A75] focus:border-[#B8913A] focus:outline-none transition-colors"
+                    />
+                  </div>
+
+                  {/* 2. Mobile */}
+                  <div>
+                    <label className="block text-[11px] uppercase font-mono tracking-wider text-[#6B6B5A] mb-1.5">
+                      Mobile <span className="text-[#B8913A]">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      value={formData.mobile}
+                      onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                      placeholder="+966 5X XXX XXXX / +971 5X XXX XXXX"
+                      className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.12)] rounded-lg px-3.5 py-2.5 text-xs text-[#0F0F0E] placeholder:text-[#8A8A75] focus:border-[#B8913A] focus:outline-none transition-colors"
+                    />
+                  </div>
+
+                  {/* 3. Looking for */}
+                  <div>
+                    <label className="block text-[11px] uppercase font-mono tracking-wider text-[#6B6B5A] mb-1.5">
+                      Looking for <span className="text-[#B8913A]">*</span>
+                    </label>
                     <textarea
                       required
                       rows={4}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Describe your desired asset class, unit requirements, or preferred delivery timing..."
-                      className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] rounded-lg p-3 text-xs text-[#0F0F0E] focus:border-[#B8913A] focus:outline-none resize-none"
+                      value={formData.lookingFor}
+                      onChange={(e) => setFormData({ ...formData, lookingFor: e.target.value })}
+                      placeholder="Specify your requirements: e.g. Villa in Riyadh, Corniche Penthouse in Jeddah, Sanctuary in Mecca/Medina, or Dubai Waterfront..."
+                      className="w-full bg-[#F0EBE1] border border-[rgba(15,15,14,0.12)] rounded-lg px-3.5 py-2.5 text-xs text-[#0F0F0E] placeholder:text-[#8A8A75] focus:border-[#B8913A] focus:outline-none transition-colors resize-none"
                     />
                   </div>
 
                   <div className="pt-2 flex items-center justify-between">
-                    <span className="text-[10px] text-[#8A8A75] font-mono">Response within 24 business hours</span>
+                    <span className="text-[10px] text-[#8A8A75] font-mono">Confidential & Direct</span>
                     <button
                       type="submit"
                       disabled={isSubmitting}
                       className="bg-[#B8913A] hover:bg-[#D4A853] text-[#FAF7F2] font-semibold px-6 py-3 rounded text-xs tracking-wider uppercase flex items-center gap-2 cursor-pointer transition-colors shadow-sm"
                     >
-                      {isSubmitting ? 'Registering Brief...' : 'Transmit Brief'}
+                      {isSubmitting ? 'Submitting...' : 'Send Inquiry'}
                       <Send size={12} />
                     </button>
                   </div>
@@ -283,11 +241,11 @@ export default function ContactPage() {
           
           <ScrollReveal animation="fade-left" delay={100}>
             <div className="bg-[#FAF7F2] border border-[rgba(15,15,14,0.12)] rounded-2xl p-6 space-y-4 shadow-sm">
-              <h3 className="font-serif text-lg font-bold text-[#0F0F0E]">Direct Concierge Hotline</h3>
+              <h3 className="font-serif text-lg font-bold text-[#0F0F0E]">Private Desk Hotline</h3>
               <p className="text-xs text-[#5A5A52] leading-relaxed">
-                For urgent walkthrough scheduling or high-priority inquiries, contact our advisory concierge directly:
+                Direct phone and WhatsApp assistance for private clients and institutional allocators:
               </p>
-              <div className="space-y-3 pt-2 text-xs">
+              <div className="space-y-3 pt-1 text-xs">
                 <a
                   href="https://wa.me/966501234567"
                   target="_blank"
@@ -297,18 +255,18 @@ export default function ContactPage() {
                   <Phone size={16} className="text-emerald-700 shrink-0" />
                   <div>
                     <p className="font-semibold text-[#0F0F0E]">+966 50 123 4567</p>
-                    <p className="text-[10px] text-[#6B6B5A] font-mono">Instant WhatsApp Concierge Desk</p>
+                    <p className="text-[10px] text-[#6B6B5A] font-mono">WhatsApp Concierge Desk</p>
                   </div>
                 </a>
 
                 <a
-                  href="mailto:advisory@miras-re.sa"
+                  href="mailto:contact@sadu-development.sa"
                   className="flex items-center gap-3 p-3.5 rounded-lg bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] hover:border-[#B8913A]/50 transition-colors"
                 >
                   <Mail size={16} className="text-[#B8913A] shrink-0" />
                   <div>
-                    <p className="font-semibold text-[#0F0F0E]">advisory@miras-re.sa</p>
-                    <p className="text-[10px] text-[#6B6B5A] font-mono">Executive Advisory Inquiries</p>
+                    <p className="font-semibold text-[#0F0F0E]">contact@sadu-development.sa</p>
+                    <p className="text-[10px] text-[#6B6B5A] font-mono">Executive Development Desk</p>
                   </div>
                 </a>
               </div>
@@ -318,7 +276,7 @@ export default function ContactPage() {
           {/* Regional Offices */}
           <div className="space-y-4">
             <ScrollReveal animation="fade-left" delay={200}>
-              <h3 className="font-serif text-lg font-bold text-[#0F0F0E]">Kingdom Office Locations</h3>
+              <h3 className="font-serif text-lg font-bold text-[#0F0F0E]">Office Locations</h3>
             </ScrollReveal>
             <div className="space-y-3">
               {offices.map((office, idx) => (
@@ -327,7 +285,7 @@ export default function ContactPage() {
                   animation="fade-left"
                   delay={250 + idx * 80}
                 >
-                  <div className="p-4 rounded-xl bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] space-y-2 text-xs">
+                  <div className="p-4 rounded-xl bg-[#F0EBE1] border border-[rgba(15,15,14,0.08)] space-y-1.5 text-xs">
                     <div className="flex items-center justify-between">
                       <h4 className="font-semibold text-[#0F0F0E]">{office.city}</h4>
                       <span className="font-mono text-[9px] text-[#B8913A] font-semibold">{office.coordinates}</span>
@@ -336,8 +294,8 @@ export default function ContactPage() {
                       <MapPin size={12} className="text-[#B8913A] mt-0.5 shrink-0" />
                       <span>{office.address}</span>
                     </p>
-                    <p className="text-[11px] text-[#6B6B5A] pt-1">
-                      Hours: {office.hours}
+                    <p className="text-[10.5px] text-[#6B6B5A]">
+                      {office.hours}
                     </p>
                   </div>
                 </ScrollReveal>
@@ -349,12 +307,12 @@ export default function ContactPage() {
 
       </div>
 
-      {/* Frequently Answered Questions */}
+      {/* FAQs */}
       <ScrollReveal animation="fade-up">
         <div className="pt-8 border-t border-[rgba(15,15,14,0.08)] space-y-6">
           <div className="max-w-2xl space-y-1">
-            <p className="text-xs font-mono uppercase text-[#B8913A]">Advisory Governance</p>
-            <h2 className="font-serif text-2xl font-bold text-[#0F0F0E]">Frequently Addressed Parameters</h2>
+            <p className="text-xs font-mono uppercase text-[#B8913A]">Governance</p>
+            <h2 className="font-serif text-2xl font-bold text-[#0F0F0E]">Key Parameters</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
